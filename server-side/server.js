@@ -21,3 +21,4 @@ mongoose.connect( DatabaseURI, {
     });
 
 app.use( cors());
+

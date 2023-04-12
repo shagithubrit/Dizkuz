@@ -9,9 +9,9 @@ function NavBar() {
         <Container>
           <Navbar.Brand href="#home">Dizkuz</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Profile</Nav.Link>
-            <Nav.Link href="#features">Organisations</Nav.Link>
-            <Nav.Link href="#pricing">About Us</Nav.Link>
+            <Nav.Link href="/">Profile</Nav.Link>
+            <Nav.Link href="/features">Organisations</Nav.Link>
+            <Nav.Link href="/pricing">About Us</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
