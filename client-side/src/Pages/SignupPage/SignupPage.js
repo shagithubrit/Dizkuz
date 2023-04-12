@@ -3,8 +3,16 @@ import Signup_img from './Landing_img.jpg';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './SignupPage.css'
+import { useNavigate} from 'react-router-dom';
 
-export default function SignupPage() {
+export default function SignupPage(prop) {
+  const navigate = useNavigate();
+
+  const CheckSignup = () => {
+    prop.setUser( true);
+    navigate( '/');
+  }
+
   return (
     <>
     <div className='SignupContainer'>
@@ -38,10 +46,11 @@ export default function SignupPage() {
                 <Form.Control type="password" placeholder="Password" />
               </Form.Group>
 
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" onClick={CheckSignup}>
                 Sign up
               </Button>
             </Form>
+            <a href='/login'>Login instead?</a>
             </div>
         </div>
     </div>

@@ -1,20 +1,43 @@
-import React from 'react'
-import HomePage from './Pages/HomePage/HomePage';
-// import LoginPage from './Pages/LoginPage/LoginPage'
-// import SignupPage from './Pages/SignupPage/SignupPage'
-// import LandingPage from './Pages/LandingPage/LandingPage'
-// import NavBar from './Components/NavBar'
+import React from "react";
+import './App.css';
+import LandingPage from './Pages/LandingPage/LandingPage';
+import LoginPage from "./Pages/LoginPage/LoginPage";
+import SignupPage from "./Pages/SignupPage/SignupPage";
+import HomePage from "./Pages/HomePage/HomePage";
+import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
-export default function App() {
-  const serverAPI = '';
 
+function App() {
+  const [ user, setUser] = useState( false);
+  const [ userCredentials, setUserCredentials] = useState({});
+  
 
   return (
-    <div>
-      {/* <SignupPage /> */}
-      {/* <LandingPage /> */}
-      {/* <LoginPage /> */}
-      <HomePage />
-    </div>
-  )
+    user ?
+    <Router>
+      <div className="App">
+        <Routes> 
+          <Route path='/' element={<HomePage />} />
+        </Routes>
+      </div>
+    </Router>
+    :
+    <Router>
+      <div className="App">
+        <Routes> 
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/login' element={<LoginPage user={user} setUser={setUser}/>} />
+          <Route path='/signup' element={<SignupPage user={user} setUser={setUser}/>} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
+
+export default App;
