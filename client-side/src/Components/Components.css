@@ -1,3 +1,5 @@
+/* //============================================================================ Footer */
+
 .FooterContainer{
     background-color: rgb(248, 249, 250);
     padding: 200px;
@@ -36,3 +38,55 @@ a:hover{
         padding-bottom: 150px;
     }
 }
+
+/* //============================================================================ OrganisationCard */
+
+.OrganisationCardOuter{
+    height: 240px;
+    width: 300px;
+    overflow: hidden;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 5px;
+    box-shadow: 0 0 7px rgb(176, 190, 201);
+}
+.OrganisationCardOuter:hover{
+    box-shadow: 0 0 12px rgb(137, 148, 156);
+}
+.OrganisationTitle{
+    text-align: center;
+    height: 100%;
+    background-color: white;
+}
+.OrganisationLogo{
+    height: 180px;
+    width: 300px;
+    border-bottom: 1px solid black;
+}
+
+
+@media screen and (max-width: 920px) {
+    .OrganisationCardOuter{
+        height: 200px;
+        width: 250px;
+
+    }
+    .OrganisationLogo{
+        height: 150px;
+        width: 250px;
+    }
+}
+
+
+@media screen and (max-width: 640px) {
+    .OrganisationCardOuter{
+        height: 160px;
+        width: 200px;
+
+    }
+    .OrganisationLogo{
+        height: 120px;
+        width: 200px;
+    }
+}
+
