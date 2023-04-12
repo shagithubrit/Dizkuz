@@ -90,3 +90,16 @@ a:hover{
     }
 }
 
+/* //============================================================================ CategoryCard */
+
+.CategoryCardOuter{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.CategoryCardOuter:hover{
+    box-shadow: 0px 0px 10px rgb(167, 185, 205);
+    border: 1.5px solid black;
+}
