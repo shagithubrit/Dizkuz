@@ -1,0 +1,38 @@
+.FooterContainer{
+    background-color: rgb(248, 249, 250);
+    padding: 200px;
+    padding-top: 20px;
+    padding-bottom: 150px;
+}
+
+a{
+    color: rgb(106, 106, 106);
+    text-decoration: none;
+}
+a:hover{
+    color: black;
+}
+
+@media screen and (max-width: 920px) {
+    .FooterContainer{
+        padding: 100px;
+        padding-top: 20px;
+        padding-bottom: 150px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .FooterContainer{
+        padding: 50px;
+        padding-top: 20px;
+        padding-bottom: 150px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .FooterContainer{
+        padding: 25px;
+        padding-top: 20px;
+        padding-bottom: 150px;
+    }
+}
