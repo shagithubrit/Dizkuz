@@ -44,7 +44,7 @@ export default function OrganisationsPage() {
 
   console.log( CardsComponent);
   return (
-    <div>
+    <div  style={{paddingTop : '100px'}}>
     
     <div className='OrganisationPageContainer1'>
         <h3 style={{textAlign: 'center'}}>Your Organisations</h3>

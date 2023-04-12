@@ -1,11 +1,12 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import './Components.css';
 
 function NavBar() {
   return (
-    <>
-      <Navbar bg="light" variant="light">
+    <div className='NavBarC'>
+      <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">Dizkuz</Navbar.Brand>
           <Nav className="me-auto">
@@ -15,7 +16,7 @@ function NavBar() {
           </Nav>
         </Container>
       </Navbar>
-    </>
+    </div>
   );
 }
 

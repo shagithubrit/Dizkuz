@@ -15,6 +15,7 @@ import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 import OrganisationsPage from "./Pages/OrganisationsPage/OrganisationsPage";
 import CategoryPage from "./Pages/CategoryPage/CategoryPage";
+import IssuePage from "./Pages/IssuePage/IssuePage";
 
 
 function App() {
@@ -46,7 +47,8 @@ function App() {
     <>
     <NavBar />
     {/* <OrganisationsPage  /> */}
-    <CategoryPage />
+    {/* <CategoryPage /> */}
+    <IssuePage />
     <Footer />
     </>
   );

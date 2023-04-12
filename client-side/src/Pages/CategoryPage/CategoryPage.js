@@ -41,7 +41,9 @@ export default function CategoryPage() {
       });
 
   return (
-    <div className='CategoryConainer'>
+    <div className='CategoryConainer' style={{paddingTop : '100px'}}>
+        <h3 style={{textAlign: 'center'}}>Organisation's Categories</h3>
+        <hr/>
         {CategoryComponent}
     </div>
   )
