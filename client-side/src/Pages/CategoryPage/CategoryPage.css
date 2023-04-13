@@ -7,6 +7,16 @@
     padding-right: 300px;
 }
 
+.OrganisationButton2{
+    display: flex;
+    flex-direction: row;
+}
+
+.orgbtn_{
+    width: 100%;
+    margin: 10px;
+}
+
 
 @media screen and (max-width: 1200px) {
     .CategoryConainer{

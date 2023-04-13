@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useReducer, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import CategoryCard from '../../Components/CategoryCard';
 import './CategoryPage.css';
+import Modal from 'react-bootstrap/Modal';
 
 const Categories = [
     {
@@ -31,6 +33,22 @@ const Categories = [
 ]
 
 export default function CategoryPage() {
+    // modal
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false)
+  };
+  const handleShow = () => {
+    setShow(true)
+  };
+  const handleLeave = () => {
+    setShow(false)
+    // console.log( "organisation : ", prop.id);
+  }
+
+    const [orgName, setOrgName] = useState( 'Organization test');
+
 
     const CategoryComponent = Categories.map((category) =>{
         return(
@@ -40,11 +58,41 @@ export default function CategoryPage() {
         );
       });
 
+    const openMembers = () => {
+        console.log( "Members");
+    }
+
+    const leaveOrganisation = () => {
+        handleShow();
+        console.log( "leave organisation");
+    }
+
   return (
+    <>
     <div className='CategoryConainer' style={{paddingTop : '100px'}}>
-        <h3 style={{textAlign: 'center'}}>Organisation's Categories</h3>
+
+        <h3 style={{textAlign: 'center'}}>{orgName}</h3>
         <hr/>
+        <div className='OrganisationButton2'>
+            <Button className='orgbtn_' variant="outline-primary" onClick={openMembers}>Members</Button>
+            <Button className='orgbtn_' variant="outline-danger" onClick={leaveOrganisation}>Leave</Button>
+        </div>
         {CategoryComponent}
     </div>
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Once you leave this, you won't be able to access it ever again.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleLeave}>
+            Leave
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   )
 }

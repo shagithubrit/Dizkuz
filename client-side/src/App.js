@@ -16,6 +16,7 @@ import Footer from "./Components/Footer";
 import OrganisationsPage from "./Pages/OrganisationsPage/OrganisationsPage";
 import CategoryPage from "./Pages/CategoryPage/CategoryPage";
 import IssuePage from "./Pages/IssuePage/IssuePage";
+import ChatPage from "./Pages/ChatPage/ChatPage";
 
 
 function App() {
@@ -45,12 +46,14 @@ function App() {
     //   </div>
     // </Router>
     <>
-    <NavBar />
-    {/* <OrganisationsPage  /> */}
-    {/* <CategoryPage /> */}
-    <IssuePage />
-    <Footer />
-    </>
+     <NavBar />
+     {/* <OrganisationsPage  /> */}
+     {/* <CategoryPage /> */}
+     {/* <IssuePage /> */}
+     <ChatPage />
+     {/* <Footer /> */}
+     {/* <LandingPage /> */}
+     </>
   );
 }
 

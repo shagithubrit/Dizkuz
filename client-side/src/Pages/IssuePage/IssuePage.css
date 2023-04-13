@@ -1,7 +1,40 @@
+.IssuePageOuterContainer{
+    /* background-color: rgb(230, 230, 230); */
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding: 150px; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .IssuePageContainer{
+    display: inline-flex;
+    width: 1280px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
-    align-items:center;
+    /* justify-content: space-around; */
+}
+
+@media screen and (max-width: 1360px) {
+    .IssuePageContainer{
+        width: 960px;
+    }
+}
+
+@media screen and (max-width: 1040px) {
+    .IssuePageContainer{
+        width: 640px;
+    }
+}
+
+
+@media screen and (max-width: 680px) {
+    .IssuePageContainer{
+        width: 320px;
+    }
 }

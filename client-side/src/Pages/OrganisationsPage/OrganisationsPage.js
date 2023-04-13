@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import OrganisationCard from '../../Components/OrganisationCard';
 import testImg from './testimg.jpeg';
 import './OrganisationPage.css';
