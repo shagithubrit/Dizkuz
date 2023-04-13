@@ -4,9 +4,33 @@
     padding-bottom: 100px;
     display: flex;
     justify-content: center;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(200, 200, 200);
 }
 
 .ChatPageContainer2{
     max-width: 880px;
+}
+
+@media screen and (max-width: 860px) {
+    .ChatPageContainer{
+        padding: 30px;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .ChatPageContainer{
+        padding: 15px;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .ChatPageContainer{
+        padding: 5px;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
 }
