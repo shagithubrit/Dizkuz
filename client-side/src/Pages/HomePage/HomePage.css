@@ -31,8 +31,9 @@
 }
 
 .HBtn:hover{
-    background-color: black;
-    color: white;
+    box-shadow: 0px 0px 10px rgb(167, 185, 205);
+    border: 1.5px solid black;
+    font-weight: bold;
 }
 
 .small{
@@ -40,11 +41,18 @@
     width: 260px;
 }
 
+.small:hover{
+    color: white;
+    background-color: black;
+}
+
 .abt{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+
 
 @media screen and (max-width: 640px) {
     .HomePageButtons{
