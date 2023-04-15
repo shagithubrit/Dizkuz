@@ -45,15 +45,6 @@ function App() {
         </Routes>
       </div>
     </Router>
-    /* <>
-     <NavBar />
-     <OrganisationsPage  />
-     <CategoryPage />
-     <IssuePage />
-     <ChatPage />
-     <Footer />
-     <LandingPage />
-     </> */
   );
 }
 
