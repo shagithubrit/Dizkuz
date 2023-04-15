@@ -1,17 +1,50 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Signup_img from './Landing_img.jpg';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './SignupPage.css'
-import { useNavigate} from 'react-router-dom';
+import { useNavigate, useHistory} from 'react-router-dom';
 
 export default function SignupPage(prop) {
   const navigate = useNavigate();
 
-  const CheckSignup = () => {
-    prop.setUser( true);
-    navigate( '/');
+  const [person, setPerson] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cPassword: ""
+  });
+
+  const handleInputs = (e) =>
+  {
+    const Name = e.target.name;
+    const Value = e.target.value;
+
+    setPerson({...person, [Name]: Value});
   }
+
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    if (person.password === person.cPassword) {
+      try {
+        const response = await fetch("http://localhost:8080/demo", {
+          method: "POST",
+          body: JSON.stringify(person),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+          const data = await response.json();
+          prop.setUser(true);
+          navigate("/");
+          console.log(data);
+      } catch (error) {
+        console.log(error);
+        window.alert("failed to sign up");
+      }
+  }
+}
 
   return (
     <>
@@ -21,32 +54,32 @@ export default function SignupPage(prop) {
                 <img src={Signup_img} alt='img' />
             </div>
             <div className='SignupPageChild2'>
-            <Form>
+            <Form onSubmit={handleSubmit}>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter name" />
+                <Form.Control name='name' type="text" placeholder="Enter name"  required onChange={handleInputs}/>
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control name='email' type="email" placeholder="Enter email" required onChange={handleInputs}/>
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.
                 </Form.Text>
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3">
                 <Form.Label>Create password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control name='password' type="password" placeholder="Password" required onChange={handleInputs}/>
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3">
                 <Form.Label>Confirm password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control name='cPassword' type="password" placeholder="Password" required onChange={handleInputs}/>
               </Form.Group>
 
-              <Button variant="primary" type="submit" onClick={CheckSignup}>
+              <Button variant="primary" type="submit">
                 Sign up
               </Button>
             </Form>
