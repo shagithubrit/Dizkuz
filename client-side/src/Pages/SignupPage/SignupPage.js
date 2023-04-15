@@ -28,7 +28,7 @@ export default function SignupPage(prop) {
     e.preventDefault();
     if (person.password === person.cPassword) {
       try {
-        const response = await fetch("http://localhost:8080/demo", {
+        const response = await fetch("http://localhost:8080/signUp", {
           method: "POST",
           body: JSON.stringify(person),
           headers: {
@@ -43,6 +43,10 @@ export default function SignupPage(prop) {
         console.log(error);
         window.alert("failed to sign up");
       }
+  }
+  else
+  {
+    window.alert("Ouch! The passwords didn't match");
   }
 }
 

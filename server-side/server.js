@@ -26,7 +26,7 @@ server.use(cors());
 server.use(bodyParser.json());
 
 
-server.post("/demo", async(req, res) => {
+server.post("/signUp", async(req, res) => {
 
     let user = new User();
     user.name = req.body.name;
@@ -39,10 +39,46 @@ server.post("/demo", async(req, res) => {
     res.json(doc);
 })
 
-server.get("/demo", async(req, res) => {
+server.get("/signUp", async(req, res) => {
     const docs = await User.find({});
     res.json(docs);
 })
+
+server.post("/login", async (req, res) => {
+  const EMAIL = req.body.email;
+  const PASSWORD = req.body.password;
+
+//   User.find({email: EMAIL}, async (err, foundUser) => {
+//     if (err) {
+//         res.send("login failed");
+//       console.log(err);
+//     } else {
+//       if (foundUser) {
+//         if (foundUser.password === PASSWORD) {
+//           res.json("password matched");
+//         }
+//         else 
+//         {
+//             res.json("wrong password");
+//         }
+//       }
+//       else
+//       {
+//             res.json("NA");
+//       }
+
+//         console.log(foundUser);
+//     }
+//   });
+
+    let output = await User.findOne({email : EMAIL}).exec();
+    res.json(output);
+});
+
+server.get("/login", async (req, res) => {
+  const docs = await User.find({});
+  res.json(docs);
+});
 
 server.listen(8080, () => {
     console.log("server started");

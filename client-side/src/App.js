@@ -25,35 +25,35 @@ function App() {
   
 
   return (
-    // user ?
-    // <Router>
-    //   <div className="App">
-    //     <NavBar />
-    //     <Routes> 
-    //       <Route path='/' element={<HomePage />} />
-    //     </Routes>
-    //     <Footer />
-    //   </div>
-    // </Router>
-    // :
-    // <Router>
-    //   <div className="App">
-    //     <Routes> 
-    //       <Route path='/' element={<LandingPage />} />
-    //       <Route path='/login' element={<LoginPage user={user} setUser={setUser}/>} />
-    //       <Route path='/signup' element={<SignupPage user={user} setUser={setUser}/>} />
-    //     </Routes>
-    //   </div>
-    // </Router>
-    <>
+    user ?
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Routes> 
+          <Route path='/' element={<HomePage />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+    :
+    <Router>
+      <div className="App">
+        <Routes> 
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/login' element={<LoginPage user={user} setUser={setUser}/>} />
+          <Route path='/signup' element={<SignupPage user={user} setUser={setUser}/>} />
+        </Routes>
+      </div>
+    </Router>
+    /* <>
      <NavBar />
-     {/* <OrganisationsPage  /> */}
-     {/* <CategoryPage /> */}
-     {/* <IssuePage /> */}
+     <OrganisationsPage  />
+     <CategoryPage />
+     <IssuePage />
      <ChatPage />
-     {/* <Footer /> */}
-     {/* <LandingPage /> */}
-     </>
+     <Footer />
+     <LandingPage />
+     </> */
   );
 }
 
