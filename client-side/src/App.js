@@ -25,26 +25,36 @@ function App() {
   
 
   return (
-    user ?
-    <Router>
-      <div className="App">
-        <NavBar />
-        <Routes> 
-          <Route path='/' element={<OrganisationsPage />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
-    :
-    <Router>
-      <div className="App">
-        <Routes> 
-          <Route path='/' element={<LandingPage />} />
-          <Route path='/login' element={<LoginPage user={user} setUser={setUser}/>} />
-          <Route path='/signup' element={<SignupPage user={user} setUser={setUser}/>} />
-        </Routes>
-      </div>
-    </Router>
+    // user ?
+    // <Router>
+    //   <div className="App">
+    //     <NavBar />
+    //     <Routes> 
+    //       <Route path='/' element={<HomePage />} />
+    //       <Route path='/organisations' element={<OrganisationsPage />} />
+    //       <Route path='/categories' element={<CategoryPage />} />
+    //       <Route path='/chats' element={<ChatPage />} />
+    //       <Route path='/issues' element={<IssuePage />} />
+    //     </Routes>
+    //     <Footer />
+    //   </div>
+    // </Router>
+    // :
+    // <Router>
+    //   <div className="App">
+    //     <Routes> 
+    //       <Route path='/' element={<LandingPage />} />
+    //       <Route path='/login' element={<LoginPage user={user} setUser={setUser}/>} />
+    //       <Route path='/signup' element={<SignupPage user={user} setUser={setUser}/>} />
+    //     </Routes>
+    //   </div>
+    // </Router>
+
+    <>
+    <NavBar />
+    < HomePage name="Aditya" email='aditya@abc.com' numOrg={11} messages={193}/>
+    <Footer />
+    </>
   );
 }
 

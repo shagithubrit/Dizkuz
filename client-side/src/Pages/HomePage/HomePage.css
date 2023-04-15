@@ -1,0 +1,53 @@
+.HomePageOuterContainer{
+    padding: 50px;
+    padding-top: 100px;
+}
+
+.HomePageProfileContainer{
+    padding: 10px;
+    /* border: 1px solid black; */
+    /* border-radius: 10px; */
+    /* width: 100%; */
+    margin: 10px;
+}
+
+
+.HomePageButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.HBtn{
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin: 10px;
+}
+
+.HBtn:hover{
+    background-color: black;
+    color: white;
+}
+
+.small{
+    height: 40px;
+    width: 260px;
+}
+
+.abt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 640px) {
+    .HomePageButtons{
+        flex-direction: column;
+    }
+}
