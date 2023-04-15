@@ -39,12 +39,14 @@ export default function LoginPage(prop) {
         });
           const data = await response.json();
           console.log(JSON.stringify(data));
+          // if no user is found then null is returned
           if (data==null) {
               window.alert("user not found");
           }
           else
           {
             const passWord = data.password;
+            // check if password of returned object matches with the entered password
             if (passWord === userCredentials.password) {
               prop.setUser(true);
               navigate("/");

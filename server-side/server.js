@@ -48,28 +48,7 @@ server.post("/login", async (req, res) => {
   const EMAIL = req.body.email;
   const PASSWORD = req.body.password;
 
-//   User.find({email: EMAIL}, async (err, foundUser) => {
-//     if (err) {
-//         res.send("login failed");
-//       console.log(err);
-//     } else {
-//       if (foundUser) {
-//         if (foundUser.password === PASSWORD) {
-//           res.json("password matched");
-//         }
-//         else 
-//         {
-//             res.json("wrong password");
-//         }
-//       }
-//       else
-//       {
-//             res.json("NA");
-//       }
-
-//         console.log(foundUser);
-//     }
-//   });
+//   find users with the entered email in database
 
     let output = await User.findOne({email : EMAIL}).exec();
     res.json(output);
