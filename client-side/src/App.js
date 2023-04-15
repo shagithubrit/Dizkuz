@@ -30,7 +30,7 @@ function App() {
       <div className="App">
         <NavBar />
         <Routes> 
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={<OrganisationsPage />} />
         </Routes>
         <Footer />
       </div>
