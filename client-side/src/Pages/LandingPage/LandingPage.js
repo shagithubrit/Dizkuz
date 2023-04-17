@@ -13,6 +13,23 @@ export default function LandingPage() {
     navigate( '/signup');
   }
 
+  const [ currentUser, setCurrentUser] = useState({
+    name : null,
+    email : null,
+    password : null,
+    organisations : [],
+    messages : 0
+  });
+
+  useEffect( () => {
+    const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+    setCurrentUser( currentUser_);
+
+    if( currentUser.name == null){
+      navigate( '/landing');
+    }
+
+  }, []);
 
   return (
     <>

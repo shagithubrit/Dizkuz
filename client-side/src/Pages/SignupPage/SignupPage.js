@@ -11,7 +11,15 @@ export default function SignupPage(prop) {
   const [ alertHead, setAlertHead] = useState( "");
   const [ alertBody, setAlertBody] = useState( "");
   const [ alertVarient, setAlertVarient] = useState( "");
-  const [show, setShow] = useState(false);
+  const [ show, setShow] = useState(false);
+
+  const [ currentUser, setCurrentUser] = useState({
+    name : null,
+    email : null,
+    password : null,
+    organisations : [],
+    messages : 0
+  })
 
   const [person, setPerson] = useState({
     name: "",
@@ -41,12 +49,20 @@ export default function SignupPage(prop) {
           },
         });
           const data = await response.json();
-          prop.setUser(true);
+          // prop.setUser(true);
+
+          currentUser.name = data.body.name;
+          currentUser.email = data.body.email;
+          currentUser.password = data.body.password;
+          currentUser.organisations = data.body.organisations;
+          currentUser.messages = data.body.messages;
+        
+          localStorage.setItem('currentUser', JSON.stringify(currentUser)); // saving current user in the browser's local storage.
+
           navigate("/");
           console.log(data);
       } catch (error) {
         console.log(error);
-        // window.alert("failed to sign up");
         setAlertHead( "Signing up failed!");
         setAlertBody( "Due to an unexpected error we were not able to sign you up, please check your connection try again.");
         setAlertVarient( "danger");
@@ -61,6 +77,15 @@ export default function SignupPage(prop) {
     setShow( true);
   }
 }
+
+    
+    useEffect( () => {
+      const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+      setCurrentUser( currentUser_);
+  
+      if( currentUser.name != null){
+        navigate( '/');
+      }
 
   return (
     show ? 

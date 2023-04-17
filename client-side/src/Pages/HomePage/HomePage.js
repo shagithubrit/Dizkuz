@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './HomePage.css';
 import Footer from '../../Components/Footer';
 import { useNavigate} from 'react-router-dom';
@@ -9,14 +9,33 @@ export default function HomePage( prop) {
     navigate( '/organisations');
   }
 
+  const [ currentUser, setCurrentUser] = useState({
+    name : null,
+    email : null,
+    password : null,
+    organisations : [],
+    messages : 0
+  });
+
+  useEffect( () => {
+    const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+    setCurrentUser( currentUser_);
+
+    if( currentUser.name == null){
+      navigate( '/landing');
+    }
+
+  }, []);
+
+
   return (
     <>
       <div className='HomePageOuterContainer'>
           <div className='HomePageProfileContainer'>
-            <h2>User name : {prop.name}</h2>
-            <h5>email : {prop.email}</h5>
-            <h5>Organisations : {prop.numOrg}</h5>
-            <h5>Organisations : {prop.messages}</h5>
+            <h2>User name : {currentUser.name}</h2>
+            <h5>email : {currentUser.emaill}</h5>
+            <h5>Organisations : {currentUser.organisations.length}</h5>
+            <h5>Organisations : {currentUser.messages}</h5>
           </div>
           <hr/>
           <div className='HomePageButtons'>

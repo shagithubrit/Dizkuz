@@ -21,7 +21,7 @@ import ChatPage from "./Pages/ChatPage/ChatPage";
 
 function App() {
   const [ user, setUser] = useState( {
-    username : "DemoUser",
+    username : null,
     useremail : "demoemail@dizkuz.com",
     userorgs : 11,
     usermessages : 193
@@ -34,14 +34,14 @@ function App() {
       <div className="App">
         <NavBar />
         <Routes> 
-          <Route path='/' element={<HomePage  name={user.username} email={user.useremail} numOrg={user.numOrg} messages={user.usermessages} />} />
+          <Route path='/' element={<HomePage />} />
           <Route path='/organisations' element={<OrganisationsPage />} />
           <Route path='/categories' element={<CategoryPage />} />
           <Route path='/chats' element={<ChatPage />} />
           <Route path='/issues' element={<IssuePage />} />
           <Route path='/landing' element={<LandingPage />} />
-          <Route path='/login' element={<LoginPage user={user} setUser={setUser}/>} />
-          <Route path='/signup' element={<SignupPage user={user} setUser={setUser}/>} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<SignupPage />} />
         </Routes>
       </div>
     </Router>
