@@ -56,11 +56,28 @@ server.get("/signUp", async(req, res) => {
 
 server.post("/login", async (req, res) => {
   const EMAIL = req.body.email;
-
+  const PASSWORD = req.body.password;
 //   find users with the entered email in database
 
     let output = await User.findOne({email : EMAIL}).exec();
-    res.json(output);
+
+    if(output==null)
+    {
+      res.json(output);
+    }
+    else
+    {
+      if (output.password === PASSWORD) 
+      {
+        const matched = {password:"matched"};
+          res.json(matched);
+      }
+      else
+      {
+        const matched = {password:"notMatched"};
+        res.json(matched);
+      }
+    }
 });
 
 server.get("/login", async (req, res) => {

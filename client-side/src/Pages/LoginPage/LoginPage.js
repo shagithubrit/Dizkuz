@@ -59,9 +59,9 @@ export default function LoginPage(prop) {
           }
           else
           {
-            const passWord = data.password;
+              const check = data.password;
             // check if password of returned object matches with the entered password
-            if (passWord === userCredentials.password) {
+            if (check == "matched") {
               // prop.setUser(true);
 
               const curUser = {
