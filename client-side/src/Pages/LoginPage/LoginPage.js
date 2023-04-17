@@ -62,7 +62,21 @@ export default function LoginPage(prop) {
             const passWord = data.password;
             // check if password of returned object matches with the entered password
             if (passWord === userCredentials.password) {
-              prop.setUser(true);
+              // prop.setUser(true);
+
+              const curUser = {
+                name : data.name,
+                email : data.email,
+                password : data.password,
+                organisations : [],
+                messages : 0
+              }
+      
+              setCurrentUser( curUser);
+      
+              localStorage.setItem('currentUser', JSON.stringify(currentUser)); // saving current user in the browser's local storage.
+      
+
               navigate("/");
             }
             else
