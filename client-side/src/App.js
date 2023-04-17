@@ -20,41 +20,31 @@ import ChatPage from "./Pages/ChatPage/ChatPage";
 
 
 function App() {
-  const [ user, setUser] = useState( false);
+  const [ user, setUser] = useState( {
+    username : "DemoUser",
+    useremail : "demoemail@dizkuz.com",
+    userorgs : 11,
+    usermessages : 193
+  });
   const [ userCredentials, setUserCredentials] = useState({});
   
 
   return (
-    // user ?
-    // <Router>
-    //   <div className="App">
-    //     <NavBar />
-    //     <Routes> 
-    //       <Route path='/' element={<HomePage />} />
-    //       <Route path='/organisations' element={<OrganisationsPage />} />
-    //       <Route path='/categories' element={<CategoryPage />} />
-    //       <Route path='/chats' element={<ChatPage />} />
-    //       <Route path='/issues' element={<IssuePage />} />
-    //     </Routes>
-    //     <Footer />
-    //   </div>
-    // </Router>
-    // :
-    // <Router>
-    //   <div className="App">
-    //     <Routes> 
-    //       <Route path='/' element={<LandingPage />} />
-    //       <Route path='/login' element={<LoginPage user={user} setUser={setUser}/>} />
-    //       <Route path='/signup' element={<SignupPage user={user} setUser={setUser}/>} />
-    //     </Routes>
-    //   </div>
-    // </Router>
-
-    <>
-    <NavBar />
-    < HomePage name="Aditya" email='aditya@abc.com' numOrg={11} messages={193}/>
-    <Footer />
-    </>
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Routes> 
+          <Route path='/' element={<HomePage  name={user.username} email={user.useremail} numOrg={user.numOrg} messages={user.usermessages} />} />
+          <Route path='/organisations' element={<OrganisationsPage />} />
+          <Route path='/categories' element={<CategoryPage />} />
+          <Route path='/chats' element={<ChatPage />} />
+          <Route path='/issues' element={<IssuePage />} />
+          <Route path='/landing' element={<LandingPage />} />
+          <Route path='/login' element={<LoginPage user={user} setUser={setUser}/>} />
+          <Route path='/signup' element={<SignupPage user={user} setUser={setUser}/>} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

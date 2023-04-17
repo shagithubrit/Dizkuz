@@ -1,6 +1,7 @@
 import React from 'react';
 import IssueCard from '../../Components/IssueCard';
 import './IssuePage.css';
+import Footer from '../../Components/Footer';
 
 const Issues = [
     {
@@ -58,6 +59,7 @@ export default function IssuePage() {
       });
 
   return (
+    <>
     <div className='IssuePageOuterContainer' style={{paddingTop : '100px'}}>
         <h3 style={{textAlign: 'center'}}>Issues</h3>
         <hr/>
@@ -65,5 +67,7 @@ export default function IssuePage() {
             {IssueComponent}
         </div>
     </div>
+    <Footer />
+    </>
   );
 }

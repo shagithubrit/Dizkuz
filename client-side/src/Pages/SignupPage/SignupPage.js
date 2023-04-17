@@ -8,6 +8,10 @@ import { useNavigate, useHistory} from 'react-router-dom';
 
 export default function SignupPage(prop) {
   const navigate = useNavigate();
+  const [ alertHead, setAlertHead] = useState( "");
+  const [ alertBody, setAlertBody] = useState( "");
+  const [ alertVarient, setAlertVarient] = useState( "");
+  const [show, setShow] = useState(false);
 
   const [person, setPerson] = useState({
     name: "",
@@ -15,7 +19,6 @@ export default function SignupPage(prop) {
     password: "",
     cPassword: ""
   });
-  const [show, setShow] = useState(false);
 
   const handleInputs = (e) =>
   {
@@ -43,12 +46,18 @@ export default function SignupPage(prop) {
           console.log(data);
       } catch (error) {
         console.log(error);
-        window.alert("failed to sign up");
+        // window.alert("failed to sign up");
+        setAlertHead( "Signing up failed!");
+        setAlertBody( "Due to an unexpected error we were not able to sign you up, please check your connection try again.");
+        setAlertVarient( "danger");
+        setShow( true);
       }
   }
   else
   {
-    console.log( "Oops");
+    setAlertHead( "Oops! Password mismatched...");
+    setAlertBody( "The passwords you entered didn't matched. Please check the password and try again.");
+    setAlertVarient( "warning");
     setShow( true);
   }
 }
@@ -56,10 +65,10 @@ export default function SignupPage(prop) {
   return (
     show ? 
     <>
-    <Alert variant="warning" onClose={() => setShow(false)} dismissible>
-      <Alert.Heading>Oops! Password mismatched...</Alert.Heading>
+    <Alert variant={alertVarient} onClose={() => setShow(false)} dismissible>
+      <Alert.Heading>{alertHead}</Alert.Heading>
       <p>
-        The passwords you entered didn't matched. Please check the password and try again.
+        {alertBody}
       </p> 
     </Alert> 
     <div className='SignupContainer'>

@@ -2,6 +2,7 @@ import React from 'react';
 import OrganisationCard from '../../Components/OrganisationCard';
 import testImg from './testimg.jpeg';
 import './OrganisationPage.css';
+import Footer from '../../Components/Footer';
 
 const cards = [
     {
@@ -44,6 +45,7 @@ export default function OrganisationsPage() {
 
   console.log( CardsComponent);
   return (
+    <>
     <div  style={{paddingTop : '100px'}}>
     
     <div className='OrganisationPageContainer1'>
@@ -54,5 +56,7 @@ export default function OrganisationsPage() {
         </div>
     </div>
     </div>
+    <Footer />
+    </>
   );
 }

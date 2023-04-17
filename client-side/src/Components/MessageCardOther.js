@@ -7,7 +7,7 @@ export default function MessageCardOther(prop) {
         <div className='MessageCardOther'>
             <b style={{ color : 'orange' }}>{prop.author}</b>
             <p>{prop.text}</p>
-            <small style={{fontWeight : '200'}}><i>{prop.dateTime}</i></small>
+            <small style={{fontWeight : '200', textAlign : 'end'}}><i>{prop.dateTime}</i></small>
         </div>
     </div>
   )

@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import CategoryCard from '../../Components/CategoryCard';
 import './CategoryPage.css';
 import Modal from 'react-bootstrap/Modal';
+import Footer from '../../Components/Footer';
 
 const Categories = [
     {
@@ -92,7 +93,8 @@ export default function CategoryPage() {
             Leave
           </Button>
         </Modal.Footer>
-      </Modal>
+    </Modal>
+    <Footer />
     </>
   )
 }

@@ -4,17 +4,20 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './LoginPage.css'
 import { useNavigate} from 'react-router-dom';
-
+import Alert from 'react-bootstrap/Alert';
 
 
 export default function LoginPage(prop) {
+  const [ alertHead, setAlertHead] = useState( "");
+  const [ alertBody, setAlertBody] = useState( "");
+  const [show, setShow] = useState(false);
 
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
-
+  
   const CheckLogin = () => {
     prop.setUser( true);
     navigate( '/');
@@ -41,7 +44,10 @@ export default function LoginPage(prop) {
           console.log(JSON.stringify(data));
           // if no user is found then null is returned
           if (data==null) {
-              window.alert("user not found");
+              // window.alert("user not found");
+              setAlertHead( "User not found!");
+              setAlertBody( "The email you used to login is not present in our database. Please try to recall your email and try again.");
+              setShow( true);
           }
           else
           {
@@ -53,17 +59,64 @@ export default function LoginPage(prop) {
             }
             else
             {
-              window.alert("The password entered is wrong");
+              // window.alert("The password entered is wrong");
+              setAlertHead( "Incorrect password!");
+              setAlertBody( "The password you entered is not the correct password for the account " + userCredentials.email + ". Please recall your password and try again.");
+              setShow( true);
             }
           }
       } catch (error) {
         console.log(error);
-        window.alert("failed to login");
+        // window.alert("failed to login");
+        setAlertHead( "Login failed!");
+        setAlertBody( "Due to an unexpected error we were not able to log you in, please check your connection try again.");
+        setShow( true);
       }
    }
 
 
   return (
+    show ? 
+    <>
+      <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+      <Alert.Heading>{alertHead}</Alert.Heading>
+      <p>
+        {alertBody}
+      </p> 
+    </Alert> 
+      <div className="LoginContainer">
+        <div className="LoginPageContainer">
+          <div className="LoginPageChild1">
+            <img src={Login_img} alt="img" />
+          </div>
+          <div className="LoginPageChild2">
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="Enter email"
+                  required
+                  onChange={handleInputs}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" name="password" placeholder="Password" required onChange={handleInputs}/>
+              </Form.Group>
+
+              <Button variant="primary" type="submit">
+                Login
+              </Button>
+            </Form>
+            <a href="/signup">Sign up instead?</a>
+          </div>
+        </div>
+      </div>
+    </>
+    :
     <>
       <div className="LoginContainer">
         <div className="LoginPageContainer">
