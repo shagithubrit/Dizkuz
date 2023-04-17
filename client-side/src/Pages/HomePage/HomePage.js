@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './HomePage.css';
 import Footer from '../../Components/Footer';
 import { useNavigate} from 'react-router-dom';
+import NavBar from '../../Components/NavBar';
 
 export default function HomePage( prop) {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function HomePage( prop) {
 
   return (
     <>
+      <NavBar />
       <div className='HomePageOuterContainer'>
           <div className='HomePageProfileContainer'>
             <h2>User name : {currentUser.name}</h2>

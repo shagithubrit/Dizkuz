@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import { useNavigate} from 'react-router-dom';
 import MessageCardOther from '../../Components/MessageCardOther';
 import MessageCardUser from '../../Components/MessageCardUser';
 import './ChatPage.css';
 import MessageInput from '../../Components/MessageInput';
+import NavBar from '../../Components/NavBar';
 
 const messageList = [
     {
@@ -68,6 +70,7 @@ const messageList = [
 ];
 
 export default function ChatPage() {
+    const navigate = useNavigate();
 
     const MessageComponent = messageList.map(( message) =>{
         return(
@@ -102,6 +105,7 @@ export default function ChatPage() {
 
   return (
     <>
+    <NavBar />
     <div className='ChatPageContainer'>
         <div className='ChatPageContainer2'>
             {MessageComponent}

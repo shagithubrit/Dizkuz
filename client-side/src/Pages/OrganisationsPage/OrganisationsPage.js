@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import { useNavigate} from 'react-router-dom';
 import OrganisationCard from '../../Components/OrganisationCard';
 import testImg from './testimg.jpeg';
 import './OrganisationPage.css';
 import Footer from '../../Components/Footer';
+import NavBar from '../../Components/NavBar';
 
 const cards = [
     {
@@ -33,7 +35,7 @@ const cards = [
 ];
 
 export default function OrganisationsPage() {
-  
+  const navigate = useNavigate();
 
   const CardsComponent = cards.map((card) =>{
     return(
@@ -65,15 +67,16 @@ export default function OrganisationsPage() {
   console.log( CardsComponent);
   return (
     <>
+    <NavBar />
     <div  style={{paddingTop : '100px'}}>
     
-    <div className='OrganisationPageContainer1'>
-        <h3 style={{textAlign: 'center'}}>Your Organisations</h3>
-        <hr/>
-        <div className='OrganisationPageContainer2'>
-            {CardsComponent}
-        </div>
-    </div>
+      <div className='OrganisationPageContainer1'>
+          <h3 style={{textAlign: 'center'}}>Your Organisations</h3>
+          <hr/>
+          <div className='OrganisationPageContainer2'>
+              {CardsComponent}
+          </div>
+      </div>
     </div>
     <Footer />
     </>

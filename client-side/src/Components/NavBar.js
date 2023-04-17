@@ -11,8 +11,8 @@ function NavBar() {
           <Navbar.Brand href="#home">Dizkuz</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Profile</Nav.Link>
-            <Nav.Link href="/features">Organisations</Nav.Link>
-            <Nav.Link href="/pricing">About Us</Nav.Link>
+            <Nav.Link href="/organisations">Organisations</Nav.Link>
+            <Nav.Link href="/about-us">About Us</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

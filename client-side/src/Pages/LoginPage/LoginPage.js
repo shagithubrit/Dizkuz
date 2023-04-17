@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate} from 'react-router-dom';
 import Login_img from './Landing_img.jpg';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './LoginPage.css'
-import { useNavigate} from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 
 

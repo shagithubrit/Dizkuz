@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import { useNavigate} from 'react-router-dom';
 import IssueCard from '../../Components/IssueCard';
 import './IssuePage.css';
 import Footer from '../../Components/Footer';
+import NavBar from '../../Components/NavBar';
 
 const Issues = [
     {
@@ -49,6 +51,7 @@ const Issues = [
 ]
 
 export default function IssuePage() {
+    const navigate = useNavigate();
 
     const IssueComponent = Issues.map(( issue) =>{
         return(
@@ -78,6 +81,7 @@ export default function IssuePage() {
 
   return (
     <>
+    <NavBar />
     <div className='IssuePageOuterContainer' style={{paddingTop : '100px'}}>
         <h3 style={{textAlign: 'center'}}>Issues</h3>
         <hr/>

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate} from 'react-router-dom';
 import Landing_img from './Landing_img.jpg';
 import Button from 'react-bootstrap/Button';
-import { useNavigate} from 'react-router-dom';
 import './LandingPage.css'
 
 export default function LandingPage() {

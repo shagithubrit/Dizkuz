@@ -1,9 +1,11 @@
-import React, { useReducer, useState } from 'react';
+import React, { useState, useEffect } from 'react'
+import { useNavigate} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import CategoryCard from '../../Components/CategoryCard';
 import './CategoryPage.css';
 import Modal from 'react-bootstrap/Modal';
 import Footer from '../../Components/Footer';
+import NavBar from '../../Components/NavBar';
 
 const Categories = [
     {
@@ -34,6 +36,8 @@ const Categories = [
 ]
 
 export default function CategoryPage() {
+  const navigate = useNavigate();
+
     // modal
   const [show, setShow] = useState(false);
 
@@ -88,6 +92,7 @@ export default function CategoryPage() {
 
   return (
     <>
+    <NavBar />
     <div className='CategoryConainer' style={{paddingTop : '100px'}}>
 
         <h3 style={{textAlign: 'center'}}>{orgName}</h3>
