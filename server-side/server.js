@@ -19,6 +19,8 @@ const UserSchema = new mongoose.Schema({
     password: String,
 });
 
+
+
 const User = mongoose.model('User', UserSchema);
 
 const server = express();
@@ -29,15 +31,22 @@ server.use(bodyParser.json());
 
 server.post("/signUp", async(req, res) => {
 
-    let user = new User();
-    user.name = req.body.name;
-    user.password = req.body.password;
-    user.email = req.body.email;
-
-    const doc = await user.save()
-
-    console.log(doc);
-    res.json(doc);
+    const EMAIL = req.body.email;
+    let output = await User.findOne({ email: EMAIL }).exec();
+    if(output==null)
+    {
+      let user = new User();
+      user.name = req.body.name;
+      user.password = req.body.password;
+      user.email = req.body.email;
+      const doc = await user.save();
+      console.log(doc);
+      res.json(doc);
+    }
+    else
+    {
+      res.json(null);
+    }
 })
 
 server.get("/signUp", async(req, res) => {
@@ -47,7 +56,6 @@ server.get("/signUp", async(req, res) => {
 
 server.post("/login", async (req, res) => {
   const EMAIL = req.body.email;
-  const PASSWORD = req.body.password;
 
 //   find users with the entered email in database
 

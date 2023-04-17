@@ -48,22 +48,33 @@ export default function SignupPage(prop) {
           },
         });
         const data = await response.json();
-        // prop.setUser(true);
 
-        const curUser = {
-          name : data.name,
-          email : data.email,
-          password : data.password,
-          organisations : [],
-          messages : 0
+        if (data != null) {
+           const curUser = {
+             name: data.name,
+             email: data.email,
+             password: data.password,
+             organisations: [],
+             messages: 0,
+           };
+
+           setCurrentUser(curUser);
+
+           localStorage.setItem("currentUser", JSON.stringify(currentUser)); // saving current user in the browser's local storage.
+
+           navigate("/");
+           console.log(data);
         }
-
-        setCurrentUser( curUser);
-
-        localStorage.setItem('currentUser', JSON.stringify(currentUser)); // saving current user in the browser's local storage.
-
-        navigate("/");
-        console.log(data);
+        else
+        {
+          setAlertHead("Signing up failed!");
+          setAlertBody(
+            "The email you used to sign up is already in use, try logging in or sign up with a different email."
+          );
+          setAlertVarient("danger");
+          setShow(true);
+        }
+        // prop.setUser(true);
       } catch (error) {
         console.log(error);
         setAlertHead("Signing up failed!");
