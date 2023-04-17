@@ -50,11 +50,15 @@ export default function SignupPage(prop) {
         const data = await response.json();
         // prop.setUser(true);
 
-        currentUser.name = data.body.name;
-        currentUser.email = data.body.email;
-        currentUser.password = data.body.password;
-        currentUser.organisations = data.body.organisations;
-        currentUser.messages = data.body.messages;
+        const curUser = {
+          name : data.name,
+          email : data.email,
+          password : data.password,
+          organisations : [],
+          messages : 0
+        }
+
+        setCurrentUser( curUser);
 
         localStorage.setItem('currentUser', JSON.stringify(currentUser)); // saving current user in the browser's local storage.
 

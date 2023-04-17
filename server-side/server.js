@@ -7,8 +7,8 @@ main().catch(err => console.log(err));
 
 async function main() {
     await mongoose.connect(
-      // "mongodb+srv://ishavishwakarma29:ishaDizkuz@cluster0.zwbubwl.mongodb.net/test"
-      "mongodb+srv://adityarai:aditya07@dizkuz.4tvbing.mongodb.net/test"
+      "mongodb+srv://ishavishwakarma29:ishaDizkuz@cluster0.zwbubwl.mongodb.net/test"
+      // "mongodb+srv://adityarai:aditya07@dizkuz.4tvbing.mongodb.net/test"
     );
     console.log("db connected");
 }
