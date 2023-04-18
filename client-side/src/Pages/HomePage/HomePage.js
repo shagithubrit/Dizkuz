@@ -11,18 +11,19 @@ export default function HomePage( prop) {
   }
 
   const [ currentUser, setCurrentUser] = useState({
-    name : null,
-    email : null,
-    password : null,
+    name : "",
+    email : "",
+    password : "",
     organisations : [],
     messages : 0
   });
 
   useEffect( () => {
     const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+    console.log( currentUser);
     setCurrentUser( currentUser_);
 
-    if( currentUser.name == null){
+    if( currentUser == null){
       navigate( '/landing');
     }
 

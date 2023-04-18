@@ -13,9 +13,12 @@ export default function LoginPage(prop) {
   const [show, setShow] = useState(false);
 
   const [ currentUser, setCurrentUser] = useState({
-    name : null,
-    email : null,
-    password : null,
+    _id : "",
+    name : "",
+    password : "",
+    email : "",
+    __v : "",
+    status : "",
     organisations : [],
     messages : 0
   });
@@ -51,7 +54,7 @@ export default function LoginPage(prop) {
           const data = await response.json();
           console.log(JSON.stringify(data));
           // if no user is found then null is returned
-          if (data==null) {
+          if (data.status == 'notFound') {
               // window.alert("user not found");
               setAlertHead( "User not found!");
               setAlertBody( "The email you used to login is not present in our database. Please try to recall your email and try again.");
@@ -61,19 +64,23 @@ export default function LoginPage(prop) {
           {
               const check = data.password;
             // check if password of returned object matches with the entered password
-            if (check == "matched") {
+            if ( data.status === "matched") {
               // prop.setUser(true);
 
               const curUser = {
                 name : data.name,
                 email : data.email,
                 password : data.password,
-                organisations : [],
-                messages : 0
+                organisations : data.organisations,
+                messages : data.messages,
+                _id : data._id,
+                __v : data.__v
               }
       
               setCurrentUser( curUser);
-      
+              
+              console.log( "Login successful");
+
               localStorage.setItem('currentUser', JSON.stringify(currentUser)); // saving current user in the browser's local storage.
       
 

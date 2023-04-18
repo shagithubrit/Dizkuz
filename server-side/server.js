@@ -61,23 +61,42 @@ server.post("/login", async (req, res) => {
 
     let output = await User.findOne({email : EMAIL}).exec();
 
+    console.log( output);
+
+    const userObject = {
+      _id : "",
+      name : "",
+      password : "",
+      email : "",
+      __v : "",
+      status : "",
+      organisations : [],
+      messages : 0
+    }
+
     if(output==null)
     {
-      res.json(output);
+      userObject.status = 'notfound';
     }
     else
     {
       if (output.password === PASSWORD) 
       {
-        const matched = {password:"matched"};
-          res.json(matched);
+        userObject.status = 'matched';
+        userObject.name = output.name;
+        userObject.password = output.password;
+        userObject.email = output.password;
+        // userObject.organisations = output.organisations;
+        // userObject.messages = output.messages;
+        userObject._id = output._id;
+        userObject.__v = output.__v;
       }
       else
       {
-        const matched = {password:"notMatched"};
-        res.json(matched);
+        userObject.status = 'notMatched';
       }
     }
+    res.json(userObject);
 });
 
 server.get("/login", async (req, res) => {

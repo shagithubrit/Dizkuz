@@ -14,11 +14,14 @@ export default function SignupPage(prop) {
   const [show, setShow] = useState(false);
 
   const [currentUser, setCurrentUser] = useState({
-    name: null,
-    email: null,
-    password: null,
-    organisations: [],
-    messages: 0
+    _id : "",
+    name : "",
+    password : "",
+    email : "",
+    __v : "",
+    status : "",
+    organisations : [],
+    messages : 0
   })
 
   const [person, setPerson] = useState({
@@ -51,11 +54,13 @@ export default function SignupPage(prop) {
 
         if (data != null) {
            const curUser = {
-             name: data.name,
-             email: data.email,
-             password: data.password,
-             organisations: [],
-             messages: 0,
+            name : data.name,
+            email : data.email,
+            password : data.password,
+            organisations : data.organisations,
+            messages : data.messages,
+            _id : data._id,
+            __v : data.__v
            };
 
            setCurrentUser(curUser);
