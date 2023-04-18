@@ -17,6 +17,7 @@ import OrganisationsPage from "./Pages/OrganisationsPage/OrganisationsPage";
 import CategoryPage from "./Pages/CategoryPage/CategoryPage";
 import IssuePage from "./Pages/IssuePage/IssuePage";
 import ChatPage from "./Pages/ChatPage/ChatPage";
+import NewOrganisationPage from "./Pages/NewOrganisationPage/NewOrganisationPage";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path='/categories' element={<CategoryPage />} />
           <Route path='/chats' element={<ChatPage />} />
           <Route path='/issues' element={<IssuePage />} />
+          <Route path='/neworganisation' element={<NewOrganisationPage />} />
           <Route path='/landing' element={<LandingPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignupPage />} />
