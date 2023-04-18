@@ -12,16 +12,7 @@ export default function LoginPage(prop) {
   const [ alertBody, setAlertBody] = useState( "");
   const [show, setShow] = useState(false);
 
-  const [ currentUser, setCurrentUser] = useState({
-    _id : "",
-    name : "",
-    password : "",
-    email : "",
-    __v : "",
-    status : "",
-    organisations : [],
-    messages : 0
-  });
+  let currentUser_ = {};
 
   const [userCredentials, setUserCredentials] = useState({
     email: "",
@@ -77,11 +68,15 @@ export default function LoginPage(prop) {
                 __v : data.__v
               }
       
-              setCurrentUser( curUser);
+              // setCurrentUser( curUser);
               
-              console.log( "Login successful");
+              // console.log( "curUser");
+              // console.log( curUser);
+              // console.log( "currentUser");
+              // console.log( currentUser);
+              // console.log( "Login successful");
 
-              localStorage.setItem('currentUser', JSON.stringify(currentUser)); // saving current user in the browser's local storage.
+              localStorage.setItem('currentUser', JSON.stringify( curUser)); // saving current user in the browser's local storage.
       
 
               navigate("/");
@@ -109,11 +104,12 @@ export default function LoginPage(prop) {
 
   useEffect( () => {
     const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-    setCurrentUser( currentUser_);
 
-    if( currentUser.name != null){
+    if( currentUser_ != null){
       navigate( '/');
     }
+
+    
 
   }, []);
 

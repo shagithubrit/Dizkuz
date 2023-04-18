@@ -61,22 +61,13 @@ export default function IssuePage() {
         );
       });
 
-      const [ currentUser, setCurrentUser] = useState({
-        name : null,
-        email : null,
-        password : null,
-        organisations : [],
-        messages : 0
-      });
+      let currentUser_ = {};
     
       useEffect( () => {
-        const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-        setCurrentUser( currentUser_);
-    
-        if( currentUser.name == null){
+        currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+        if( currentUser_ == null){
           navigate( '/landing');
         }
-    
       }, []);
 
   return (

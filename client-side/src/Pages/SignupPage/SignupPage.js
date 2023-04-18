@@ -13,17 +13,6 @@ export default function SignupPage(prop) {
   const [alertVarient, setAlertVarient] = useState("");
   const [show, setShow] = useState(false);
 
-  const [currentUser, setCurrentUser] = useState({
-    _id : "",
-    name : "",
-    password : "",
-    email : "",
-    __v : "",
-    status : "",
-    organisations : [],
-    messages : 0
-  })
-
   const [person, setPerson] = useState({
     name: "",
     email: "",
@@ -63,12 +52,9 @@ export default function SignupPage(prop) {
             __v : data.__v
            };
 
-           setCurrentUser(curUser);
-
-           localStorage.setItem("currentUser", JSON.stringify(currentUser)); // saving current user in the browser's local storage.
+           localStorage.setItem("currentUser", JSON.stringify(curUser)); // saving current user in the browser's local storage.
 
            navigate("/");
-           console.log(data);
         }
         else
         {
@@ -99,9 +85,8 @@ export default function SignupPage(prop) {
 
   useEffect( () => {
     const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-    setCurrentUser( currentUser_);
 
-    if( currentUser.name != null){
+    if( currentUser_ != null){
       navigate( '/');
     }
 

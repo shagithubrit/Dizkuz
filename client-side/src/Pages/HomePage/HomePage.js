@@ -11,22 +11,28 @@ export default function HomePage( prop) {
   }
 
   const [ currentUser, setCurrentUser] = useState({
-    name : "",
-    email : "",
-    password : "",
+    name : '',
+    email : '',
     organisations : [],
     messages : 0
   });
 
-  useEffect( () => {
-    const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-    console.log( currentUser);
-    setCurrentUser( currentUser_);
+  let currentUser_ = {};
+  
 
-    if( currentUser == null){
+  useEffect( () => {
+    currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+    if( currentUser_ == null){
       navigate( '/landing');
     }
-
+    
+    setCurrentUser({
+      name : currentUser_.name,
+      emaill : currentUser_.email,
+      organisations : currentUser_.organisations,
+      messages : currentUser_.messages
+    })
+    console.log( currentUser_);
   }, []);
 
 

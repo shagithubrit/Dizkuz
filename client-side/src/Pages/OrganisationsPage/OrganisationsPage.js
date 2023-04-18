@@ -36,6 +36,7 @@ const cards = [
 
 export default function OrganisationsPage() {
   const navigate = useNavigate();
+  let currentUser_ = {};
 
   const CardsComponent = cards.map((card) =>{
     return(
@@ -44,23 +45,12 @@ export default function OrganisationsPage() {
     </div>
     );
   });
-
-  const [ currentUser, setCurrentUser] = useState({
-    name : null,
-    email : null,
-    password : null,
-    organisations : [],
-    messages : 0
-  });
-
+  
   useEffect( () => {
-    const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-    setCurrentUser( currentUser_);
-
-    if( currentUser.name == null){
+    currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+    if( currentUser_ == null){
       navigate( '/landing');
     }
-
   }, []);
 
 
