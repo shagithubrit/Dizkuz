@@ -10,6 +10,10 @@ export default function HomePage( prop) {
     navigate( '/organisations');
   }
 
+  const JumpToNewOrganisation = () => {
+    navigate( '/neworganisation');
+  }
+
   const [ currentUser, setCurrentUser] = useState({
     name : '',
     email : '',
@@ -51,7 +55,7 @@ export default function HomePage( prop) {
             <div className='HBtn' onClick={jumptoOrganisations}>
               Go to your Organisations
             </div>
-            <div className='HBtn'>
+            <div className='HBtn' onClick={JumpToNewOrganisation}>
               Create a new Organisation
             </div>
           </div>
