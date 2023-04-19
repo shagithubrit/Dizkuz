@@ -120,7 +120,7 @@ export default function CategoryPage() {
   return (
     <>
     <NavBar />
-    <div className='CategoryConainer' style={{paddingTop : '100px'}}>
+    <div className='CategoryConainer' style={{paddingTop : '70px'}}>
 
         <h3 style={{textAlign: 'center'}}>{orgName}</h3>
         <hr/>

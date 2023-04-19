@@ -153,7 +153,7 @@ export default function NewOrganisationPage() {
     <div>
         <>
             <NavBar />
-            <div className='NewOrganisationContainer' style={{paddingTop : '100px'}}>
+            <div className='NewOrganisationContainer' style={{paddingTop : '70px'}}>
                 <h4>Create New Organisation</h4>
                 <div className='NewOrganisationSubContainer'>
                     <Form className='NewOrganisationSubContainer2'>
