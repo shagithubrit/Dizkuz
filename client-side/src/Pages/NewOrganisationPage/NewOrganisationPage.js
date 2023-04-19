@@ -63,7 +63,7 @@ export default function NewOrganisationPage() {
                   const data = await response.json();
                   console.log(JSON.stringify(data));
                   // if no user is found then null is returned
-                  if (data.status == 'Found') {
+                  if (data.status === "Found") {
                       setAlertHead( "User Added Succesfully!");
                       setAlertBody( "The user has been added to the organisation");
                       setShow( true);
@@ -92,6 +92,34 @@ export default function NewOrganisationPage() {
         }
     }
 
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const organisation = {
+        users: participants,
+        name: OrganisationName,
+      };
+      try {
+        const response = await fetch("http://localhost:8080/newOrg", {
+          method: "POST",
+          body: JSON.stringify(organisation),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        console.log(data);
+        navigate('/');
+      } catch (error) {
+        console.log(error);
+        setAlertHead("Unknown error occured!");
+        setAlertBody(
+          "An unknown error occured. please check your network and try again."
+        );
+        setShow(true);
+      }
+    };
+
+
     useEffect( () => {
         currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
         if( currentUser_ == null){
@@ -114,7 +142,7 @@ export default function NewOrganisationPage() {
             <div className='NewOrganisationContainer' style={{paddingTop : '0px'}}>
                 <h4>Create New Organisation</h4>
                 <div className='NewOrganisationSubContainer'>
-                    <Form className='NewOrganisationSubContainer2'>
+                    <Form className='NewOrganisationSubContainer2' onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Organisation's name</Form.Label>
                             <Form.Control type="text" placeholder="Enter your organisation's name" name='organisationName' onChange={handleInputName} required/>
