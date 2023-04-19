@@ -1,3 +1,4 @@
+// imports
 const express = require('express');
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -5,6 +6,8 @@ const mongoose = require("mongoose");
 
 main().catch(err => console.log(err));
 
+
+// connecting mongodb
 async function main() {
     await mongoose.connect(
       "mongodb+srv://ishavishwakarma29:ishaDizkuz@cluster0.zwbubwl.mongodb.net/test"
@@ -13,6 +16,8 @@ async function main() {
     console.log("db connected");
 }
 
+
+// mongoose schemas
 const UserSchema = new mongoose.Schema({
     name: String,
     email: String,
@@ -27,14 +32,35 @@ const OrganisationSchema = new mongoose.Schema({
 });
 
 
+const CategorySchema = new mongoose.Schema({
+  title : String,
+  description: String,
+  categoryId: String,
+});
+
+
+const MessageSchema = new mongoose.Schema({
+  userId1: String,
+  userId2: String,
+})
+
+
+// mongoose models
 const User = mongoose.model('User', UserSchema);
 
 const Organisation = mongoose.model('Organisation', OrganisationSchema);
 
+const Category = mongoose.model('Category', CategorySchema);
+
+const Message = mongoose.model('Message', MessageSchema);
+
 const server = express();
 
+
+// middlewares
 server.use(cors());
 server.use(bodyParser.json());
+
 
 // user signup
 
@@ -186,6 +212,7 @@ server.get("/leaveOrg", async (req, res) => {
   const docs = await organisation.find({});
   res.json(docs);
 });
+
 
 
 
