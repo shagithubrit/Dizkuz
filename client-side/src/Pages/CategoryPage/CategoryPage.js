@@ -6,6 +6,7 @@ import './CategoryPage.css';
 import Modal from 'react-bootstrap/Modal';
 import Footer from '../../Components/Footer';
 import NavBar from '../../Components/NavBar';
+import Form from 'react-bootstrap/Form';
 
 const Categories = [
     {
@@ -33,13 +34,49 @@ const Categories = [
         description : 'description about category 5',
         id : 'id 5'
     }
-]
+];
+
+function NewCategoryModal(props) {
+
+  const addCategory = () =>{
+    props.onHide();
+  }
+
+
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          New Category
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form.Control type="text" placeholder="Enter category name" />
+      </Modal.Body>
+      <Modal.Footer>
+      <Button variant="secondary" onClick={props.onHide}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={addCategory}>
+            Create
+          </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
 
 export default function CategoryPage() {
   const navigate = useNavigate();
 
     // modal
   const [show, setShow] = useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
 
   const handleClose = () => {
     setShow(false)
@@ -67,9 +104,8 @@ export default function CategoryPage() {
         console.log( "Members");
     }
 
-    const leaveOrganisation = () => {
-        handleShow();
-        console.log( "leave organisation");
+    const JumpToNewCategory = () => {
+      setModalShow( true);
     }
 
     let currentUser_ = {};
@@ -90,7 +126,7 @@ export default function CategoryPage() {
         <hr/>
         <div className='OrganisationButton2'>
             <Button className='orgbtn_' variant="outline-primary" onClick={openMembers}>Members</Button>
-            <Button className='orgbtn_' variant="outline-danger" onClick={leaveOrganisation}>Leave</Button>
+            <Button className='orgbtn_' variant="primary" onClick={JumpToNewCategory}>New Category</Button>
         </div>
         {CategoryComponent}
     </div>
@@ -108,6 +144,10 @@ export default function CategoryPage() {
           </Button>
         </Modal.Footer>
     </Modal>
+    <NewCategoryModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     <Footer />
     </>
   )
