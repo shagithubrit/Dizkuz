@@ -95,6 +95,7 @@ export default function NewOrganisationPage() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       const organisation = {
+        currUser: JSON.parse(localStorage.getItem('currentUser')),
         users: participants,
         name: OrganisationName,
       };

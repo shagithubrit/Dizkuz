@@ -1,10 +1,24 @@
 import React from 'react';
 import './Components.css';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import {useState , useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 
 export default function OrganisationCard(prop) {
+
+  const navigate = useNavigate(); 
+  let currentUser_ = {};
+
+  useEffect(() => {
+    currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser_ == null) {
+      navigate("/landing");
+    }
+    console.log(currentUser_);
+  }, []);
+
+
   // modal
   const [show, setShow] = useState(false);
 
@@ -25,6 +39,7 @@ export default function OrganisationCard(prop) {
   };
   const leaveOrganisation = () => {
     setShow(true);
+
   };
 
   return (

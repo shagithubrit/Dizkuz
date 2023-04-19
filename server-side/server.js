@@ -144,12 +144,16 @@ server.get("/checkuserid", async (req, res) => {
 server.post("/newOrg", async (req, res) => {
   const NAME = req.body.name;
   const USERS = req.body.users;
+  const curr = req.body.currUser;
+
+  let output = await User.findById(curr._id).exec();
 
   let org = new Organisation();
   org.name = NAME;
   org.users = USERS;
   const doc = await org.save();
-  console.log(doc);
+  console.log(doc.id);
+  User.findByIdAndUpdate(curr._id, {$push: {organisations : doc.id}}).exec();
   res.json(doc);
   
 });
