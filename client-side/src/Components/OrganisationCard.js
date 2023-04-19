@@ -10,14 +10,6 @@ export default function OrganisationCard(prop) {
   const navigate = useNavigate(); 
   let currentUser_ = {};
 
-  useEffect(() => {
-    currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
-    if (currentUser_ == null) {
-      navigate("/landing");
-    }
-    console.log(currentUser_);
-  }, []);
-
 
   // modal
   const [show, setShow] = useState(false);
@@ -28,9 +20,29 @@ export default function OrganisationCard(prop) {
   const handleShow = () => {
     setShow(true)
   };
-  const handleLeave = () => {
+  const handleLeave = async (e) => {
     setShow(false)
     console.log( "organisation : ", prop.id);
+    currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
+    const out = {
+      userId : currentUser_._id,
+      organisationId: prop.id,
+    }
+      try {
+        const response = await fetch("http://localhost:8080/leaveOrg", {
+          method: "POST",
+          body: JSON.stringify(out),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const newOrgs = await response.json();
+        console.log(newOrgs);
+      } catch (error) {
+        console.log(error);
+        window.alert( "Try again !");
+        setShow( true);
+      }
   }
 
 

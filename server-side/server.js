@@ -36,6 +36,7 @@ const server = express();
 server.use(cors());
 server.use(bodyParser.json());
 
+// user signup
 
 server.post("/signUp", async(req, res) => {
 
@@ -61,6 +62,9 @@ server.get("/signUp", async(req, res) => {
     const docs = await User.find({});
     res.json(docs);
 })
+
+
+// user login
 
 server.post("/login", async (req, res) => {
   const EMAIL = req.body.email;
@@ -113,6 +117,8 @@ server.get("/login", async (req, res) => {
 });
 
 
+// check if user with given user id exists
+
 server.post("/checkuserid", async (req, res) => {
   const id = req.body.userID;
   console.log(id);
@@ -141,12 +147,12 @@ server.get("/checkuserid", async (req, res) => {
 });
 
 
+// new organisation
+
 server.post("/newOrg", async (req, res) => {
   const NAME = req.body.name;
   const USERS = req.body.users;
   const curr = req.body.currUser;
-
-  let output = await User.findById(curr._id).exec();
 
   let org = new Organisation();
   org.name = NAME;
@@ -159,6 +165,24 @@ server.post("/newOrg", async (req, res) => {
 });
 
 server.get("/newOrg", async (req, res) => {
+  const docs = await organisation.find({});
+  res.json(docs);
+});
+
+
+
+// leave organisation
+
+server.post("/leaveOrg", async (req, res) => {
+  const USERID = req.body.userId;
+  const ORGID = req.body.organisationId;
+
+  User.findByIdAndUpdate(USERID, { $pull: { organisations: ORGID } }).exec();
+  let output = await User.findById(USERID).exec();
+  res.json(output.organisations);
+});
+
+server.get("/leaveOrg", async (req, res) => {
   const docs = await organisation.find({});
   res.json(docs);
 });

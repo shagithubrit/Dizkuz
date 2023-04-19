@@ -7,31 +7,31 @@ import Footer from '../../Components/Footer';
 import NavBar from '../../Components/NavBar';
 
 const cards = [
-    {
-        logo : testImg,
-        title : 'Title1',
-        id : 'id1'
-    },
-    {
-        logo : testImg,
-        title : 'Title2',
-        id : 'id2'
-    },
-    {
-        logo : testImg,
-        title : 'Title3',
-        id : 'id3'
-    },
-    {
-        logo : testImg,
-        title : 'Title4',
-        id : 'id4'
-    },
-    {
-        logo : testImg,
-        title : 'Title5',
-        id : 'id5'
-    }
+  {
+    logo: testImg,
+    title: "Title1",
+    id: "644060638750188c0c2881e7",
+  },
+  {
+    logo: testImg,
+    title: "Title2",
+    id: "id2",
+  },
+  {
+    logo: testImg,
+    title: "Title3",
+    id: "id3",
+  },
+  {
+    logo: testImg,
+    title: "Title4",
+    id: "id4",
+  },
+  {
+    logo: testImg,
+    title: "Title5",
+    id: "id5",
+  },
 ];
 
 export default function OrganisationsPage() {
