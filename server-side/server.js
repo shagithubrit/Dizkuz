@@ -51,8 +51,7 @@ const MessageSchema = new mongoose.Schema({
   author : String,
   text : String,
   dateTime : String,
-  userAuth : String,
-  userID : String,
+  authorID : String,
   IssueID : String
 });
 
@@ -274,7 +273,31 @@ server.get( '/issues', async( req, res) => {
 });
 
 // get messages
-server.get( '/chats')
+server.get( '/chats', async( req, res) => {
+  const checkID = req.body.issueID;
+  const userID = req.body.userID;
+
+  var output = {
+    status : 'failed',
+    data : []
+  };
+
+  let List = await Issue.find( { issueId : checkID} ).catch( () => {
+    res.json( output);
+  });
+
+  let OutputList = List.map( (elt) => {
+    if( userID == elt.authorID){
+      return {...elt, userAuth : true};
+    }else{
+      return {...elt, userAuth : false};
+    }
+  });
+
+  output.status = 'success';
+  output.data = OutputList;
+  res.json( output);
+});
 
 
 server.listen(8080, () => {
