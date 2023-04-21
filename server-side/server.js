@@ -69,17 +69,12 @@ const checkLogin = async ( EMAIL, PASSWORD) => {
   let output = await User.findOne({email : EMAIL}).exec();
 
   if(output==null){
-    return 'authfailed';
+    return false;
   }
-  else
-  {
-    if (output.password === PASSWORD) {
-      return 'authsuccess';
-    }
-    else{
-      return 'authfailed';
-    }
+  if (output.password === PASSWORD) {
+    return true;
   }
+  return false;
 };
 
 // middlewares
