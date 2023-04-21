@@ -199,6 +199,11 @@ server.post("/newOrg", async (req, res) => {
   const USERS = req.body.users;
   const curr = req.body.currUser;
 
+  if( !checkLogin( req.body.email, req.body.password)){
+    output.status = 'authFailed';
+    res.json( output);
+  }
+
   let org = new Organisation();
   org.name = NAME;
   org.users = USERS;
@@ -221,6 +226,11 @@ server.post("/leaveOrg", async (req, res) => {
   const USERID = req.body.userId;
   const ORGID = req.body.organisationId;
 
+  if( !checkLogin( req.body.email, req.body.password)){
+    output.status = 'authFailed';
+    res.json( output);
+  }
+
   User.findByIdAndUpdate(USERID, { $pull: { organisations: ORGID } }).exec();
   let output = await User.findById(USERID).exec();
   res.json(output.organisations);
@@ -237,6 +247,11 @@ server.get( '/organisations', async( req, res) => {
     status : 'failed',
     data : []
   };
+
+  if( !checkLogin( req.body.email, req.body.password)){
+    output.status = 'authFailed';
+    res.json( output);
+  }
 
   let List = req.body.organisations.map( async(orgID) => {
     return await Organisation.findById( orgID);
@@ -258,6 +273,11 @@ server.get( '/issues', async( req, res) => {
     data : []
   };
 
+  if( !checkLogin( req.body.email, req.body.password)){
+    output.status = 'authFailed';
+    res.json( output);
+  }
+
   let List = await Issue.find( { CategoryId : checkID} ).catch( () => {
     res.json( output);
   });
@@ -276,6 +296,11 @@ server.get( '/chats', async( req, res) => {
     status : 'failed',
     data : []
   };
+
+  if( !checkLogin( req.body.email, req.body.password)){
+    output.status = 'authFailed';
+    res.json( output);
+  }
 
   let List = await Issue.find( { issueId : checkID} ).catch( () => {
     res.json( output);
