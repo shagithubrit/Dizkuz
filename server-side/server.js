@@ -35,14 +35,26 @@ const OrganisationSchema = new mongoose.Schema({
 const CategorySchema = new mongoose.Schema({
   title : String,
   description: String,
-  categoryId: String,
+  OrganisationId: String,
+});
+
+const IssueSchema = new mongoose.Schema({
+  author : String,
+  title : String,
+  body : String,
+  creationDate : String,
+  CategoryId : String,
 });
 
 
 const MessageSchema = new mongoose.Schema({
-  userId1: String,
-  userId2: String,
-})
+  author : String,
+  text : String,
+  dateTime : String,
+  userAuth : String,
+  userID : String,
+  IssueID : String
+});
 
 
 // mongoose models
