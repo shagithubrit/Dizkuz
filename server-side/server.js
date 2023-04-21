@@ -59,15 +59,29 @@ const MessageSchema = new mongoose.Schema({
 
 // mongoose models
 const User = mongoose.model('User', UserSchema);
-
 const Organisation = mongoose.model('Organisation', OrganisationSchema);
-
 const Category = mongoose.model('Category', CategorySchema);
-
 const Message = mongoose.model('Message', MessageSchema);
+const Issue = mongoose.model( 'Issue', IssueSchema);
 
 const server = express();
 
+const checkLogin = async ( EMAIL, PASSWORD) => {
+  let output = await User.findOne({email : EMAIL}).exec();
+
+  if(output==null){
+    return 'authfailed';
+  }
+  else
+  {
+    if (output.password === PASSWORD) {
+      return 'authsuccess';
+    }
+    else{
+      return 'authfailed';
+    }
+  }
+};
 
 // middlewares
 server.use(cors());
@@ -75,7 +89,6 @@ server.use(bodyParser.json());
 
 
 // user signup
-
 server.post("/signUp", async(req, res) => {
 
     const EMAIL = req.body.email;
@@ -199,7 +212,6 @@ server.post("/newOrg", async (req, res) => {
   console.log(doc.id);
   User.findByIdAndUpdate(curr._id, {$push: {organisations : doc.id}}).exec();
   res.json(doc);
-  
 });
 
 server.get("/newOrg", async (req, res) => {
@@ -221,14 +233,50 @@ server.post("/leaveOrg", async (req, res) => {
 });
 
 server.get("/leaveOrg", async (req, res) => {
-  const docs = await organisation.find({});
+  const docs = await Organisation.find({});
   res.json(docs);
 });
 
+// get all organisation 
+server.get( '/organisations', async( req, res) => {
+  var output = {
+    status : 'failed',
+    data : []
+  };
 
+  let List = req.body.organisations.map( async(orgID) => {
+    return await Organisation.findById( orgID);
+  }).catch(() => {
+    res.json( output);
+  })
+  
+  output.status = 'success';
+  output.data = List;
+  res.json( output);
+});
 
+// get all Issues
+server.get( '/issues', async( req, res) => {
+  const checkID = req.body.CategoryId;
+
+  var output = {
+    status : 'failed',
+    data : []
+  };
+
+  let List = await Issue.find( { CategoryId : checkID} ).catch( () => {
+    res.json( output);
+  });
+
+  output.status = 'success';
+  output.data = List;
+  res.json( output);
+});
+
+// get messages
+server.get( '/chats')
 
 
 server.listen(8080, () => {
     console.log("server started");
-})
+});
