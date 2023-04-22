@@ -204,3 +204,31 @@
 .sendBtn{
     margin: 3px;
 }
+
+/* //============================================================================ Profile Picture */
+.PfpConainter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.OuterCirclePfp{
+    height: 160px;
+    width: 160px;
+}
+
+
+@media screen and (max-width: 740px) {
+    .OuterCirclePfp{
+        height: 120px;
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .OuterCirclePfp{
+        height: 160px;
+        width: 160px;
+    }
+}

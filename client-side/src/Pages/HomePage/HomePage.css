@@ -12,6 +12,21 @@
     text-align: start;
 }
 
+.HomePageUserInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 640px) {
+    .HomePageUserInfo{
+        flex-direction: column-reverse;
+    }
+    .title_he{
+        font-size: small;
+    }
+}
 
 .HomePageButtons{
     display: flex;

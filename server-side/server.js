@@ -1,11 +1,10 @@
 // imports
 const express = require('express');
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 main().catch(err => console.log(err));
-
 
 // connecting mongodb
 async function main() {
@@ -16,7 +15,6 @@ async function main() {
     console.log("db connected");
 }
 
-
 // mongoose schemas
 const UserSchema = new mongoose.Schema({
     name: String,
@@ -25,12 +23,10 @@ const UserSchema = new mongoose.Schema({
     organisations: [String]
 });
 
-
 const OrganisationSchema = new mongoose.Schema({
     users: [String],
     name: String,
 });
-
 
 const CategorySchema = new mongoose.Schema({
   title : String,
@@ -46,7 +42,6 @@ const IssueSchema = new mongoose.Schema({
   CategoryId : String,
 });
 
-
 const MessageSchema = new mongoose.Schema({
   author : String,
   text : String,
@@ -54,7 +49,6 @@ const MessageSchema = new mongoose.Schema({
   authorID : String,
   IssueID : String
 });
-
 
 // mongoose models
 const User = mongoose.model('User', UserSchema);
@@ -81,10 +75,8 @@ const checkLogin = async ( EMAIL, PASSWORD) => {
 server.use(cors());
 server.use(bodyParser.json());
 
-
 // user signup
 server.post("/signUp", async(req, res) => {
-
     const EMAIL = req.body.email;
     let output = await User.findOne({ email: EMAIL }).exec();
     if(output==null)
@@ -101,25 +93,19 @@ server.post("/signUp", async(req, res) => {
     {
       res.json(null);
     }
-})
+});
 
 server.get("/signUp", async(req, res) => {
     const docs = await User.find({});
     res.json(docs);
-})
-
+});
 
 // user login
-
 server.post("/login", async (req, res) => {
   const EMAIL = req.body.email;
   const PASSWORD = req.body.password;
 //   find users with the entered email in database
-
     let output = await User.findOne({email : EMAIL}).exec();
-
-    console.log( output);
-
     const userObject = {
       _id : "",
       name : "",
@@ -130,15 +116,11 @@ server.post("/login", async (req, res) => {
       organisations : [],
       messages : 0
     }
-
-    if(output==null)
-    {
+    if(output==null){
       userObject.status = 'notfound';
     }
-    else
-    {
-      if (output.password === PASSWORD) 
-      {
+    else{
+      if (output.password === PASSWORD) {
         userObject.status = 'matched';
         userObject.name = output.name;
         userObject.password = output.password;
@@ -148,8 +130,7 @@ server.post("/login", async (req, res) => {
         userObject._id = output._id;
         userObject.__v = output.__v;
       }
-      else
-      {
+      else{
         userObject.status = 'notMatched';
       }
     }
@@ -163,14 +144,11 @@ server.get("/login", async (req, res) => {
 
 
 // check if user with given user id exists
-
 server.post("/checkuserid", async (req, res) => {
   const id = req.body.userID;
   console.log(id);
   let output = await User.findById(id).exec();
-
   console.log(output);
-
   if (output === null) {
     const out = {
       status : "not Found",
@@ -180,7 +158,6 @@ server.post("/checkuserid", async (req, res) => {
     const out = {
       status: "Found",
     };
-
     res.json(out);
   }
 });
@@ -193,17 +170,14 @@ server.get("/checkuserid", async (req, res) => {
 
 
 // new organisation
-
 server.post("/newOrg", async (req, res) => {
   const NAME = req.body.name;
   const USERS = req.body.users;
   const curr = req.body.currUser;
-
   if( !checkLogin( req.body.email, req.body.password)){
     output.status = 'authFailed';
     res.json( output);
   }
-
   let org = new Organisation();
   org.name = NAME;
   org.users = USERS;
@@ -218,19 +192,14 @@ server.get("/newOrg", async (req, res) => {
   res.json(docs);
 });
 
-
-
 // leave organisation
-
 server.post("/leaveOrg", async (req, res) => {
   const USERID = req.body.userId;
   const ORGID = req.body.organisationId;
-
   if( !checkLogin( req.body.email, req.body.password)){
     output.status = 'authFailed';
     res.json( output);
   }
-
   User.findByIdAndUpdate(USERID, { $pull: { organisations: ORGID } }).exec();
   let output = await User.findById(USERID).exec();
   res.json(output.organisations);
@@ -247,18 +216,15 @@ server.get( '/organisations', async( req, res) => {
     status : 'failed',
     data : []
   };
-
   if( !checkLogin( req.body.email, req.body.password)){
     output.status = 'authFailed';
     res.json( output);
   }
-
   let List = req.body.organisations.map( async(orgID) => {
     return await Organisation.findById( orgID);
   }).catch(() => {
     res.json( output);
   })
-  
   output.status = 'success';
   output.data = List;
   res.json( output);
@@ -267,21 +233,17 @@ server.get( '/organisations', async( req, res) => {
 // get all Issues
 server.get( '/issues', async( req, res) => {
   const checkID = req.body.CategoryId;
-
   var output = {
     status : 'failed',
     data : []
   };
-
   if( !checkLogin( req.body.email, req.body.password)){
     output.status = 'authFailed';
     res.json( output);
   }
-
   let List = await Issue.find( { CategoryId : checkID} ).catch( () => {
     res.json( output);
   });
-
   output.status = 'success';
   output.data = List;
   res.json( output);
@@ -291,21 +253,17 @@ server.get( '/issues', async( req, res) => {
 server.get( '/chats', async( req, res) => {
   const checkID = req.body.issueID;
   const userID = req.body.userID;
-
   var output = {
     status : 'failed',
     data : []
   };
-
   if( !checkLogin( req.body.email, req.body.password)){
     output.status = 'authFailed';
     res.json( output);
   }
-
   let List = await Issue.find( { issueId : checkID} ).catch( () => {
     res.json( output);
   });
-
   let OutputList = List.map( (elt) => {
     if( userID == elt.authorID){
       return {...elt, userAuth : true};
@@ -313,13 +271,13 @@ server.get( '/chats', async( req, res) => {
       return {...elt, userAuth : false};
     }
   });
-
   output.status = 'success';
   output.data = OutputList;
   res.json( output);
 });
 
 
+// starting server
 server.listen(8080, () => {
     console.log("server started");
 });

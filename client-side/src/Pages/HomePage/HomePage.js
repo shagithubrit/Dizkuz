@@ -3,6 +3,7 @@ import './HomePage.css';
 import Footer from '../../Components/Footer';
 import { useNavigate} from 'react-router-dom';
 import NavBar from '../../Components/NavBar';
+import ImageContainer from '../../Components/ImageContainer';
 
 export default function HomePage( prop) {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function HomePage( prop) {
   });
 
   let currentUser_ = {};
+  let profilePic = null;
   
 
   useEffect( () => {
@@ -35,7 +37,9 @@ export default function HomePage( prop) {
       emaill : currentUser_.email,
       organisations : currentUser_.organisations,
       messages : currentUser_.messages
-    })
+    });
+
+    profilePic = currentUser_.profilePic;
     console.log( currentUser_);
   }, []);
 
@@ -44,12 +48,15 @@ export default function HomePage( prop) {
     <>
       <NavBar />
       <div className='HomePageOuterContainer'>
+        <div className='HomePageUserInfo'>
           <div className='HomePageProfileContainer'>
-            <h2>User name : {currentUser.name}</h2>
-            <h5>email : {currentUser.emaill}</h5>
-            <h5>Organisations : {currentUser.organisations.length}</h5>
-            <h5>Organisations : {currentUser.messages}</h5>
+            <div><div className='title_he'>User name :</div> <h2>{currentUser.name}</h2></div>
+            <div><div className='title_he'>email :</div> <h4>{currentUser.emaill}</h4></div>
+            <div><div className='title_he'>Organisations :</div> <h4>{currentUser.organisations.length}</h4></div>
+            <div><div className='title_he'>Organisations :</div> <h4>{currentUser.messages}</h4></div>
           </div>
+          <ImageContainer />
+        </div>
           <hr/>
           <div className='HomePageButtons'>
             <div className='HBtn' onClick={jumptoOrganisations}>
