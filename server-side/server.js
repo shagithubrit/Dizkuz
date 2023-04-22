@@ -211,7 +211,7 @@ server.get("/leaveOrg", async (req, res) => {
 });
 
 // get all organisation 
-server.post( '/organisations', async( req, res) => {
+server.post( '/organisations', ( req, res) => {
   var output = {
     status : 'failed',
     data : []
@@ -221,16 +221,23 @@ server.post( '/organisations', async( req, res) => {
     res.json( output);
   }
   let List = [];
-  try{
-    List = req.body.organisations.map( async(orgID) => {
-      return await Organisation.findById( orgID);
-    })
-  }catch{
-    res.json( output);
+
+  const getList = async() => {
+    const OrgIDs = req.body.organisations;
+    console.log( OrgIDs);
+    for( let i = 0; i < OrgIDs.length; i++){
+      const ListElt = await Organisation.findById( OrgIDs[ i]);
+      List.push( ListElt);
+    }
   }
-  output.status = 'success';
-  output.data = List;
-  res.json( output);
+  
+  getList().then(() => {
+    output.status = 'success';
+    output.data = List;
+    console.log( "hello");
+    console.log( output.data);
+    res.json( output);
+  });
 });
 
 // get all Issues

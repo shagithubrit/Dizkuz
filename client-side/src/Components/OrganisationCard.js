@@ -25,7 +25,7 @@ export default function OrganisationCard(prop) {
     console.log( "organisation : ", prop.id);
     currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
     const out = {
-      userId : currentUser_._id,
+      userId : currentUser_.id,
       organisationId: prop.id,
     }
       try {
@@ -58,7 +58,7 @@ export default function OrganisationCard(prop) {
     <>
       <div className='OrganisationCardOuter'>
           <div className='OrganisationTitle'> <h5>{prop.title}</h5> </div>
-          <img className='OrganisationLogo' src={prop.logo} alt='logo' />
+          {/* <img className='OrganisationLogo' src={prop.logo} alt='logo' /> */}
           <div className='OrganisationButtons'>
             <Button className='orgbtn' variant="outline-primary" onClick={openOrganisation}>Open</Button>
             <Button className='orgbtn' variant="outline-danger" onClick={leaveOrganisation}>Leave</Button>

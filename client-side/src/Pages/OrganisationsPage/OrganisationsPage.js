@@ -8,8 +8,6 @@ import NavBar from '../../Components/NavBar';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 
-let cards = [];
-
 // const cards = [
 //   {
 //     logo: testImg,
@@ -49,7 +47,7 @@ export default function OrganisationsPage(prop) {
 
   const [ HtmlLoaded, setHtmlLoaded] = useState( false);
 
-  let CardsComponent = [];
+  const [ CardsComponent, setCardsComponent] = useState( null);
   
   useEffect( () => {
     currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
@@ -90,16 +88,22 @@ export default function OrganisationsPage(prop) {
         }else{
           console.log( "fetched");
           console.log( fetchedData);
-          cards = fetchedData.data;
+          console.log( 'cards');
+          const cards = fetchedData.data;
+          console.log( cards);
 
-          CardsComponent = cards.map((card) =>{
+          let tempCardsComponent = cards.map((card) =>{
             return(
             <div>
-                <OrganisationCard logo={card.logo} title={card.name} id={card._id} key={card._id}/>
+                <OrganisationCard title={card.name} id={card._id} key={card._id}/>
             </div>
             );
           });
 
+          setCardsComponent( tempCardsComponent);
+
+          console.log( "cc");
+          console.log( CardsComponent);
           setHtmlLoaded( true);
         }
       } catch (error) {
@@ -116,7 +120,6 @@ export default function OrganisationsPage(prop) {
   }, []);
 
 
-  console.log( CardsComponent);
   return (
     HtmlLoaded?
     show?
