@@ -79,7 +79,7 @@ server.use(bodyParser.json());
 server.post("/signUp", async(req, res) => {
     const EMAIL = req.body.email;
     let output = await User.findOne({ email: EMAIL }).exec();
-    if(output==null)
+    if(output===null)
     {
       let user = new User();
       user.name = req.body.name;
@@ -125,8 +125,8 @@ server.post("/login", async (req, res) => {
         userObject.name = output.name;
         userObject.password = output.password;
         userObject.email = output.email;
-        // userObject.organisations = output.organisations;
-        // userObject.messages = output.messages;
+        userObject.organisations = output.organisations;
+        userObject.messages = output.messages;
         userObject._id = output._id;
         userObject.__v = output.__v;
       }
@@ -211,7 +211,7 @@ server.get("/leaveOrg", async (req, res) => {
 });
 
 // get all organisation 
-server.get( '/organisations', async( req, res) => {
+server.post( '/organisations', async( req, res) => {
   var output = {
     status : 'failed',
     data : []
@@ -220,11 +220,14 @@ server.get( '/organisations', async( req, res) => {
     output.status = 'authFailed';
     res.json( output);
   }
-  let List = req.body.organisations.map( async(orgID) => {
-    return await Organisation.findById( orgID);
-  }).catch(() => {
+  let List = [];
+  try{
+    List = req.body.organisations.map( async(orgID) => {
+      return await Organisation.findById( orgID);
+    })
+  }catch{
     res.json( output);
-  })
+  }
   output.status = 'success';
   output.data = List;
   res.json( output);

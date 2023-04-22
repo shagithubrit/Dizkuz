@@ -20,6 +20,13 @@
     /* justify-content: space-around; */
 }
 
+.SpinnerContainer{
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 1539px) {
     .OrganisationPageContainer2{
         width: 930px;

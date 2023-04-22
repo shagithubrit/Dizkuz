@@ -55,7 +55,7 @@ export default function HomePage( prop) {
             <div><div className='title_he'>Organisations :</div> <h4>{currentUser.organisations.length}</h4></div>
             <div><div className='title_he'>Organisations :</div> <h4>{currentUser.messages}</h4></div>
           </div>
-          <ImageContainer />
+          <ImageContainer image={profilePic}/>
         </div>
           <hr/>
           <div className='HomePageButtons'>
