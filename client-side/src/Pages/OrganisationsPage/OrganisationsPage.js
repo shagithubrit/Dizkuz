@@ -8,33 +8,6 @@ import NavBar from '../../Components/NavBar';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 
-// const cards = [
-//   {
-//     logo: testImg,
-//     title: "Title1",
-//     id: "644060638750188c0c2881e7",
-//   },
-//   {
-//     logo: testImg,
-//     title: "Title2",
-//     id: "id2",
-//   },
-//   {
-//     logo: testImg,
-//     title: "Title3",
-//     id: "id3",
-//   },
-//   {
-//     logo: testImg,
-//     title: "Title4",
-//     id: "id4",
-//   },
-//   {
-//     logo: testImg,
-//     title: "Title5",
-//     id: "id5",
-//   },
-// ];
 
 export default function OrganisationsPage(prop) {
   const navigate = useNavigate();
@@ -85,13 +58,8 @@ export default function OrganisationsPage(prop) {
           );
           setAlertVarient("danger");
           setShow( true);
-        }else{
-          console.log( "fetched");
-          console.log( fetchedData);
-          console.log( 'cards');
+        }else{;
           const cards = fetchedData.data;
-          console.log( cards);
-
           let tempCardsComponent = cards.map((card) =>{
             return(
             <div>
@@ -102,12 +70,9 @@ export default function OrganisationsPage(prop) {
 
           setCardsComponent( tempCardsComponent);
 
-          console.log( "cc");
-          console.log( CardsComponent);
           setHtmlLoaded( true);
         }
       } catch (error) {
-        console.log(error);
         setAlertHead("Data failed to retrieve!");
         setAlertBody("There was some error in retrieving the data of your organisations. Please check your connection and try again.");
         setAlertVarient("danger");

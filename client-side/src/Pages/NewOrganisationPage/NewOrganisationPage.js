@@ -42,7 +42,6 @@ export default function NewOrganisationPage() {
 
     const AddNewUser = async (e) => {
         e.preventDefault();
-        console.log( "xx");
         if( NewUserID == ''){
             setAlertHead( "UserID is empty!");
             setAlertBody( "The userID cannot be an empty string. Please enter userID.");
@@ -61,7 +60,6 @@ export default function NewOrganisationPage() {
                   },
                 });
                   const data = await response.json();
-                  console.log(JSON.stringify(data));
                   // if no user is found then null is returned
                   if (data.status === "Found") {
                       setAlertHead( "User Added Succesfully!");
@@ -82,7 +80,6 @@ export default function NewOrganisationPage() {
                       setShow( true);
                   }
               } catch (error) {
-                console.log(error);
                 setAlertHead( "Unknown error occured!");
                 setAlertBody( "An unknown error occured. please check your network and try again.");
                 setVariant( "danger");
@@ -94,7 +91,6 @@ export default function NewOrganisationPage() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-      console.log( currentUser_);
       const organisation = {
         name : currentUser_.name,
         email : currentUser_.email,
@@ -104,7 +100,6 @@ export default function NewOrganisationPage() {
         users: participants,
         OrgName: OrganisationName,
       };
-      console.log( organisation);
       try {
         const response = await fetch("http://localhost:8080/newOrg", {
           method: "POST",
@@ -114,8 +109,6 @@ export default function NewOrganisationPage() {
           },
         });
         const data = await response.json();
-        console.log( "data : ");
-        console.log( data);
         if( data.status === 'Success'){
             let curUser = {
                 name : data.name,
@@ -126,8 +119,6 @@ export default function NewOrganisationPage() {
                 _id : data._id,
                 __v : data.__v
             }
-            console.log( "new USER : ");
-            console.log( curUser);
             localStorage.removeItem( 'currentUser');
             localStorage.setItem('currentUser', JSON.stringify( curUser)); 
             navigate("/");
@@ -139,7 +130,6 @@ export default function NewOrganisationPage() {
             setShow(true);
         }
       } catch (error) {
-        console.log(error);
         setAlertHead("Unknown error occured!");
         setAlertBody(
           "An unknown error occured. please check your network and try again."
