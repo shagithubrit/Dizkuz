@@ -10,6 +10,7 @@ import Alert from 'react-bootstrap/Alert';
 export default function NewOrganisationPage() {
     const [ alertHead, setAlertHead] = useState( "");
     const [ alertBody, setAlertBody] = useState( "");
+    const [ variant, setVariant] = useState("");
     const [show, setShow] = useState(false);
 
 
@@ -47,6 +48,7 @@ export default function NewOrganisationPage() {
         if( NewUserID == ''){
             setAlertHead( "UserID is empty!");
             setAlertBody( "The userID cannot be an empty string. Please enter userID.");
+            setVariant( "warning");
             setShow( true);
         }else{
             const checkID = {
@@ -66,18 +68,21 @@ export default function NewOrganisationPage() {
                   if (data.status === "Found") {
                       setAlertHead( "User Added Succesfully!");
                       setAlertBody( "The user has been added to the organisation");
+                      setVariant( "success");
                       setShow( true);
                   }
                   else
                   {
                       setAlertHead( "User not found!");
                       setAlertBody( "The userID you entered does not exist in our database. Please check it and try again.");
+                      setVariant( "danger");
                       setShow( true);
                   }
               } catch (error) {
                 console.log(error);
                 setAlertHead( "Unknown error occured!");
                 setAlertBody( "An unknown error occured. please check your network and try again.");
+                setVariant( "danger");
                 setShow( true);
               }
 
@@ -94,10 +99,15 @@ export default function NewOrganisationPage() {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
+      const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
       const organisation = {
-        currUser: JSON.parse(localStorage.getItem('currentUser')),
+        name : currentUser_.name,
+        email : currentUser_.email,
+        password : currentUser_.password,
+        organisations : currentUser_.organisations,
+        User_id : currentUser_.id,
         users: participants,
-        name: OrganisationName,
+        OrgName: OrganisationName,
       };
       try {
         const response = await fetch("http://localhost:8080/newOrg", {
@@ -132,7 +142,7 @@ export default function NewOrganisationPage() {
     show ? 
     <div>
         <div style={{height : '50px'}}></div>
-        <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+        <Alert variant={variant} onClose={() => setShow(false)} dismissible>
             <Alert.Heading>{alertHead}</Alert.Heading>
             <p>
                 {alertBody}

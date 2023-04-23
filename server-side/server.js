@@ -106,6 +106,8 @@ server.post("/login", async (req, res) => {
   const PASSWORD = req.body.password;
 //   find users with the entered email in database
     let output = await User.findOne({email : EMAIL}).exec();
+    console.log( "user output");
+    console.log( output);
     const userObject = {
       _id : "",
       name : "",
@@ -116,8 +118,8 @@ server.post("/login", async (req, res) => {
       organisations : [],
       messages : 0
     }
-    if(output==null){
-      userObject.status = 'notfound';
+    if(output === null){
+      userObject.status = 'notFound';
     }
     else{
       if (output.password === PASSWORD) {
@@ -146,17 +148,22 @@ server.get("/login", async (req, res) => {
 // check if user with given user id exists
 server.post("/checkuserid", async (req, res) => {
   const id = req.body.userID;
-  console.log(id);
-  let output = await User.findById(id).exec();
-  console.log(output);
-  if (output === null) {
+  
+  let IdExists = false;
+  User.exists({ _id: id }).then(exists => {
+    if (exists) {
+      IdExists = true;
+    }
+  });
+
+  if ( IdExists) {
     const out = {
-      status : "not Found",
+      status: "Found",
     };
     res.json(out);
   } else {
     const out = {
-      status: "Found",
+      status : "not Found",
     };
     res.json(out);
   }
@@ -170,6 +177,7 @@ server.get("/checkuserid", async (req, res) => {
 
 
 // new organisation
+// changes are to be made based on the updated json in NewOrganisationPage line 95.
 server.post("/newOrg", async (req, res) => {
   const NAME = req.body.name;
   const USERS = req.body.users;

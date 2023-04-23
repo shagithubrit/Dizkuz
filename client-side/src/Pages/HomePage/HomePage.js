@@ -36,7 +36,8 @@ export default function HomePage( prop) {
       name : currentUser_.name,
       emaill : currentUser_.email,
       organisations : currentUser_.organisations,
-      messages : currentUser_.messages
+      messages : currentUser_.messages,
+      _id : currentUser_._id
     });
 
     profilePic = currentUser_.profilePic;
@@ -51,6 +52,7 @@ export default function HomePage( prop) {
         <div className='HomePageUserInfo'>
           <div className='HomePageProfileContainer'>
             <div><div className='title_he'>User name :</div> <h2>{currentUser.name}</h2></div>
+            <div><div className='title_he'>User ID :</div> <h4>{currentUser._id}</h4></div>
             <div><div className='title_he'>email :</div> <h4>{currentUser.emaill}</h4></div>
             <div><div className='title_he'>Organisations :</div> <h4>{currentUser.organisations.length}</h4></div>
             <div><div className='title_he'>Organisations :</div> <h4>{currentUser.messages}</h4></div>
