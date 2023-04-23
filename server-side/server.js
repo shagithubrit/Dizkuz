@@ -15,47 +15,13 @@ async function main() {
     console.log("db connected");
 }
 
-// mongoose schemas
-const UserSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
-    organisations: [String]
-});
-
-const OrganisationSchema = new mongoose.Schema({
-    users: [String],
-    name: String,
-});
-
-const CategorySchema = new mongoose.Schema({
-  title : String,
-  description: String,
-  OrganisationId: String,
-});
-
-const IssueSchema = new mongoose.Schema({
-  author : String,
-  title : String,
-  body : String,
-  creationDate : String,
-  CategoryId : String,
-});
-
-const MessageSchema = new mongoose.Schema({
-  author : String,
-  text : String,
-  dateTime : String,
-  authorID : String,
-  IssueID : String
-});
 
 // mongoose models
-const User = mongoose.model('User', UserSchema);
-const Organisation = mongoose.model('Organisation', OrganisationSchema);
-const Category = mongoose.model('Category', CategorySchema);
-const Message = mongoose.model('Message', MessageSchema);
-const Issue = mongoose.model( 'Issue', IssueSchema);
+const User = require('./models/user');
+const Organisation = require('./models/organisation');
+const Category = require('./models/category');
+const Message = require('./models/message');
+const Issue = require('./models/issue');
 
 const server = express();
 
