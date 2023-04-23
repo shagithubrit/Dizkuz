@@ -67,18 +67,7 @@ export default function LoginPage(prop) {
                 _id : data._id,
                 __v : data.__v
               }
-      
-              // setCurrentUser( curUser);
-              
-              // console.log( "curUser");
-              // console.log( curUser);
-              // console.log( "currentUser");
-              // console.log( currentUser);
-              // console.log( "Login successful");
-
-              localStorage.setItem('currentUser', JSON.stringify( curUser)); // saving current user in the browser's local storage.
-      
-
+              localStorage.setItem('currentUser', JSON.stringify( curUser)); 
               navigate("/");
             }
             else

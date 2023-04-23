@@ -11,7 +11,7 @@ export default function NewOrganisationPage() {
     const [ alertHead, setAlertHead] = useState( "");
     const [ alertBody, setAlertBody] = useState( "");
     const [ variant, setVariant] = useState("");
-    const [show, setShow] = useState(false);
+    const [ show, setShow] = useState(false);
 
 
     const navigate = useNavigate();
@@ -34,12 +34,10 @@ export default function NewOrganisationPage() {
     
     const handleInputName = (e) => {
         OrganisationName = e.target.value;
-        console.log('orgName : ', OrganisationName);
       };
 
     const handleID = (e) => {
         NewUserID = e.target.value;
-        console.log('newID : ', NewUserID);
     };
 
     const AddNewUser = async (e) => {
@@ -70,6 +68,11 @@ export default function NewOrganisationPage() {
                       setAlertBody( "The user has been added to the organisation");
                       setVariant( "success");
                       setShow( true);
+                      let arr = participants;
+                      arr.push( NewUserID);
+                      setParticipants( arr);
+                      setDummy( !dummy);
+                      document.getElementsByClassName( 'newUserIDUserInput')[ 0].value = '';
                   }
                   else
                   {
@@ -84,31 +87,24 @@ export default function NewOrganisationPage() {
                 setAlertBody( "An unknown error occured. please check your network and try again.");
                 setVariant( "danger");
                 setShow( true);
-              }
-
-            // a program to check if userID exists is to be written here.
-            console.log( participants);
-            let arr = participants;
-            arr.push( NewUserID);
-            setParticipants( arr);
-            console.log( participants);
-            setDummy( !dummy);
-            document.getElementsByClassName( 'newUserIDUserInput')[ 0].value = '';
+              }            
         }
     }
 
     const handleSubmit = async (e) => {
       e.preventDefault();
       const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+      console.log( currentUser_);
       const organisation = {
         name : currentUser_.name,
         email : currentUser_.email,
         password : currentUser_.password,
         organisations : currentUser_.organisations,
-        User_id : currentUser_.id,
+        User_id : currentUser_._id,
         users: participants,
         OrgName: OrganisationName,
       };
+      console.log( organisation);
       try {
         const response = await fetch("http://localhost:8080/newOrg", {
           method: "POST",
@@ -118,8 +114,30 @@ export default function NewOrganisationPage() {
           },
         });
         const data = await response.json();
-        console.log(data);
-        navigate('/');
+        console.log( "data : ");
+        console.log( data);
+        if( data.status === 'Success'){
+            let curUser = {
+                name : data.name,
+                email : data.email,
+                password : data.password,
+                organisations : data.organisations,
+                messages : data.messages,
+                _id : data._id,
+                __v : data.__v
+            }
+            console.log( "new USER : ");
+            console.log( curUser);
+            localStorage.removeItem( 'currentUser');
+            localStorage.setItem('currentUser', JSON.stringify( curUser)); 
+            navigate("/");
+        }else{
+            setAlertHead("Unknown error occured!");
+            setAlertBody(
+            "An unknown error occured. please check your network and try again."
+            );
+            setShow(true);
+        }
       } catch (error) {
         console.log(error);
         setAlertHead("Unknown error occured!");
@@ -179,7 +197,7 @@ export default function NewOrganisationPage() {
                         <Button variant="outline-primary" className='newOrgButton' onClick={AddNewUser}>
                             Add User
                         </Button>
-                        <Button variant="primary" type="submit" className='newOrgButton'>
+                        <Button variant="primary" type="submit" className='newOrgButton' onClick={handleSubmit}>
                             Create Organisation
                         </Button>
                     </Form>
@@ -221,7 +239,7 @@ export default function NewOrganisationPage() {
                         <Button variant="outline-primary" className='newOrgButton' onClick={AddNewUser}>
                             Add User
                         </Button>
-                        <Button variant="primary" type="submit" className='newOrgButton'>
+                        <Button variant="primary" type="submit" className='newOrgButton' onClick={handleSubmit}>
                             Create Organisation
                         </Button>
                     </Form>

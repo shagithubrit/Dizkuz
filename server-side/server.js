@@ -163,7 +163,7 @@ server.post("/checkuserid", async (req, res) => {
     res.json(out);
   } else {
     const out = {
-      status : "not Found",
+      status : "notFound",
     };
     res.json(out);
   }
@@ -177,11 +177,25 @@ server.get("/checkuserid", async (req, res) => {
 
 
 // new organisation
-// changes are to be made based on the updated json in NewOrganisationPage line 95.
 server.post("/newOrg", async (req, res) => {
-  const NAME = req.body.name;
+  console.log( "request arrived");
+  const NAME = req.body.OrgName;
+  const EMAIL = req.body.email;
   const USERS = req.body.users;
-  const curr = req.body.currUser;
+  const PASSWORD = req.body.password;
+  const curr = req.body.name;
+  const curr_id = req.body.User_id;
+
+  console.log( "curr_id : ", curr_id);
+  USERS.push( curr_id);
+  console.log( USERS);
+
+
+  let output = {
+    status : 'Failed',
+    data : {}
+  }
+
   if( !checkLogin( req.body.email, req.body.password)){
     output.status = 'authFailed';
     res.json( output);
@@ -191,8 +205,44 @@ server.post("/newOrg", async (req, res) => {
   org.users = USERS;
   const doc = await org.save();
   console.log(doc.id);
-  User.findByIdAndUpdate(curr._id, {$push: {organisations : doc.id}}).exec();
-  res.json(doc);
+  for( let i = 0; i < USERS.length; i++){
+    User.findByIdAndUpdate( USERS[ i], {$push: {organisations : doc.id}}).exec();
+  }
+
+  let UserData = await User.findOne({email : EMAIL}).exec();
+  console.log(UserData);
+  console.log("aj");
+  let userObject = {
+    _id : "",
+    name : "",
+    password : "",
+    email : "",
+    __v : "",
+    status : "",
+    organisations : [],
+    messages : 0
+  }
+  if( UserData === null){
+    userObject.status = 'Failed';
+  }
+  else{
+    if ( UserData.password === PASSWORD) {
+      userObject.status = 'Success';
+      userObject.name = UserData.name;
+      userObject.password = UserData.password;
+      userObject.email = UserData.email;
+      userObject.organisations = UserData.organisations;
+      userObject.messages = UserData.messages;
+      userObject._id = UserData._id;
+      userObject.__v = UserData.__v;
+    }
+    else{
+      userObject.status = 'Failed';
+    }
+  }
+  console.log( "Sending Data");
+  console.log( userObject);
+  res.json(userObject);
 });
 
 server.get("/newOrg", async (req, res) => {
