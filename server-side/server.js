@@ -150,11 +150,16 @@ server.post("/checkuserid", async (req, res) => {
   const id = req.body.userID;
   
   let IdExists = false;
-  User.exists({ _id: id }).then(exists => {
-    if (exists) {
-      IdExists = true;
-    }
-  });
+  // User.exists({ _id: id }).then(exists => {
+  //   if (exists) {
+  //     IdExists = true;
+  //   }
+  // });
+  let output = await User.findOne({ _id : id}).exec();
+
+  if( output != null){
+    IdExists = true;
+  }
 
   if ( IdExists) {
     const out = {
@@ -178,7 +183,6 @@ server.get("/checkuserid", async (req, res) => {
 
 // new organisation
 server.post("/newOrg", async (req, res) => {
-  console.log( "request arrived");
   const NAME = req.body.OrgName;
   const EMAIL = req.body.email;
   const USERS = req.body.users;
@@ -186,10 +190,7 @@ server.post("/newOrg", async (req, res) => {
   const curr = req.body.name;
   const curr_id = req.body.User_id;
 
-  console.log( "curr_id : ", curr_id);
   USERS.push( curr_id);
-  console.log( USERS);
-
 
   let output = {
     status : 'Failed',
@@ -204,14 +205,11 @@ server.post("/newOrg", async (req, res) => {
   org.name = NAME;
   org.users = USERS;
   const doc = await org.save();
-  console.log(doc.id);
   for( let i = 0; i < USERS.length; i++){
     User.findByIdAndUpdate( USERS[ i], {$push: {organisations : doc.id}}).exec();
   }
 
   let UserData = await User.findOne({email : EMAIL}).exec();
-  console.log(UserData);
-  console.log("aj");
   let userObject = {
     _id : "",
     name : "",
@@ -240,8 +238,6 @@ server.post("/newOrg", async (req, res) => {
       userObject.status = 'Failed';
     }
   }
-  console.log( "Sending Data");
-  console.log( userObject);
   res.json(userObject);
 });
 
