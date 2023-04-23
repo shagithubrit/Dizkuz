@@ -121,7 +121,7 @@ export default function NewOrganisationPage() {
             }
             localStorage.removeItem( 'currentUser');
             localStorage.setItem('currentUser', JSON.stringify( curUser)); 
-            navigate("/");
+            navigate("/organisations");
         }else{
             setAlertHead("Unknown error occured!");
             setAlertBody(

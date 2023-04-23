@@ -250,13 +250,36 @@ server.get("/newOrg", async (req, res) => {
 server.post("/leaveOrg", async (req, res) => {
   const USERID = req.body.userId;
   const ORGID = req.body.organisationId;
+  console.log(USERID);
+  console.log(ORGID);
   if( !checkLogin( req.body.email, req.body.password)){
     output.status = 'authFailed';
     res.json( output);
   }
-  User.findByIdAndUpdate(USERID, { $pull: { organisations: ORGID } }).exec();
+  try {
+    User.findByIdAndUpdate(USERID, { $pull: { organisations: ORGID } }).exec();
+  } catch (error) {
+    const status = {
+      process: "Failed"
+    }
+
+    res.json(status);
+  }
+
+  try {
+    Organisation.findByIdAndUpdate(ORGID, { $pull: { users: USERID } }).exec();
+  } catch (error) {
+    const status = {
+      process: "Failed",
+    };
+    res.json(status);
+  }
   let output = await User.findById(USERID).exec();
-  res.json(output.organisations);
+  const status = {
+    process: "success",
+    user: output
+  }
+  res.json(status);
 });
 
 server.get("/leaveOrg", async (req, res) => {

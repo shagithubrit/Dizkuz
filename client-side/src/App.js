@@ -18,6 +18,7 @@ import CategoryPage from "./Pages/CategoryPage/CategoryPage";
 import IssuePage from "./Pages/IssuePage/IssuePage";
 import ChatPage from "./Pages/ChatPage/ChatPage";
 import NewOrganisationPage from "./Pages/NewOrganisationPage/NewOrganisationPage";
+import Redirect from './Components/Redirect';
 
 
 function App() {
@@ -34,16 +35,17 @@ function App() {
     <Router>
       <div className="App">
         {/* <NavBar /> */}
-        <Routes> 
-          <Route path='/' element={<HomePage />} />
-          <Route path='/organisations' element={<OrganisationsPage />} />
-          <Route path='/categories' element={<CategoryPage />} />
-          <Route path='/chats' element={<ChatPage />} />
-          <Route path='/issues' element={<IssuePage />} />
-          <Route path='/neworganisation' element={<NewOrganisationPage />} />
-          <Route path='/landing' element={<LandingPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/signup' element={<SignupPage />} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/organisations" element={<OrganisationsPage />} />
+          <Route path="/categories" element={<CategoryPage />} />
+          <Route path="/chats" element={<ChatPage />} />
+          <Route path="/issues" element={<IssuePage />} />
+          <Route path="/neworganisation" element={<NewOrganisationPage />} />
+          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/redirect" element={<Redirect />} />
         </Routes>
       </div>
     </Router>
