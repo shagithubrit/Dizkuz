@@ -4,8 +4,11 @@ import Footer from '../../Components/Footer';
 import { useNavigate} from 'react-router-dom';
 import NavBar from '../../Components/NavBar';
 import ImageContainer from '../../Components/ImageContainer';
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function HomePage( prop) {
+  const [ HtmlLoaded, setHtmlLoaded] = useState( false);
+
   const navigate = useNavigate();
   const jumptoOrganisations = () => {
     navigate( '/organisations');
@@ -27,25 +30,32 @@ export default function HomePage( prop) {
   
 
   useEffect( () => {
-    currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-    if( currentUser_ == null){
-      navigate( '/landing');
-    }
-    
-    setCurrentUser({
-      name : currentUser_.name,
-      emaill : currentUser_.email,
-      organisations : currentUser_.organisations,
-      messages : currentUser_.messages,
-      _id : currentUser_._id
-    });
 
-    profilePic = currentUser_.profilePic;
-    console.log( currentUser_);
+    const doWork = async() => {
+      currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+      if( currentUser_ == null){
+        navigate( '/landing');
+      }
+      
+      setCurrentUser({
+        name : currentUser_.name,
+        emaill : currentUser_.email,
+        organisations : currentUser_.organisations,
+        messages : currentUser_.messages,
+        _id : currentUser_._id
+      });
+
+      profilePic = currentUser_.profilePic;
+      setHtmlLoaded( true);
+    }
+
+    doWork();  
+
   }, []);
 
 
   return (
+    HtmlLoaded ? 
     <>
       <NavBar />
       <div className='HomePageOuterContainer'>
@@ -55,7 +65,7 @@ export default function HomePage( prop) {
             <div><div className='title_he'>User ID :</div> <h4>{currentUser._id}</h4></div>
             <div><div className='title_he'>email :</div> <h4>{currentUser.emaill}</h4></div>
             <div><div className='title_he'>Organisations :</div> <h4>{currentUser.organisations.length}</h4></div>
-            <div><div className='title_he'>Organisations :</div> <h4>{currentUser.messages}</h4></div>
+            <div><div className='title_he'>Messages :</div> <h4>{currentUser.messages}</h4></div>
           </div>
           <ImageContainer image={profilePic}/>
         </div>
@@ -81,6 +91,14 @@ export default function HomePage( prop) {
               Learn more about us
             </div>
           </div>
+      </div>
+      <Footer />
+    </>
+    :
+    <>
+      <NavBar />
+      <div className='SpinnerContainer'>
+        <Spinner animation="border" variant="dark" />
       </div>
       <Footer />
     </>

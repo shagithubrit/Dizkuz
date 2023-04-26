@@ -8,34 +8,6 @@ import Footer from '../../Components/Footer';
 import NavBar from '../../Components/NavBar';
 import Form from 'react-bootstrap/Form';
 
-const Categories = [
-    {
-        title : 'category 1',
-        description : 'description about category 1',
-        id : 'id 1'
-    },
-    {
-        title : 'category 2',
-        description : 'description about category 2',
-        id : 'id 2'
-    },
-    {
-        title : 'category 3',
-        description : 'description about category 3',
-        id : 'id 3'
-    },
-    {
-        title : 'category 4',
-        description : 'description about category 4',
-        id : 'id 4'
-    },
-    {
-        title : 'category 5',
-        description : 'description about category 5',
-        id : 'id 5'
-    }
-];
-
 function NewCategoryModal(props) {
 
   const addCategory = () =>{
@@ -77,6 +49,8 @@ export default function CategoryPage() {
     // modal
   const [show, setShow] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
+  const [ HtmlLoaded, setHtmlLoaded] = useState( false);
+  const [ Categories, setCategories] = useState( {} );
 
   const handleClose = () => {
     setShow(false)
@@ -115,6 +89,14 @@ export default function CategoryPage() {
       if( currentUser_ == null){
         navigate( '/landing');
       }
+
+      const dizkuzData = JSON.parse(localStorage.getItem('currentUser'));
+      const OrgID = dizkuzData.currentOrganisation;
+
+      // List contains all categories in which organisationID == OrgID
+
+      
+
     }, []);
 
   return (
