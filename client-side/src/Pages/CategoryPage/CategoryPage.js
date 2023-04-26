@@ -51,7 +51,7 @@ export default function CategoryPage() {
   const [ modalShow, setModalShow] = React.useState(false);
   const [ HtmlLoaded, setHtmlLoaded] = useState( false);
   const [ Categories, setCategories] = useState( [] );
-  const [ orgName, setOrgName] = useState( 'Organization test');
+  const [ orgName, setOrgName] = useState( 'Organization');
   const [ CategoryComponent, setCategoryComponent] = useState(<></>);
 
   const handleClose = () => {
@@ -94,9 +94,9 @@ export default function CategoryPage() {
 
         const tempCategoryComponent = Categories.map((category) =>{
           return(
-          <div>
-              <CategoryCard title={category.title} description={category.description} id={category.id} key={category.id}/>
-          </div>
+            <div>
+                <CategoryCard title={category.title} description={category.description} id={category.id} key={category.id}/>
+            </div>
           );
         });
 
@@ -105,6 +105,7 @@ export default function CategoryPage() {
         setHtmlLoaded( true);
       }
 
+      doWork();
     }, []);
 
   return (

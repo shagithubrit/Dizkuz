@@ -8,112 +8,103 @@ import NavBar from '../../Components/NavBar';
 import AddImg from './AddImg.png';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import Spinner from 'react-bootstrap/Spinner';
 
-const Issues = [
-    {
-        title : 'Issue 1',
-        body : 'Issue regarding test Issue 1',
-        author : 'person 1',
-        date : '15-10-2022',
-        id : 'id 1'
-    },
-    {
-        title : 'Issue 2',
-        body : 'Issue regarding test Issue 2',
-        author : 'person 2',
-        date : '17-10-2022',
-        id : 'id 2'
-    },
-    {
-        title : 'Issue 3',
-        body : 'Issue regarding test Issue 3',
-        author : 'person 3',
-        date : '15-10-2022',
-        id : 'id 3'
-    },
-    {
-        title : 'Issue 4',
-        body : 'Issue regarding test Issue 4',
-        author : 'person 4',
-        date : '15-10-2022',
-        id : 'id 4'
-    },
-    {
-        title : 'Issue 5',
-        body : 'Issue regarding test Issue 5',
-        author : 'person 5',
-        date : '15-10-2022',
-        id : 'id 5'
-    },
-    {
-        title : 'Issue 6',
-        body : 'Issue regarding test Issue 6',
-        author : 'person 6',
-        date : '15-10-2022',
-        id : 'id 6'
-    }
-];
+// Issues
+// const Issues = [
+//     {
+//         title : 'Issue 1',
+//         body : 'Issue regarding test Issue 1',
+//         author : 'person 1',
+//         date : '15-10-2022',
+//         id : 'id 1'
+//     },
+// ];
 
 function NewIssueModal(props) {
-    const addIssue = () => {
-        props.onHide();
-    }
-  
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            New Issue
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Control type="text" placeholder="Enter Issue name" style={{marginBottom : '5px'}} />
-          <Form.Control type="textarea" placeholder="Enter Issue description" style={{marginTop : '5px'}} />
-        </Modal.Body>
-        <Modal.Footer>
-        <Button variant="secondary" onClick={props.onHide}>
-              Cancel
-            </Button>
-            <Button variant="primary" onClick={addIssue}>
-              Create
-            </Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  };
+  const addIssue = () => {
+      props.onHide();
+  }
+
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          New Issue
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form.Control type="text" placeholder="Enter Issue name" style={{marginBottom : '5px'}} />
+        <Form.Control type="textarea" placeholder="Enter Issue description" style={{marginTop : '5px'}} />
+      </Modal.Body>
+      <Modal.Footer>
+      <Button variant="secondary" onClick={props.onHide}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={addIssue}>
+            Create
+          </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
 
 export default function IssuePage() {
-    const navigate = useNavigate();
-    const [modalShow, setModalShow] = React.useState(false);
+  const navigate = useNavigate();
 
-    const IssueComponent = Issues.map(( issue) =>{
+  const [ modalShow, setModalShow] = React.useState(false);
+  const [ HtmlLoaded, setHtmlLoaded] = useState( false);
+  const [ IssueComponent, setIssueComponent] = useState( <></>);
+  const [ Issues, setIssues] = useState( []);
+
+  
+
+  const JumpToAddIssue = () => {
+    setModalShow( true);
+  }
+
+
+  let currentUser_ = {};
+
+  useEffect( () => {
+    currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+    if( currentUser_ == null){
+      navigate( '/landing');
+    }
+
+    const doWork = async() => {
+      const dizkuzData = JSON.parse(localStorage.getItem('currentUser'));
+      const CatID = dizkuzData.currentCategory;
+
+      //=================================================================================
+      //=================================================================================
+      // A POST request to find and store all Issues with CategoryID === CatID in Issues using setIssues()
+      //=================================================================================
+      //=================================================================================
+
+      const tempIssueComponent = Issues.map(( issue) =>{
         return(
-        <div>
-            <IssueCard title={issue.title} body={issue.body} id={issue.id} author={issue.author} date={issue.date} key={issue.id}/>
-        </div>
+          <div>
+              <IssueCard title={issue.title} body={issue.body} id={issue.id} author={issue.author} date={issue.date} key={issue.id}/>
+          </div>
         );
       });
 
-      const JumpToAddIssue = () => {
-        setModalShow( true);
-      }
+      setIssueComponent( tempIssueComponent);
 
+      setHtmlLoaded( true);
+    }
 
-      let currentUser_ = {};
-    
-      useEffect( () => {
-        currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-        if( currentUser_ == null){
-          navigate( '/landing');
-        }
-      }, []);
+    doWork();
+  }, []);
 
   return (
+    HtmlLoaded ? 
     <>
     <NavBar />
     <div className='IssuePageOuterContainer' style={{paddingTop : '70px'}}>
@@ -136,6 +127,14 @@ export default function IssuePage() {
         onHide={() => setModalShow(false)}
       />
     <Footer />
+    </>
+    :
+    <>
+      <NavBar />
+      <div className='SpinnerContainer'>
+        <Spinner animation="border" variant="dark" />
+      </div>
+      <Footer />
     </>
   );
 }
