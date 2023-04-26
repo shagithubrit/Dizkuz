@@ -10,9 +10,42 @@ import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 
 function NewCategoryModal(props) {
+  const [CategoryName, setCategoryName] = useState( '');
 
-  const addCategory = () =>{
+  const updateCategoryName = (e) => {
+    setCategoryName( e.target.value);
+  }
+
+
+  const addCategory = async (e) =>{
     props.onHide();
+    try {
+        const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
+        const OrgID = dizkuzData.currentOrganisation;
+        const inp = {
+          NAME: CategoryName,
+          ID: OrgID
+        };
+        const response = await fetch("http://localhost:8080/newCategory", {
+          method: "POST",
+          body: JSON.stringify(inp),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        if (data==null) {
+          window.alert("category with given name already exists");
+        }
+        else
+        {
+          window.alert("successfully added the new category");
+        }
+        }catch (error) {
+        console.log(error);
+        window.alert( "Try again !");
+      }
+
   }
 
   return (
@@ -28,7 +61,7 @@ function NewCategoryModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Control type="text" placeholder="Enter category name" />
+        <Form.Control type="text" placeholder="Enter category name" value={CategoryName} onChange={updateCategoryName}/>
       </Modal.Body>
       <Modal.Footer>
       <Button variant="secondary" onClick={props.onHide}>
@@ -43,7 +76,7 @@ function NewCategoryModal(props) {
 };
 
 
-export default function CategoryPage() {
+export default function CategoryPage(props) {
   const navigate = useNavigate();
 
     // modal
@@ -67,7 +100,7 @@ export default function CategoryPage() {
 
     
 
-    const JumpToNewCategory = () => {
+    const JumpToNewCategory = async (e) => {
       setModalShow( true);
     }
 

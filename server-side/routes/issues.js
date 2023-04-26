@@ -23,20 +23,21 @@ const checkLogin = async (EMAIL, PASSWORD) => {
 };
 
 router.get("/", async (req, res) => {
-  const checkID = req.body.CategoryId;
+  const checkID = req.body.OrgId;
+  console.log(checkID);
   var output = {
     status: "failed",
     data: [],
   };
-  if (!checkLogin(req.body.email, req.body.password)) {
-    output.status = "authFailed";
-    res.json(output);
-  }
-  let List = await Issue.find({ CategoryId: checkID }).catch(() => {
-    res.json(output);
-  });
-  output.status = "success";
-  output.data = List;
+  // if (!checkLogin(req.body.email, req.body.password)) {
+  //   output.status = "authFailed";
+  //   res.json(output);
+  // }
+  // let List = await Issue.find({ CategoryId: checkID }).catch(() => {
+  //   res.json(output);
+  // });
+  // output.status = "success";
+  // output.data = List;
   res.json(output);
 });
 

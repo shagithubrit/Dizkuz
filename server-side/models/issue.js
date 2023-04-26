@@ -9,4 +9,4 @@ const IssueSchema = new Schema({
   CategoryId: String,
 });
 
-module.exportsc = mongoose.model("Issue", IssueSchema);
+module.exports = mongoose.model("Issue", IssueSchema);
