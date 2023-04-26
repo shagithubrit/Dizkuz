@@ -16,7 +16,7 @@ export default function NewOrganisationPage() {
   const navigate = useNavigate();
   const [participants, setParticipants] = useState([]);
   const [dummy, setDummy] = useState(true);
-  let OrganisationName = "";
+  const [OrganisationName, setOrganisationName] = useState( '');
   let NewUserID = "";
   let currentUser_ = {};
 
@@ -30,7 +30,7 @@ export default function NewOrganisationPage() {
   });
 
   const handleInputName = (e) => {
-    OrganisationName = e.target.value;
+    setOrganisationName( e.target.value);
   };
 
   const handleID = (e) => {
@@ -59,8 +59,6 @@ export default function NewOrganisationPage() {
           },
         });
         const data = await response.json();
-// <<<<<<< HEAD
-        // if no user is found then null is returned
         if (data.status === "Found") {
           setAlertHead("User Added Succesfully!");
           setAlertBody("The user has been added to the organisation");
@@ -78,27 +76,6 @@ export default function NewOrganisationPage() {
           );
           setVariant("danger");
           setShow(true);
-// =======
-        // if( data.status === 'Success'){
-        //     let curUser = {
-        //         name : data.name,
-        //         email : data.email,
-        //         password : data.password,
-        //         organisations : data.organisations,
-        //         messages : data.messages,
-        //         _id : data._id,
-        //         __v : data.__v
-        //     }
-        //     localStorage.removeItem( 'currentUser');
-        //     localStorage.setItem('currentUser', JSON.stringify( curUser)); 
-        //     navigate("/organisations");
-        // }else{
-        //     setAlertHead("Unknown error occured!");
-        //     setAlertBody(
-        //     "An unknown error occured. please check your network and try again."
-        //     );
-        //     setShow(true);
-// >>>>>>> 58cbbac23306f50a861a9b1e117272a865c8f0ee
         }
       } catch (error) {
         setAlertHead("Unknown error occured!");
@@ -144,7 +121,7 @@ export default function NewOrganisationPage() {
         };
         localStorage.removeItem("currentUser");
         localStorage.setItem("currentUser", JSON.stringify(curUser));
-        navigate("/");
+        navigate("/organisations");
       } else {
         setAlertHead("Unknown error occured!");
         setAlertBody(
@@ -190,6 +167,7 @@ export default function NewOrganisationPage() {
                   type="text"
                   placeholder="Enter your organisation's name"
                   name="organisationName"
+                  value={OrganisationName}
                   onChange={handleInputName}
                   required
                 />
@@ -254,6 +232,7 @@ export default function NewOrganisationPage() {
                   type="text"
                   placeholder="Enter your organisation's name"
                   name="organisationName"
+                  value={OrganisationName}
                   onChange={handleInputName}
                   required
                 />
