@@ -17,6 +17,7 @@ export default function OrganisationsPage(prop) {
   const [alertBody, setAlertBody] = useState("");
   const [alertVarient, setAlertVarient] = useState("");
   const [show, setShow] = useState(false);
+  const [ rerenderer, setRerenderer] = useState( false);
 
   const [ HtmlLoaded, setHtmlLoaded] = useState( false);
 
@@ -63,7 +64,7 @@ export default function OrganisationsPage(prop) {
           let tempCardsComponent = cards.map((card) =>{
             return(
             <div>
-                <OrganisationCard title={card.name} id={card._id} key={card._id}/>
+                <OrganisationCard title={card.name} id={card._id} key={card._id} rerenderer={rerenderer} setRerenderer={setRerenderer}/>
             </div>
             );
           });

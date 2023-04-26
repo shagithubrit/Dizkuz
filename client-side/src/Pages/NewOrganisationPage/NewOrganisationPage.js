@@ -59,6 +59,7 @@ export default function NewOrganisationPage() {
           },
         });
         const data = await response.json();
+// <<<<<<< HEAD
         // if no user is found then null is returned
         if (data.status === "Found") {
           setAlertHead("User Added Succesfully!");
@@ -77,6 +78,27 @@ export default function NewOrganisationPage() {
           );
           setVariant("danger");
           setShow(true);
+// =======
+        // if( data.status === 'Success'){
+        //     let curUser = {
+        //         name : data.name,
+        //         email : data.email,
+        //         password : data.password,
+        //         organisations : data.organisations,
+        //         messages : data.messages,
+        //         _id : data._id,
+        //         __v : data.__v
+        //     }
+        //     localStorage.removeItem( 'currentUser');
+        //     localStorage.setItem('currentUser', JSON.stringify( curUser)); 
+        //     navigate("/organisations");
+        // }else{
+        //     setAlertHead("Unknown error occured!");
+        //     setAlertBody(
+        //     "An unknown error occured. please check your network and try again."
+        //     );
+        //     setShow(true);
+// >>>>>>> 58cbbac23306f50a861a9b1e117272a865c8f0ee
         }
       } catch (error) {
         setAlertHead("Unknown error occured!");
