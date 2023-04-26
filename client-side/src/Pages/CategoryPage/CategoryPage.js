@@ -15,7 +15,6 @@ function NewCategoryModal(props) {
     props.onHide();
   }
 
-
   return (
     <Modal
       {...props}
