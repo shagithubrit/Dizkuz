@@ -69,8 +69,10 @@ export default function OrganisationCard(prop) {
 
   const openOrganisation = () => {
     // console.log( "organisation : ", prop.id);
-    const dizkuzData = JSON.parse(localStorage.getItem('dizkuzData'));
+    const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
     dizkuzData.currentOrganisation = prop.id;
+    localStorage.removeItem( 'dizkuzData');
+    localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData));
     navigate( '/categories');
   };
   const leaveOrganisation = () => {

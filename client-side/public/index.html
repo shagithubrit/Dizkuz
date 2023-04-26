@@ -21,7 +21,19 @@
     <script
       src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"
       crossorigin></script>
-    <script>var Alert = ReactBootstrap.Alert;</script>
+    <script>
+    var Alert = ReactBootstrap.Alert;
+    
+    console.log( "running js");
+    localStorage.removeItem( 'dizkuzData');
+    const dizkuzData = {
+      currentOrganistaion : "none",
+      currentCategory : "none",
+      currentIssue : "none"
+    };
+    localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData)); 
+
+    </script>
 
 
 

@@ -1,4 +1,19 @@
+Data stored in localStorage
+
+
 dizkuzData = {
     currentOrganisation : '',
+    currentCategory : '',
     currentIssue : '',
+}
+
+dizkuzredirectUR = '';
+
+currentUser = {
+    name : '',
+    email : '',
+    organisations : [''],
+    password : '',
+    __v : 0,
+    _id : ''
 }

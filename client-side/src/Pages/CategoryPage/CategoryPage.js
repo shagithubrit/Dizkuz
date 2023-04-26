@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Footer from '../../Components/Footer';
 import NavBar from '../../Components/NavBar';
 import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';
 
 function NewCategoryModal(props) {
 
@@ -47,10 +48,12 @@ export default function CategoryPage() {
   const navigate = useNavigate();
 
     // modal
-  const [show, setShow] = useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [ show, setShow] = useState(false);
+  const [ modalShow, setModalShow] = React.useState(false);
   const [ HtmlLoaded, setHtmlLoaded] = useState( false);
-  const [ Categories, setCategories] = useState( {} );
+  const [ Categories, setCategories] = useState( [] );
+  const [ orgName, setOrgName] = useState( 'Organization test');
+  const [ CategoryComponent, setCategoryComponent] = useState(<></>);
 
   const handleClose = () => {
     setShow(false)
@@ -63,43 +66,50 @@ export default function CategoryPage() {
     // console.log( "organisation : ", prop.id);
   }
 
-    const [orgName, setOrgName] = useState( 'Organization test');
-
-
-    const CategoryComponent = Categories.map((category) =>{
-        return(
-        <div>
-            <CategoryCard title={category.title} description={category.description} id={category.id} key={category.id}/>
-        </div>
-        );
-      });
-
-    const openMembers = () => {
-        console.log( "Members");
-    }
+    
 
     const JumpToNewCategory = () => {
       setModalShow( true);
     }
 
-    let currentUser_ = {};
-  
+    const openMembers = () => {
+
+    }
+    
     useEffect( () => {
+      let currentUser_ = {};
       currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
       if( currentUser_ == null){
         navigate( '/landing');
       }
 
-      const dizkuzData = JSON.parse(localStorage.getItem('currentUser'));
-      const OrgID = dizkuzData.currentOrganisation;
+      const doWork = async() => {
+        const dizkuzData = JSON.parse(localStorage.getItem('currentUser'));
+        const OrgID = dizkuzData.currentOrganisation;
 
-      // List contains all categories in which organisationID == OrgID
+        //=================================================================================
+        //=================================================================================
+        // A POST request to find and store all categories with organisationID === OrgID in in Categories using setCategories()
+        //=================================================================================
+        //=================================================================================
 
-      
+        const tempCategoryComponent = Categories.map((category) =>{
+          return(
+          <div>
+              <CategoryCard title={category.title} description={category.description} id={category.id} key={category.id}/>
+          </div>
+          );
+        });
+
+        setCategoryComponent( tempCategoryComponent);
+
+        setHtmlLoaded( true);
+      }
 
     }, []);
 
   return (
+    HtmlLoaded ? 
     <>
     <NavBar />
     <div className='CategoryConainer' style={{paddingTop : '70px'}}>
@@ -131,6 +141,14 @@ export default function CategoryPage() {
         onHide={() => setModalShow(false)}
       />
     <Footer />
+    </>
+    :
+    <>
+      <NavBar />
+      <div className='SpinnerContainer'>
+        <Spinner animation="border" variant="dark" />
+      </div>
+      <Footer />
     </>
   )
 }
