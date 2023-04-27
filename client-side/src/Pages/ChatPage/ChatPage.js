@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import Alert from "react-bootstrap/Alert";
 import { useNavigate} from 'react-router-dom';
 import MessageCardOther from '../../Components/MessageCardOther';
 import MessageCardUser from '../../Components/MessageCardUser';
 import './ChatPage.css';
 import MessageInput from '../../Components/MessageInput';
 import NavBar from '../../Components/NavBar';
-
+import Footer from '../../Components/Footer';
+import Spinner from 'react-bootstrap/esm/Spinner';
 // Messages
 // const messages = [
 //     {

@@ -2,9 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-
 const User = require("../models/user");
 const Organisation = require("../models/organisation");
+const Category = require("../models/category");
+
 
 let router = express.Router();
 router.use(bodyParser.json());
@@ -22,44 +23,27 @@ const checkLogin = async (EMAIL, PASSWORD) => {
   return false;
 };
 
-
 router.post("/", async (req, res) => {
-  var output = {
-    status: "failed",
-    data: [],
-  };
-  const USERID = req.body.userId;
-  const ORGID = req.body.organisationId;
-  console.log(USERID);
+  const ORGID = req.body.ID;
   console.log(ORGID);
+  var output = {
+    status : "failed",
+  }
   if (!checkLogin(req.body.email, req.body.password)) {
     output.status = "authFailed";
     res.json(output);
   }
   try {
-    User.findByIdAndUpdate(USERID, { $pull: { organisations: ORGID } }).exec();
-  } catch (error) {
-    const status = {
-      process: "Failed",
+    let cat = await Category.find({ OrganisationId: ORGID }).exec();
+    const out = {
+      status: "success",
+      data: cat,
     };
-
-    res.json(status);
-  }
-
-  try {
-    Organisation.findByIdAndUpdate(ORGID, { $pull: { users: USERID } }).exec();
+    res.json(out);
   } catch (error) {
-    const status = {
-      process: "Failed",
-    };
-    res.json(status);
+    output.status = "failed";
+    res.json(output);
   }
-  let out = await User.findById(USERID).exec();
-  const status = {
-    process: "success",
-    user: out,
-  };
-  res.json(status);
 });
 
 router.get("/", async (req, res) => {

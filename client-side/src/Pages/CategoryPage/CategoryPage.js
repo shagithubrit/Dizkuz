@@ -10,9 +10,48 @@ import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 
 function NewCategoryModal(props) {
+  const [CategoryName, setCategoryName] = useState( '');
 
-  const addCategory = () =>{
+  const updateCategoryName = (e) => {
+    setCategoryName( e.target.value);
+  }
+
+
+  const addCategory = async (e) =>{
     props.onHide();
+    try {
+        const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
+        const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+        const OrgID = dizkuzData.currentOrganisation;
+        const inp = {
+          name: currentUser_.name,
+          email: currentUser_.email,
+          password: currentUser_.password,
+          organisations: currentUser_.organisations,
+          User_id: currentUser_._id,
+          NAME: CategoryName,
+          ID: OrgID,
+        };
+        const response = await fetch("http://localhost:8080/newCategory", {
+          method: "POST",
+          body: JSON.stringify(inp),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+       if (data == null) {
+             window.alert("category with given name already exists");
+           } else if(data.status === "success") {
+             window.alert("successfully added the new category");
+           }
+           else{
+            window.alert("an error occured");
+           }
+         } catch (error) {
+           console.log(error);
+           window.alert("Try again !");
+         }
   }
 
   return (
@@ -28,7 +67,7 @@ function NewCategoryModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Control type="text" placeholder="Enter category name" />
+        <Form.Control type="text" placeholder="Enter category name" value={CategoryName} onChange={updateCategoryName}/>
       </Modal.Body>
       <Modal.Footer>
       <Button variant="secondary" onClick={props.onHide}>
@@ -43,7 +82,7 @@ function NewCategoryModal(props) {
 };
 
 
-export default function CategoryPage() {
+export default function CategoryPage(props) {
   const navigate = useNavigate();
 
     // modal
@@ -66,7 +105,7 @@ export default function CategoryPage() {
 
     
 
-    const JumpToNewCategory = () => {
+    const JumpToNewCategory = async (e) => {
       setModalShow( true);
     }
 
@@ -82,14 +121,32 @@ export default function CategoryPage() {
       }
 
       const doWork = async() => {
-        const dizkuzData = JSON.parse(localStorage.getItem('currentUser'));
-        const OrgID = dizkuzData.currentOrganisation;
-
-        //==========================================================================================================================================================
-        //==========================================================================================================================================================
-        //================== A POST request to find and store all categories with organisationID === OrgID in in Categories using setCategories() ==================
-        //==========================================================================================================================================================
-        //==========================================================================================================================================================
+         try {
+           const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
+           const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
+           const OrgID = dizkuzData.currentOrganisation;
+           const inp = {
+             email: currentUser_.email,
+             password: currentUser_.password,
+             ID: OrgID,
+           };
+           const response = await fetch("http://localhost:8080/categories", {
+             method: "POST",
+             body: JSON.stringify(inp),
+             headers: {
+               "Content-Type": "application/json",
+             },
+           });
+           const data = await response.json();
+           console.log(data);;
+           if (data.status === "failed") {
+              navigate("/");
+           }
+          }
+           catch(error)
+           {
+              console.log(error);
+           }
 
         const tempCategoryComponent = Categories.map((category) =>{
           return(

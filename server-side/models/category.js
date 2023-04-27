@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CategorySchema = new Schema({
-  title: String,
-  description: String,
+  name: String,
   OrganisationId: String,
 });
 

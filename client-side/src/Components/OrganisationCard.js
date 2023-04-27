@@ -26,9 +26,13 @@ export default function OrganisationCard(prop) {
     console.log( "organisation : ", prop.id);
     currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
     const out = {
-      userId : currentUser_._id,
+      name: currentUser_.name,
+      email: currentUser_.email,
+      password: currentUser_.password,
+      organisations: currentUser_.organisations,
+      userId: currentUser_._id,
       organisationId: prop.id,
-    }
+    };
     console.log( "currentUser fetched");
     console.log( out);
       try {
