@@ -12,6 +12,8 @@ const ORGANISATIONS = require("./routes/organisations");
 const ISSUES = require("./routes/issues");
 const CHATS = require("./routes/chats");
 const NEWCAT = require("./routes/newCategory");
+const CATEGORY = require("./routes/categories");
+
 
 main().catch(err => console.log(err));
 
@@ -43,6 +45,8 @@ server.use("/issues", ISSUES);
 server.use("/chats", CHATS);
 // new category
 server.use("/newCategory", NEWCAT);
+// category page
+server.use("/categories", CATEGORY);
 
 
 // starting server

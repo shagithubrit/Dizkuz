@@ -32,21 +32,34 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const Name = req.body.NAME;
   const id = req.body.ID;
+  var output = {
+    status: "failed",
+    data: [],
+  };
   if (!checkLogin(req.body.email, req.body.password)) {
     output.status = "authFailed";
     res.json(output);
   }
-    let output = await Category.findOne({ name: Name }).exec();
-    if (output === null) {
+  try {
+    let out = await Category.findOne({ name: Name }).exec();
+    if (out === null) {
       let category = new Category();
       category.name = Name;
       category.OrganisationId = id;
       const doc = await category.save();
       console.log(doc);
-      res.json(doc);
+      const OUT = {
+        status: "success",
+        name: Name,
+        organisationId: id,
+      };
+      res.json(OUT);
     } else {
       res.json(null);
-    }
+    }  
+  } catch (error) {
+    res.json(error);
+  }
 });
 
 module.exports = router;

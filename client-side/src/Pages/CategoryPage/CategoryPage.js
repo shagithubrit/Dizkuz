@@ -21,7 +21,7 @@ function NewCategoryModal(props) {
     props.onHide();
     try {
         const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
-        const curUser = JSON.parse(localStorage.getItem('currentUser'));
+        const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
         const OrgID = dizkuzData.currentOrganisation;
         const inp = {
           name: currentUser_.name,
@@ -40,18 +40,18 @@ function NewCategoryModal(props) {
           },
         });
         const data = await response.json();
-        if (data==null) {
-          window.alert("category with given name already exists");
-        }
-        else
-        {
-          window.alert("successfully added the new category");
-        }
-        }catch (error) {
-        console.log(error);
-        window.alert( "Try again !");
-      }
-
+       if (data == null) {
+             window.alert("category with given name already exists");
+           } else if(data.status === "success") {
+             window.alert("successfully added the new category");
+           }
+           else{
+            window.alert("an error occured");
+           }
+         } catch (error) {
+           console.log(error);
+           window.alert("Try again !");
+         }
   }
 
   return (
@@ -124,9 +124,11 @@ export default function CategoryPage(props) {
       const doWork = async() => {
          try {
            const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
+           const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
            const OrgID = dizkuzData.currentOrganisation;
            const inp = {
-             NAME: CategoryName,
+             email: currentUser_.email,
+             password: currentUser_.password,
              ID: OrgID,
            };
            const response = await fetch("http://localhost:8080/categories", {
@@ -137,22 +139,15 @@ export default function CategoryPage(props) {
              },
            });
            const data = await response.json();
-           if (data == null) {
-             window.alert("category with given name already exists");
-           } else {
-             window.alert("successfully added the new category");
+           console.log(data);;
+           if (data.status === "failed") {
+              navigate("/");
            }
-         } catch (error) {
-           console.log(error);
-           window.alert("Try again !");
-         }
-
-
-        //=================================================================================
-        //=================================================================================
-        // A POST request to find and store all categories with organisationID === OrgID in in Categories using setCategories()
-        //=================================================================================
-        //=================================================================================
+          }
+           catch(error)
+           {
+              console.log(error);
+           }
 
         const tempCategoryComponent = Categories.map((category) =>{
           return(

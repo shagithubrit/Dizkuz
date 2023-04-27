@@ -24,6 +24,10 @@ const checkLogin = async (EMAIL, PASSWORD) => {
 
 
 router.post("/", async (req, res) => {
+  var output = {
+    status: "failed",
+    data: [],
+  };
   const USERID = req.body.userId;
   const ORGID = req.body.organisationId;
   console.log(USERID);
@@ -50,10 +54,10 @@ router.post("/", async (req, res) => {
     };
     res.json(status);
   }
-  let output = await User.findById(USERID).exec();
+  let out = await User.findById(USERID).exec();
   const status = {
     process: "success",
-    user: output,
+    user: out,
   };
   res.json(status);
 });
