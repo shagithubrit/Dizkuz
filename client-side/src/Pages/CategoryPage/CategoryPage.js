@@ -21,10 +21,16 @@ function NewCategoryModal(props) {
     props.onHide();
     try {
         const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
+        const curUser = JSON.parse(localStorage.getItem('currentUser'));
         const OrgID = dizkuzData.currentOrganisation;
         const inp = {
+          name: currentUser_.name,
+          email: currentUser_.email,
+          password: currentUser_.password,
+          organisations: currentUser_.organisations,
+          User_id: currentUser_._id,
           NAME: CategoryName,
-          ID: OrgID
+          ID: OrgID,
         };
         const response = await fetch("http://localhost:8080/newCategory", {
           method: "POST",
@@ -116,8 +122,31 @@ export default function CategoryPage(props) {
       }
 
       const doWork = async() => {
-        const dizkuzData = JSON.parse(localStorage.getItem('currentUser'));
-        const OrgID = dizkuzData.currentOrganisation;
+         try {
+           const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
+           const OrgID = dizkuzData.currentOrganisation;
+           const inp = {
+             NAME: CategoryName,
+             ID: OrgID,
+           };
+           const response = await fetch("http://localhost:8080/categories", {
+             method: "POST",
+             body: JSON.stringify(inp),
+             headers: {
+               "Content-Type": "application/json",
+             },
+           });
+           const data = await response.json();
+           if (data == null) {
+             window.alert("category with given name already exists");
+           } else {
+             window.alert("successfully added the new category");
+           }
+         } catch (error) {
+           console.log(error);
+           window.alert("Try again !");
+         }
+
 
         //=================================================================================
         //=================================================================================
