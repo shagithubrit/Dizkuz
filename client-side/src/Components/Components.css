@@ -126,6 +126,18 @@
     border: 1.5px solid black;
 }
 
+.CategoryCardTitle{
+    text-align: start;
+    background-color: rgb(152, 255, 219);
+    padding: 5px;
+    border: 1px solid aquamarine;
+    border-radius: 5px;
+}
+
+.CategoryCardDescription{
+    text-align: end;
+}
+
 /* //============================================================================ IssueCard */
 
 .IssueCardContainer{

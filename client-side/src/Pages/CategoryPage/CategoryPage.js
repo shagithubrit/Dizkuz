@@ -1,58 +1,74 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate} from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import CategoryCard from '../../Components/CategoryCard';
-import './CategoryPage.css';
-import Modal from 'react-bootstrap/Modal';
-import Footer from '../../Components/Footer';
-import NavBar from '../../Components/NavBar';
-import Form from 'react-bootstrap/Form';
-import Spinner from 'react-bootstrap/Spinner';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import CategoryCard from "../../Components/CategoryCard";
+import "./CategoryPage.css";
+import Modal from "react-bootstrap/Modal";
+import Footer from "../../Components/Footer";
+import NavBar from "../../Components/NavBar";
+import Form from "react-bootstrap/Form";
+import Spinner from "react-bootstrap/Spinner";
+import Alert from 'react-bootstrap/Alert';
+
 
 function NewCategoryModal(props) {
-  const [CategoryName, setCategoryName] = useState( '');
+  const [CategoryName, setCategoryName] = useState("");
+
+  const navigate = useNavigate();
 
   const updateCategoryName = (e) => {
-    setCategoryName( e.target.value);
-  }
+    setCategoryName(e.target.value);
+  };
 
-
-  const addCategory = async (e) =>{
+  const addCategory = async (e) => {
     props.onHide();
     try {
-        const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
-        const currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-        const OrgID = dizkuzData.currentOrganisation;
-        const inp = {
-          name: currentUser_.name,
-          email: currentUser_.email,
-          password: currentUser_.password,
-          organisations: currentUser_.organisations,
-          User_id: currentUser_._id,
-          NAME: CategoryName,
-          ID: OrgID,
-        };
-        const response = await fetch("http://localhost:8080/newCategory", {
-          method: "POST",
-          body: JSON.stringify(inp),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-       if (data == null) {
-             window.alert("category with given name already exists");
-           } else if(data.status === "success") {
-             window.alert("successfully added the new category");
-           }
-           else{
-            window.alert("an error occured");
-           }
-         } catch (error) {
-           console.log(error);
-           window.alert("Try again !");
-         }
-  }
+      const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
+      const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
+      const OrgID = dizkuzData.currentOrganisation;
+      const inp = {
+        name: currentUser_.name,
+        email: currentUser_.email,
+        password: currentUser_.password,
+        organisations: currentUser_.organisations,
+        User_id: currentUser_._id,
+        NAME: CategoryName,
+        ID: OrgID,
+      };
+      const response = await fetch("http://localhost:8080/newCategory", {
+        method: "POST",
+        body: JSON.stringify(inp),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (data == null) {
+        props.setAlertHead( 'Category already exists!');
+        props.setAlertBody( 'A category with the same name in this organisation already exists. Please try making some changes in the name and then try again.');
+        props.setAlertVarient( 'warning');
+        props.setAlertShow( true);
+      } else if (data.status === "success") {
+        props.setAlertHead( 'Category Added successfully!');
+        props.setAlertBody( 'The category you just created has been added into the database. If you cannot find it, please try reloading the page.');
+        props.setAlertVarient( 'success');
+        props.setAlertShow( true);
+        const redirectURL = '/categories';
+        localStorage.setItem("dizkuzredirectURL", JSON.stringify(redirectURL));
+        navigate( '/redirect');
+      } else {
+        props.setAlertHead( 'Some unknown Error occured!');
+        props.setAlertBody( 'There was some unexpected error which prevented us to create the category you wanted. Please try again.');
+        props.setAlertVarient( 'danger');
+        props.setAlertShow( true);
+      }
+    } catch (error) {
+      props.setAlertHead( 'Unexpected Error occured!');
+      props.setAlertBody( 'Some unknown error occured. Please check your connection and try again.');
+      props.setAlertVarient( 'danger');
+      props.setAlertShow( true);
+    }
+  };
 
   return (
     <Modal
@@ -67,144 +83,215 @@ function NewCategoryModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Control type="text" placeholder="Enter category name" value={CategoryName} onChange={updateCategoryName}/>
+        <Form.Control
+          type="text"
+          placeholder="Enter category name"
+          value={CategoryName}
+          onChange={updateCategoryName}
+        />
       </Modal.Body>
       <Modal.Footer>
-      <Button variant="secondary" onClick={props.onHide}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={addCategory}>
-            Create
-          </Button>
+        <Button variant="secondary" onClick={props.onHide}>
+          Cancel
+        </Button>
+        <Button variant="primary" onClick={addCategory}>
+          Create
+        </Button>
       </Modal.Footer>
     </Modal>
   );
-};
-
+}
 
 export default function CategoryPage(props) {
   const navigate = useNavigate();
 
-    // modal
-  const [ show, setShow] = useState(false);
-  const [ modalShow, setModalShow] = React.useState(false);
-  const [ HtmlLoaded, setHtmlLoaded] = useState( false);
-  const [ Categories, setCategories] = useState( [] );
-  const [ orgName, setOrgName] = useState( 'Organization');
-  const [ CategoryComponent, setCategoryComponent] = useState(<></>);
+  // modal
+  const [alertHead, setAlertHead] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertVarient, setAlertVarient] = useState("");
+  const [Alertshow, setAlertShow] = useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [HtmlLoaded, setHtmlLoaded] = useState(false);
+  // const [Categories, setCategories] = useState();
+  const [orgName, setOrgName] = useState("Organization");
+  const [CategoryComponent, setCategoryComponent] = useState(<></>);
+  const [reloader, setreloader] = useState( false);
 
-  const handleClose = () => {
-    setShow(false)
+  const JumpToNewCategory = async (e) => {
+    setModalShow(true);
   };
-  const handleShow = () => {
-    setShow(true)
-  };
-  const handleLeave = () => {
-    setShow(false)
-  }
 
-    
+  const openMembers = () => {};
 
-    const JumpToNewCategory = async (e) => {
-      setModalShow( true);
+  useEffect(() => {
+    setOrgName( "Organisation 1");
+    let currentUser_ = {};
+    currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser_ == null) {
+      navigate("/landing");
     }
 
-    const openMembers = () => {
-
-    }
-    
-    useEffect( () => {
-      let currentUser_ = {};
-      currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
-      if( currentUser_ == null){
-        navigate( '/landing');
-      }
-
-      const doWork = async() => {
-         try {
-           const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
-           const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
-           const OrgID = dizkuzData.currentOrganisation;
-           const inp = {
-             email: currentUser_.email,
-             password: currentUser_.password,
-             ID: OrgID,
-           };
-           const response = await fetch("http://localhost:8080/categories", {
-             method: "POST",
-             body: JSON.stringify(inp),
-             headers: {
-               "Content-Type": "application/json",
-             },
-           });
-           const data = await response.json();
-           console.log(data);;
-           if (data.status === "failed") {
-              navigate("/");
-           }
-          }
-           catch(error)
-           {
-              console.log(error);
-           }
-
-        const tempCategoryComponent = Categories.map((category) =>{
-          return(
-            <div>
-                <CategoryCard title={category.title} description={category.description} id={category.id} key={category.id}/>
-            </div>
-          );
+    const doWork = async () => {
+      try {
+        const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
+        const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
+        const OrgID = dizkuzData.currentOrganisation;
+        const inp = {
+          email: currentUser_.email,
+          password: currentUser_.password,
+          ID: OrgID,
+        };
+        const response = await fetch("http://localhost:8080/categories", {
+          method: "POST",
+          body: JSON.stringify(inp),
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
+        const fetchData = await response.json();
+        console.log( "fectchData");
+        console.log( fetchData);
+        if ( fetchData.status === "authFailed") {
+          localStorage.removeItem("currentUser");
+          navigate("/landing");
+        } else if ( fetchData.status == "failed") {
+          setAlertHead( 'Unknown error occured');
+          setAlertBody( 'Due to some unexpected error, the organisation was not loaaded. Please try again.')
+          setAlertVarient( 'danger');
+          setAlertShow( true);
+        } else {
+          const LoadedData =  fetchData.data;
 
-        setCategoryComponent( tempCategoryComponent);
+          console.log( "loadedData");
+          console.log( LoadedData);
 
-        setHtmlLoaded( true);
+          // setCategories( LoadedData);
+
+          const Categories = LoadedData;
+          console.log( "categories");
+          console.log( Categories);
+
+          const tempCategoryComponent = Categories.map((category) => {
+            return (
+              <div>
+                <CategoryCard title={category.name} id={category._id} key={category._id} />
+              </div>
+            );
+          });
+          
+          
+          console.log( "Prop changed");
+          setreloader( ! reloader);
+          setCategoryComponent(tempCategoryComponent);
+          setHtmlLoaded(true);
+        }
+      } catch (error) {
+        setAlertHead( 'Unexpected error occured!');
+        setAlertBody( 'Due to some unexpected error we were not able to get the categories for you. Please check your connection and try again...');
+        setAlertVarient( 'danger');
+        setAlertShow( true);
       }
+    };
 
-      doWork();
-    }, []);
+    doWork();
+  }, []);
 
-  return (
-    HtmlLoaded ? 
-    <>
-    <NavBar />
-    <div className='CategoryConainer' style={{paddingTop : '70px'}}>
-
-        <h3 style={{textAlign: 'center'}}>{orgName}</h3>
-        <hr/>
-        <div className='OrganisationButton2'>
-            <Button className='orgbtn_' variant="outline-primary" onClick={openMembers}>Members</Button>
-            <Button className='orgbtn_' variant="primary" onClick={JumpToNewCategory}>New Category</Button>
-        </div>
-        {CategoryComponent}
-    </div>
-    <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Once you leave this, you won't be able to access it ever again.</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleLeave}>
-            Leave
-          </Button>
-        </Modal.Footer>
-    </Modal>
-    <NewCategoryModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-    <Footer />
-    </>
-    :
+  return ( 
+    HtmlLoaded ? (
+    Alertshow ? (
     <>
       <NavBar />
-      <div className='SpinnerContainer'>
+      <div style={{height:'50px'}}></div>
+      <Alert variant={alertVarient} onClose={() => setAlertShow(false)} dismissible>
+        <Alert.Heading>{alertHead}</Alert.Heading>
+        <p>
+          {alertBody}
+        </p>
+      </Alert>
+      <div className="CategoryConainer">
+        <h3 style={{ textAlign: "center" }}>{orgName}</h3>
+        <hr />
+        <div className="OrganisationButton2">
+          <Button
+            className="orgbtn_"
+            variant="outline-primary"
+            onClick={openMembers}
+          >
+            Members
+          </Button>
+          <Button
+            className="orgbtn_"
+            variant="primary"
+            onClick={JumpToNewCategory}
+          >
+            New Category
+          </Button>
+        </div>
+        <div>
+        {CategoryComponent}
+        </div>
+      </div>
+      <NewCategoryModal 
+        show={modalShow} 
+        alertHead={alertHead} 
+        alertBody={alertBody} 
+        alertVarient={alertVarient}
+        Alertshow={Alertshow}
+        setAlertHead={setAlertHead}
+        setAlertBody={setAlertBody}
+        setAlertVarient={setAlertVarient}
+        setAlertShow={setAlertShow}
+        onHide={() => setModalShow(false)} 
+      />
+      <Footer />
+    </> )
+   :
+   <>
+      <NavBar />
+      <div className="CategoryConainer" style={{ paddingTop: "70px" }}>
+        <h3 style={{ textAlign: "center" }}>{orgName}</h3>
+        <hr />
+        <div className="OrganisationButton2">
+          <Button
+            className="orgbtn_"
+            variant="outline-primary"
+            onClick={openMembers}
+          >
+            Members
+          </Button>
+          <Button
+            className="orgbtn_"
+            variant="primary"
+            onClick={JumpToNewCategory}
+          >
+            New Category
+          </Button>
+        </div>
+        <div>
+        {CategoryComponent}
+        </div>
+      </div>
+      <NewCategoryModal 
+        show={modalShow}
+        alertHead={alertHead} 
+        alertBody={alertBody} 
+        alertVarient={alertVarient}
+        Alertshow={Alertshow}
+        setAlertHead={setAlertHead}
+        setAlertBody={setAlertBody}
+        setAlertVarient={setAlertVarient}
+        setAlertShow={setAlertShow}
+        onHide={() => setModalShow(false)} 
+      />
+      <Footer />
+    </> )
+   :
+    <>
+      <NavBar />
+      <div className="SpinnerContainer">
         <Spinner animation="border" variant="dark" />
       </div>
       <Footer />
     </>
-  )
+  );
 }

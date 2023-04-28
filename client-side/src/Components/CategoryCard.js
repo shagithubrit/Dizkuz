@@ -10,11 +10,11 @@ export default function CategoryCard(prop) {
   return (
     <div className='CategoryCardOuter' onClick={openCategory}>
         <div className='CategoryCardTitle'>
-            <b>{prop.title}</b>
+            <h4>{prop.title}</h4>
         </div>
         <hr/>
         <div className='CategoryCardDescription'>
-            {prop.description}
+            <small>ID : {prop.id}</small>
         </div>
     </div>
   )
