@@ -13,7 +13,7 @@ import Spinner from "react-bootstrap/Spinner";
 function NewIssueModal(props) {
 
   const navigate = useNavigate();
-  
+
   const [IssueName, setIssueName] = useState("");
   const [IssueDescription, setIssueDescription] = useState("");
 
@@ -162,6 +162,9 @@ export default function IssuePage() {
           password: currentUser_.password,
           ID: CatID,
         };
+
+         console.log(inp);
+
         const response = await fetch("http://localhost:8080/issues", {
           method: "POST",
           body: JSON.stringify(inp),
