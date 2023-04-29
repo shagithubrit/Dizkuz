@@ -21,9 +21,7 @@ export default function OrganisationCard(prop) {
     setShow(true)
   };
   const handleLeave = async (e) => {
-    console.log(prop._id);
     setShow(false)
-    console.log( "organisation : ", prop.id);
     currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
     const out = {
       name: currentUser_.name,
@@ -33,8 +31,6 @@ export default function OrganisationCard(prop) {
       userId: currentUser_._id,
       organisationId: prop.id,
     };
-    console.log( "currentUser fetched");
-    console.log( out);
       try {
         const response = await fetch("http://localhost:8080/leaveOrg", {
           method: "POST",
@@ -62,9 +58,7 @@ export default function OrganisationCard(prop) {
             localStorage.setItem("dizkuzredirectURL", JSON.stringify(redirectURL));
             navigate( '/redirect');
         }
-        console.log(newOrgs);
       } catch (error) {
-        console.log(error);
         window.alert( "Try again !");
         setShow( true);
       }
@@ -72,11 +66,8 @@ export default function OrganisationCard(prop) {
 
 
   const openOrganisation = () => {
-    // console.log( "organisation : ", prop.id);
     const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
-    console.log( "id : ", prop.id);
     dizkuzData.currentOrganisation = prop.id;
-    console.log( "Diz ID : ", dizkuzData.currentOrganisation);
     dizkuzData.currentOrganisationName = prop.title;
     localStorage.removeItem( 'dizkuzData');
     localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData));

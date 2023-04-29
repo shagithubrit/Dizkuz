@@ -43,7 +43,6 @@ export default function LoginPage(prop) {
           },
         });
           const data = await response.json();
-          console.log(JSON.stringify(data));
           // if no user is found then null is returned
           if (data.status == 'notFound') {
               // window.alert("user not found");
@@ -56,7 +55,6 @@ export default function LoginPage(prop) {
               const check = data.password;
             // check if password of returned object matches with the entered password
             if ( data.status === "matched") {
-              // prop.setUser(true);
 
               const curUser = {
                 name : data.name,
@@ -72,15 +70,12 @@ export default function LoginPage(prop) {
             }
             else
             {
-              // window.alert("The password entered is wrong");
               setAlertHead( "Incorrect password!");
               setAlertBody( "The password you entered is not the correct password for the account " + userCredentials.email + ". Please recall your password and try again.");
               setShow( true);
             }
           }
       } catch (error) {
-        console.log(error);
-        // window.alert("failed to login");
         setAlertHead( "Login failed!");
         setAlertBody( "Due to an unexpected error we were not able to log you in, please check your connection try again.");
         setShow( true);

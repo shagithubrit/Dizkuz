@@ -35,9 +35,7 @@ export default function MembersPage() {
           const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
           const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
           const OrgID = dizkuzData.currentOrganisation;
-          console.log(OrgID);
           setOrganisationName( dizkuzData.currentOrganisationName);
-          console.log( "ordID : ", OrgID);
           const inp = {
             email: currentUser_.email,
             password: currentUser_.password,
@@ -51,8 +49,6 @@ export default function MembersPage() {
             },
           });
           const fetchData = await response.json();
-          console.log( "members fetch DAta : ", fetchData);
-
           if ( fetchData.status === "authFailed") {
             localStorage.removeItem("currentUser");
             navigate("/landing");
@@ -65,7 +61,6 @@ export default function MembersPage() {
             const LoadedData =  fetchData.data;
     
             const Members = LoadedData;
-            console.log(Members);
             let tempVar;
             if( Members.length == 0){
               tempVar = <div style={{paddingTop : '100px', paddingBottom : '50px', color : 'darkred'}}><h4>Sorry, No Member exists.</h4></div>;
@@ -77,7 +72,6 @@ export default function MembersPage() {
             const tempMemberComponent = tempVar;
             
             
-            console.log( "Prop changed");
             setRerenderer( ! rerenderer);
             setMembersComponent(tempMemberComponent);
             setHtmlLoaded(true);

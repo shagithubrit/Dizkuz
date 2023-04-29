@@ -124,7 +124,6 @@ export default function CategoryPage(props) {
     const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
     dizkuzData.currentCategory = props.id;
     dizkuzData.currentCategoryName = props.title;
-    console.log( "org ID : ", dizkuzData.currentOrganisation);
     localStorage.removeItem( 'dizkuzData');
     localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData));
     navigate( '/members');
@@ -157,8 +156,6 @@ export default function CategoryPage(props) {
           },
         });
         const fetchData = await response.json();
-        console.log( "fectchData");
-        console.log( fetchData);
         if ( fetchData.status === "authFailed") {
           localStorage.removeItem("currentUser");
           navigate("/landing");
@@ -170,13 +167,8 @@ export default function CategoryPage(props) {
         } else {
           const LoadedData =  fetchData.data;
 
-          console.log( "loadedData");
-          console.log( LoadedData);
 
           const Categories = LoadedData;
-
-          console.log( "categories");
-          console.log( Categories);
 
           let tempVar;
           if( Categories.length == 0){
@@ -193,7 +185,6 @@ export default function CategoryPage(props) {
           const tempCategoryComponent = tempVar;
           
           
-          console.log( "Prop changed");
           setreloader( ! reloader);
           setCategoryComponent(tempCategoryComponent);
           setHtmlLoaded(true);

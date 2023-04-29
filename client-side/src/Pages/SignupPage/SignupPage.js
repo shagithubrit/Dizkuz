@@ -67,7 +67,6 @@ export default function SignupPage(prop) {
         }
         // prop.setUser(true);
       } catch (error) {
-        console.log(error);
         setAlertHead("Signing up failed!");
         setAlertBody("Due to an unexpected error we were not able to sign you up, please check your connection try again.");
         setAlertVarient("danger");

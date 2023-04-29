@@ -117,7 +117,7 @@ export default function ChatPage() {
     Alertshow?
     <>
         <NavBar />
-            <div  style={{paddingTop : '50px'}}>
+            <div  style={{paddingTop : '100px'}}>
                 <Alert variant={alertVarient} onClose={() => setAlertShow(false)} dismissible>
                     <Alert.Heading>{alertHead}</Alert.Heading>
                     <p>

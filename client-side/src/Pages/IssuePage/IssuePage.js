@@ -163,7 +163,6 @@ export default function IssuePage() {
           ID: CatID,
         };
 
-         console.log(inp);
 
         const response = await fetch("http://localhost:8080/issues", {
           method: "POST",
@@ -197,7 +196,7 @@ export default function IssuePage() {
                   color: "darkred",
                 }}
               >
-                <h4>Sorry, No Member exists.</h4>
+                <h4>Sorry, No issue exists.</h4>
               </div>
             );
           } else {
@@ -239,7 +238,7 @@ export default function IssuePage() {
   return HtmlLoaded ? (
     <>
       <NavBar />
-      <div className="IssuePageOuterContainer" style={{ paddingTop: "70px" }}>
+      <div className="IssuePageOuterContainer" style={{ paddingTop: "100px" }}>
         <h3 style={{ textAlign: "center" }}>
           {OrganisationName}/<b>{CategoryName}</b>
         </h3>
