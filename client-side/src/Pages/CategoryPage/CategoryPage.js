@@ -198,14 +198,14 @@ export default function CategoryPage(props) {
     };
 
     doWork();
-  }, []);
+  }, [ reloader]);
 
   return ( 
     HtmlLoaded ? (
     Alertshow ? (
     <>
       <NavBar />
-      <div style={{height:'50px'}}></div>
+      {/* <div style={{height:'50px'}}></div> */}
       <Alert variant={alertVarient} onClose={() => setAlertShow(false)} dismissible>
         <Alert.Heading>{alertHead}</Alert.Heading>
         <p>
@@ -252,7 +252,7 @@ export default function CategoryPage(props) {
    :
    <>
       <NavBar />
-      <div className="CategoryConainer" style={{ paddingTop: "70px" }}>
+      <div className="CategoryConainer" style={{ paddingTop: "0px" }}>
         <h3 style={{ textAlign: "center" }}>{orgName}</h3>
         <hr />
         <div className="OrganisationButton2">

@@ -1,6 +1,6 @@
 .HomePageOuterContainer{
     padding: 50px;
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 .HomePageProfileContainer{
@@ -30,6 +30,23 @@
     }
     .title_he{
         font-size: small;
+    }
+    .HomePageOuterContainer{
+        padding: 25px;
+        padding-top: 100px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .HomePageOuterContainer{
+        padding: 10px;
+        padding-top: 100px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .HomePageUserInfo{
+        font-size:x-small;
     }
 }
 

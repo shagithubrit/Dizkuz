@@ -9,6 +9,7 @@ import AddImg from "./AddImg.png";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
+import Alert from 'react-bootstrap/Alert';
 
 function NewIssueModal(props) {
 
@@ -238,11 +239,41 @@ export default function IssuePage() {
   }, [rerenderer]);
 
   return HtmlLoaded ? (
+    Alertshow?
     <>
       <NavBar />
+      <Alert variant={alertVarient} onClose={() => setAlertShow(false)} dismissible>
+        <Alert.Heading>{alertHead}</Alert.Heading>
+        <p>
+          {alertBody}
+        </p>
+      </Alert>
       <div className="IssuePageOuterContainer" style={{ paddingTop: "100px" }}>
         <h3 style={{ textAlign: "center" }}>
-          {OrganisationName}/<b>{CategoryName}</b>
+          <span style={{fontSize : '25px'}}>{OrganisationName}</span><span  style={{fontSize : '50px'}}><b>/{CategoryName}</b></span>
+        </h3>
+        <hr />
+        <div className="IssuePageContainer">
+          <div className="NewIssue" onClick={JumpToAddIssue}>
+            <div>
+              <div className="NewIssueCont">
+                <img src={AddImg} height={"100px"} />
+              </div>
+              <div>Add new issue</div>
+            </div>
+          </div>
+          {IssueComponent}
+        </div>
+      </div>
+      <NewIssueModal show={modalShow} onHide={() => setModalShow(false)} rerenderer={rerenderer} setRerenderer={setRerenderer}/>
+      <Footer />
+    </>
+    :
+    <>
+      <NavBar />
+      <div className="IssuePageOuterContainer" style={{ paddingTop: "10px" }}>
+        <h3 style={{ textAlign: "center" }}>
+          <span style={{fontSize : '25px'}}>{OrganisationName}</span><span  style={{fontSize : '50px'}}><b>/{CategoryName}</b></span>
         </h3>
         <hr />
         <div className="IssuePageContainer">

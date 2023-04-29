@@ -88,7 +88,7 @@ export default function OrganisationsPage(prop) {
     
     doWork();
     
-  }, []);
+  }, [ rerenderer]);
 
 
   return (
@@ -96,7 +96,7 @@ export default function OrganisationsPage(prop) {
     show?
     <>
     <NavBar />
-    <div  style={{paddingTop : '50px'}}>
+    <div  style={{paddingTop : '0px'}}>
       <Alert variant={alertVarient} onClose={() => setShow(false)} dismissible>
         <Alert.Heading>{alertHead}</Alert.Heading>
         <p>
@@ -116,7 +116,7 @@ export default function OrganisationsPage(prop) {
     :
     <>
     <NavBar />
-    <div  style={{paddingTop : '100px'}}>
+    <div  style={{paddingTop : '20px'}}>
       
       <div className='OrganisationPageContainer1'>
           <h3 style={{textAlign: 'center'}}>Your Organisations</h3>

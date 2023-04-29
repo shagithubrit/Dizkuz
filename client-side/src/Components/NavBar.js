@@ -1,32 +1,64 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
-import './Components.css';
+import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarToggler,
+  MDBIcon,
+  MDBNavbarNav,
+  MDBNavbarItem,
+  MDBNavbarLink,
+  MDBCollapse,
+} from 'mdb-react-ui-kit';
 
-function NavBar() {
+export default function NavBar() {
+  const [showBasic, setShowBasic] = useState(false);
+
   const navigate = useNavigate();
   const logout = async() => {
     await localStorage.removeItem( 'currentUser');
     navigate( '/landing');
   }
 
-
   return (
-    <div className='NavBarC'>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">Dizkuz</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="/">Profile</Nav.Link>
-            <Nav.Link href="/organisations">Organisations</Nav.Link>
-            <Nav.Link href="/about-us">About Us</Nav.Link>
-            <Nav.Link onClick={logout}>Log out</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-    </div>
+    <MDBNavbar expand='lg' dark bgColor='dark'>
+      <MDBContainer fluid>
+        <MDBNavbarBrand href='/'>Dizkuz</MDBNavbarBrand>
+
+        <MDBNavbarToggler
+          aria-controls='navbarSupportedContent'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+          onClick={() => setShowBasic(!showBasic)}
+        >
+          <MDBIcon icon='bars' fas />
+        </MDBNavbarToggler>
+
+        <MDBCollapse navbar show={showBasic}>
+          <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
+            
+            <MDBNavbarItem>
+              <MDBNavbarLink href='/'>Profile</MDBNavbarLink>
+            </MDBNavbarItem>
+
+            <MDBNavbarItem>
+              <MDBNavbarLink href='/organisations'>Organisations</MDBNavbarLink>
+            </MDBNavbarItem>
+
+            <MDBNavbarItem>
+              <MDBNavbarLink href='/aboutus'>About us</MDBNavbarLink>
+            </MDBNavbarItem>
+
+            
+          </MDBNavbarNav>
+
+          <form className='d-flex input-group w-auto'>
+            <Button variant="outline-light" style={{width : '100px'}} onClick={logout}>Log out</Button>{' '}
+          </form>
+        </MDBCollapse>
+      </MDBContainer>
+    </MDBNavbar>
   );
 }
-
-export default NavBar;

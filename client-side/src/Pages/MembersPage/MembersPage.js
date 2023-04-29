@@ -92,7 +92,7 @@ export default function MembersPage() {
     Alertshow?
     <>
         <NavBar />
-        <div style={{height:'50px'}}></div>
+        {/* <div style={{height:'10px'}}></div> */}
         <Alert variant={alertVarient} onClose={() => setAlertShow(false)} dismissible>
             <Alert.Heading>{alertHead}</Alert.Heading>
             <p>
@@ -113,7 +113,7 @@ export default function MembersPage() {
     :
     <>
         <NavBar />
-        <div style={{padding : '20px', marginTop : '50px'}}>
+        <div style={{padding : '20px', marginTop : '10px'}}>
             <h3>{OrganisationName}</h3> <hr/>
             <div className='MembersHeading'>
                 <h4>Members33</h4>
