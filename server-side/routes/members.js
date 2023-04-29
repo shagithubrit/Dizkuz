@@ -1,16 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+let router = express.Router();
+router.use(bodyParser.json());
+router.use(cors());
 
 const User = require("../models/user");
 const Organisation = require("../models/organisation");
 const Category = require("../models/category");
 const Issue = require("../models/issue");
 const message = require("../models/message");
-
-let router = express.Router();
-router.use(bodyParser.json());
-router.use(cors());
 
 const checkLogin = async (EMAIL, PASSWORD) => {
   let output = await User.findOne({ email: EMAIL }).exec();
@@ -35,11 +34,23 @@ router.post("/", async (req, res) => {
     res.json(output);
   }
   try {
-    const currOrg = Organisation.findById(ORGID);
-    // console.log(currOrg);
+    let currOrg = await Organisation.findById(ORGID).exec();
+    console.log(currOrg.name);
+    const MEMS = currOrg.users;
+    let arr = [];
+     for (let i = 0; i < MEMS.length; i++) {
+       const currMem = await User.findById(MEMS[i]);
+       console.log(currMem);
+       let membr = {
+            name: currMem.name,
+            email: currMem.email,
+            _id: item
+         }
+       arr.push(membr);
+     }
     const out = {
       status: "success",
-      data: currOrgMembers,
+      data: arr,
     };
     res.json(out);
   } catch (error) {

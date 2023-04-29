@@ -1,7 +1,7 @@
 // imports
 const express = require('express');
 const mongoose = require('mongoose');
-
+const cors = require('cors');
 // requiring routes
 const LOGIN = require("./routes/login");
 const SIGNUP = require("./routes/signUp");
@@ -13,7 +13,7 @@ const ISSUES = require("./routes/issues");
 const CHATS = require("./routes/chats");
 const NEWCAT = require("./routes/newCategory");
 const CATEGORY = require("./routes/categories");
-
+const MEMBERS = require("./routes/members");
 
 main().catch(err => console.log(err));
 
@@ -27,6 +27,8 @@ async function main() {
 }
 
 const server = express();
+server.use(cors());
+
 // user login
 server.use("/login", LOGIN);
 // user signUp
@@ -47,7 +49,8 @@ server.use("/chats", CHATS);
 server.use("/newCategory", NEWCAT);
 // category page
 server.use("/categories", CATEGORY);
-
+// members
+server.use("/members", MEMBERS);
 
 // starting server
 server.listen(8080, () => {

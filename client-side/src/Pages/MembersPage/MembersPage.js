@@ -35,6 +35,7 @@ export default function MembersPage() {
           const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
           const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
           const OrgID = dizkuzData.currentOrganisation;
+          console.log(OrgID);
           setOrganisationName( dizkuzData.currentOrganisationName);
           const inp = {
             email: currentUser_.email,
@@ -61,7 +62,7 @@ export default function MembersPage() {
             const LoadedData =  fetchData.data;
     
             const Members = LoadedData;
-  
+            console.log(Members);
             let tempVar;
             if( Members.length == 0){
               tempVar = <div style={{paddingTop : '100px', paddingBottom : '50px', color : 'darkred'}}><h4>Sorry, No Member exists.</h4></div>;

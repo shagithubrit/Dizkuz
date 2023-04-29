@@ -52,6 +52,11 @@ function NewIssueModal(props) {
 export default function IssuePage() {
   const navigate = useNavigate();
 
+  const [alertHead, setAlertHead] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertVarient, setAlertVarient] = useState("");
+  const [Alertshow, setAlertShow] = useState(false);
+  const [rerenderer, setRerenderer] = useState( false);
   const [modalShow, setModalShow] = React.useState(false);
   const [HtmlLoaded, setHtmlLoaded] = useState(false);
   const [IssueComponent, setIssueComponent] = useState(<></>);
@@ -121,7 +126,7 @@ export default function IssuePage() {
               </div>
             );
           } else {
-            tempvar = Issues.map((issue) => {
+            tempVar = Issues.map((issue) => {
               return (
                 <div>
                   <IssueCard
@@ -138,7 +143,8 @@ export default function IssuePage() {
           }
           const tempIssueComponent = tempVar;
 
-          setreloader(!reloader);
+          // setreloader(!reloader);
+          setRerenderer( ! rerenderer);
           setIssueComponent(tempIssueComponent);
           setHtmlLoaded(true);
         }
