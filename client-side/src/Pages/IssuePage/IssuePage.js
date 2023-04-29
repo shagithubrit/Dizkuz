@@ -235,7 +235,7 @@ export default function IssuePage() {
     };
 
     doWork();
-  }, []);
+  }, [rerenderer]);
 
   return HtmlLoaded ? (
     <>
