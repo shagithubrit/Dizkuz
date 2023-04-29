@@ -15,6 +15,8 @@ const NEWCAT = require("./routes/newCategory");
 const CATEGORY = require("./routes/categories");
 const MEMBERS = require("./routes/members");
 const NEWISSUE = require("./routes/newIssue");
+const SENDCHAT = require("./routes/newMessage");
+
 
 main().catch(err => console.log(err));
 
@@ -54,7 +56,8 @@ server.use("/categories", CATEGORY);
 server.use("/members", MEMBERS);
 // new issue
 server.use("/newIssue", NEWISSUE);
-
+// new message
+server.use("/sendmessage", SENDCHAT);
 
 // starting server
 server.listen(8080, () => {

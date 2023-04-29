@@ -5,6 +5,8 @@ const cors = require("cors");
 const User = require("../models/user");
 const Organisation = require("../models/organisation");
 const Issue = require("../models/issue");
+const Message = require("../models/message");
+
 
 let router = express.Router();
 router.use(bodyParser.json());
@@ -23,17 +25,12 @@ const checkLogin = async (EMAIL, PASSWORD) => {
 };
 
 router.post("/", async (req, res) => {
-  const issueName = req.body.NAME;
-  const UserName = req.body.name;
-  const CATID = req.body.ID;
-  const DESCRIPT = req.body.DESCRIPTION;
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  var yyyy = today.getFullYear();
-
-  today = mm + "/" + dd + "/" + yyyy;
-
+  const AuthName = req.body.name;
+  const AuthId = req.body.User_id;
+  const messageBody = req.body.body;
+  const issueId = req.body.IssueID;
+   var today = new Date().toLocaleDateString();
+   
   let output = {
     status: "Failed",
     data: {},
