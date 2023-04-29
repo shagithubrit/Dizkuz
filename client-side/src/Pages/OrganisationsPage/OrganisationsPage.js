@@ -61,16 +61,21 @@ export default function OrganisationsPage(prop) {
           setShow( true);
         }else{;
           const cards = fetchedData.data;
-          let tempCardsComponent = cards.map((card) =>{
-            return(
-            <div>
-                <OrganisationCard title={card.name} id={card._id} key={card._id} rerenderer={rerenderer} setRerenderer={setRerenderer}/>
-            </div>
-            );
-          });
+          let tempCardsComponent
+
+          if( cards.length === 0){
+            tempCardsComponent =  <div style={{paddingTop : '100px', paddingBottom : '100px', color : 'darkred'}}><h4>Sorry, currently you do not belong to any organisation. Try creating your own organisation.</h4></div>;
+          }else {
+            tempCardsComponent = cards.map((card) =>{
+              return(
+              <div>
+                  <OrganisationCard title={card.name} id={card._id} key={card._id} rerenderer={rerenderer} setRerenderer={setRerenderer}/>
+              </div>
+              );
+            });
+          }
 
           setCardsComponent( tempCardsComponent);
-
           setHtmlLoaded( true);
         }
       } catch (error) {

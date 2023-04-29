@@ -9,76 +9,101 @@ import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import MemberCard from '../../Components/MemberCard';
 
-// test data
-const members = [
-    {
-        name : 'name',
-        email : 'email',
-        _id : 'id'
-    },
-    {
-        name : 'name',
-        email : 'email',
-        _id : 'id'
-    },
-    {
-        name : 'name',
-        email : 'email',
-        _id : 'id'
-    },
-    {
-        name : 'name',
-        email : 'email',
-        _id : 'id'
-    },
-    {
-        name : 'name',
-        email : 'email',
-        _id : 'id'
-    },
-    {
-        name : 'name',
-        email : 'email',
-        _id : 'id'
-    },
-    {
-        name : 'name',
-        email : 'email',
-        _id : 'id'
-    },
-    {
-        name : 'name',
-        email : 'email',
-        _id : 'id'
-    },
-];
 
 export default function MembersPage() {
   const navigate = useNavigate();
 
-  const [ show, setShow] = useState(false);
-  const [ modalShow, setModalShow] = React.useState(false);
-  const [ HtmlLoaded, setHtmlLoaded] = useState( false);
-  const [ Categories, setCategories] = useState( [] );
-  const [ orgName, setOrgName] = useState( 'Organization');
+  let currentUser_ = {};
+
   const [ MembersComponent, setMembersComponent] = useState(<></>);
+  const [ OrganisationName, setOrganisationName] = useState( 'Organisation 1');
+  const [ alertHead, setAlertHead] = useState("");
+  const [ alertBody, setAlertBody] = useState("");
+  const [ alertVarient, setAlertVarient] = useState("");
+  const [ show, setShow] = useState(false);
+  const [ rerenderer, setRerenderer] = useState( false);
+  const [ HtmlLoaded, setHtmlLoaded] = useState( false);  
 
 
   useEffect( () => {
-    const tempMembersComponent = members.map( (member) => {
-        return (<MemberCard name={member.name} email={member.email} _id={member._id} />);
-      });
-    setMembersComponent( tempMembersComponent);
+    currentUser_ = JSON.parse(localStorage.getItem('currentUser'));
+    if( currentUser_ == null){
+      navigate( '/landing');
+    }
+
+
+    const doWork = async () => {
+        try {
+          const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
+          const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
+          const OrgID = dizkuzData.currentOrganisation;
+          setOrganisationName( dizkuzData.currentOrganisationName);
+          const inp = {
+            email: currentUser_.email,
+            password: currentUser_.password,
+            ID: OrgID,
+          };
+          const response = await fetch("http://localhost:8080/members", {
+            method: "POST",
+            body: JSON.stringify(inp),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const fetchData = await response.json();
+          console.log( "fectchData");
+          console.log( fetchData);
+          if ( fetchData.status === "authFailed") {
+            localStorage.removeItem("currentUser");
+            navigate("/landing");
+          } else if ( fetchData.status == "failed") {
+            setAlertHead( 'Unknown error occured');
+            setAlertBody( 'Due to some unexpected error, the members were not loaaded. Please try again.')
+            setAlertVarient( 'danger');
+            setAlertShow( true);
+          } else {
+            const LoadedData =  fetchData.data;
+    
+            const Members = LoadedData;
+  
+            let tempVar;
+            if( Members.length == 0){
+              tempVar = <div style={{paddingTop : '100px', paddingBottom : '50px', color : 'darkred'}}><h4>Sorry, No Member exists.</h4></div>;
+            }else {
+                tempvar = members.map( (member) => {
+                    return (<MemberCard name={member.name} email={member.email} _id={member._id} />);
+                  });
+            }
+            const tempMemberComponent = tempVar;
+            
+            
+            console.log( "Prop changed");
+            setreloader( ! reloader);
+            setMembersComponent(tempMemberComponent);
+            setHtmlLoaded(true);
+          }
+        } catch (error) {
+          setAlertHead( 'Unexpected error occured!');
+          setAlertBody( 'Due to some unexpected error we were not able to get the Members for you. Please check your connection and try again...');
+          setAlertVarient( 'danger');
+          setAlertShow( true);
+        }
+      };
+  
+      doWork();
   }, []);
 
   return (
     <>
         <NavBar />
-        <div className='MembersHeading'>
-            <h4>Members</h4>
-        </div>
-        <div className='MembersContainer'>
-            {MembersComponent}
+        <div style={{padding : '20px', marginTop : '50px'}}>
+            <h3>{OrganisationName}</h3> <hr/>
+            <div className='MembersHeading'>
+                <h4>Members</h4>
+            </div>
+            <div className='MembersContainer'>
+                {MembersComponent}
+            </div>
         </div>
         <Footer />
     </>

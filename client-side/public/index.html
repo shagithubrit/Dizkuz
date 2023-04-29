@@ -24,14 +24,16 @@
     <script>
     var Alert = ReactBootstrap.Alert;
     
-    // console.log( "running js");
-    // localStorage.removeItem( 'dizkuzData');
-    // const dizkuzData = {
-    //   currentOrganistaion : "none",
-    //   currentCategory : "none",
-    //   currentIssue : "none"
-    // };
-    // localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData)); 
+    console.log( "running js");
+    localStorage.removeItem( 'dizkuzData');
+    const dizkuzData = {
+      currentOrganistaion : "none",
+      currentOrganistaionName : "none",
+      currentCategory : "none",
+      currentCategoryName : "none",
+      currentIssue : "none"
+    };
+    localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData)); 
 
     </script>
 
@@ -40,7 +42,7 @@
 
     <title>Dizkuz</title>
   </head>
-  <body>
+  <body style="user-select: none">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

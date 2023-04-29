@@ -112,7 +112,6 @@ export default function CategoryPage(props) {
   const [Alertshow, setAlertShow] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
   const [HtmlLoaded, setHtmlLoaded] = useState(false);
-  // const [Categories, setCategories] = useState();
   const [orgName, setOrgName] = useState("Organization");
   const [CategoryComponent, setCategoryComponent] = useState(<></>);
   const [reloader, setreloader] = useState( false);
@@ -124,7 +123,7 @@ export default function CategoryPage(props) {
   const openMembers = () => {};
 
   useEffect(() => {
-    setOrgName( "Organisation 1");
+    
     let currentUser_ = {};
     currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser_ == null) {
@@ -136,6 +135,7 @@ export default function CategoryPage(props) {
         const dizkuzData = JSON.parse(localStorage.getItem("dizkuzData"));
         const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
         const OrgID = dizkuzData.currentOrganisation;
+        setOrgName( dizkuzData.currentOrganisationName);
         const inp = {
           email: currentUser_.email,
           password: currentUser_.password,
@@ -165,19 +165,24 @@ export default function CategoryPage(props) {
           console.log( "loadedData");
           console.log( LoadedData);
 
-          // setCategories( LoadedData);
-
           const Categories = LoadedData;
+
           console.log( "categories");
           console.log( Categories);
 
-          const tempCategoryComponent = Categories.map((category) => {
-            return (
-              <div>
-                <CategoryCard title={category.name} id={category._id} key={category._id} />
-              </div>
-            );
-          });
+          let tempVar;
+          if( Categories.length == 0){
+            tempVar = <div style={{paddingTop : '100px', paddingBottom : '50px', color : 'darkred'}}><h4>Sorry, No category exists in this organisation. Try adding a new category on your own.</h4></div>;
+          }else {
+            tempVar = Categories.map((category) => {
+              return (
+                <div>
+                  <CategoryCard title={category.name} id={category._id} key={category._id} />
+                </div>
+              );
+            });
+          }
+          const tempCategoryComponent = tempVar;
           
           
           console.log( "Prop changed");

@@ -50,10 +50,11 @@
     border: 1px solid black;
     border-radius: 5px;
     margin: 5px;
-    box-shadow: 0 0 7px rgb(176, 190, 201);
+    box-shadow: 0 0 2px rgb(176, 190, 201);
 }
 .OrganisationCardOuter:hover{
-    box-shadow: 0 0 12px rgb(137, 148, 156);
+    box-shadow: 0 0 6px rgb(137, 148, 156);
+    border: 1.5px solid black;
 }
 .OrganisationTitle{
     text-align: center;
@@ -135,6 +136,7 @@
 }
 
 .CategoryCardDescription{
+    /* user-select: text; */
     text-align: end;
 }
 

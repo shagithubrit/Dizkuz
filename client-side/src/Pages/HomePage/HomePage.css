@@ -16,6 +16,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: rgb(214, 250, 238);
+    padding: 20px;
+    border: 2px solid aquamarine;
+    user-select: text;
+    border-radius: 5px;
     flex-direction: row;
 }
 

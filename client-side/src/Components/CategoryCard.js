@@ -14,7 +14,7 @@ export default function CategoryCard(prop) {
         </div>
         <hr/>
         <div className='CategoryCardDescription'>
-            <small>ID : {prop.id}</small>
+            <small>ID : <span style={{userSelect : 'all'}}>{prop.id}</span></small>
         </div>
     </div>
   )

@@ -61,11 +61,11 @@ export default function HomePage( prop) {
       <div className='HomePageOuterContainer'>
         <div className='HomePageUserInfo'>
           <div className='HomePageProfileContainer'>
-            <div><div className='title_he'>User name :</div> <h2>{currentUser.name}</h2></div>
-            <div><div className='title_he'>User ID :</div> <h4>{currentUser._id}</h4></div>
-            <div><div className='title_he'>email :</div> <h4>{currentUser.emaill}</h4></div>
-            <div><div className='title_he'>Organisations :</div> <h4>{currentUser.organisations.length}</h4></div>
-            <div><div className='title_he'>Messages :</div> <h4>{currentUser.messages}</h4></div>
+            <div><div className='title_he'><i>User name :</i></div> <h2>{currentUser.name}</h2></div>
+            <div><div className='title_he'><i>User ID :</i></div> <h4 style={{color : 'rgb( 0, 89, 89)'}}>{currentUser._id}</h4></div>
+            <div><div className='title_he'><i>email :</i></div> <h4 style={{color : 'rgb( 0, 89, 89)'}}>{currentUser.emaill}</h4></div>
+            <div><div className='title_he'><i>Organisations :</i></div> <h4 style={{color : 'rgb( 0, 89, 89)'}}>{currentUser.organisations.length}</h4></div>
+            {/* <div><div className='title_he'>Messages :</div> <h4 style={{color : 'darkcyan'}}>{currentUser.messages}</h4></div> */}
           </div>
           <ImageContainer image={profilePic}/>
         </div>
