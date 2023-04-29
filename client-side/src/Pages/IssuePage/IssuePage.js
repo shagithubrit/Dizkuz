@@ -81,6 +81,8 @@ function NewIssueModal(props) {
       props.setAlertVarient("danger");
       props.setAlertShow(true);
     }
+
+    props.setRerenderer( ! props.rerenderer);
   };
 
   return (
@@ -255,7 +257,7 @@ export default function IssuePage() {
           {IssueComponent}
         </div>
       </div>
-      <NewIssueModal show={modalShow} onHide={() => setModalShow(false)} />
+      <NewIssueModal show={modalShow} onHide={() => setModalShow(false)} rerenderer={rerenderer} setRerenderer={setRerenderer}/>
       <Footer />
     </>
   ) : (
