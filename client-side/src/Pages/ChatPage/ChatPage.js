@@ -43,11 +43,8 @@ export default function ChatPage() {
         const dizkuzData = JSON.parse(localStorage.getItem('currentUser'));
         const IssID = dizkuzData.currentIssue;
 
-        //=================================================================================
-        //=================================================================================
-        // A POST request to find and store all messages with IssueID === IssD in messages using setMessages()
-        //=================================================================================
-        //=================================================================================
+        
+        
 
         const tempMessageComponent = messages.map(( message) =>{
             return(

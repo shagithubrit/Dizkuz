@@ -5,8 +5,9 @@ dizkuzData = {
     currentOrganisation : '',
     currentOrganisationName : '',
     currentCategory : '',
-    currentCategoryName : '',
+    currentCategoryName : '',    
     currentIssue : '',
+    currentIssueName : ''
 }
 
 dizkuzredirectUR = '';

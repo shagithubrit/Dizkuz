@@ -4,7 +4,12 @@ import './Components.css';
 export default function IssueCard(prop) {
 
   const openIssue = () => {
-    console.log( "Issue : ", prop.id);
+    const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
+    dizkuzData.currentIssue = prop.id;
+    dizkuzData.currentIssueName = prop.title;
+    localStorage.removeItem( 'dizkuzData');
+    localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData));
+    navigate( '/chats');
   }
 
   return (
