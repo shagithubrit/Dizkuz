@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate} from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import Footer from '../../Components/Footer';
 import NavBar from '../../Components/NavBar';
 import './MembersPage.css';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import MemberCard from '../../Components/MemberCard';
+import Alert from 'react-bootstrap/Alert';
 
 
 export default function MembersPage() {
@@ -92,6 +90,29 @@ export default function MembersPage() {
   }, []);
 
   return (
+    HtmlLoaded ? 
+    Alertshow?
+    <>
+        <NavBar />
+        <div style={{height:'50px'}}></div>
+        <Alert variant={alertVarient} onClose={() => setAlertShow(false)} dismissible>
+            <Alert.Heading>{alertHead}</Alert.Heading>
+            <p>
+            {alertBody}
+            </p>
+        </Alert>
+        <div style={{padding : '20px', paddingTop : '0px'}}>
+            <h3>{OrganisationName}</h3> <hr/>
+            <div className='MembersHeading'>
+                <h4>Members33</h4>
+            </div>
+            <div className='MembersContainer'>
+                {MembersComponent}
+            </div>
+        </div>
+        <Footer />
+    </>
+    :
     <>
         <NavBar />
         <div style={{padding : '20px', marginTop : '50px'}}>
@@ -104,6 +125,14 @@ export default function MembersPage() {
             </div>
         </div>
         <Footer />
+    </>
+    :
+    <>
+      <NavBar />
+      <div className="SpinnerContainer">
+        <Spinner animation="border" variant="dark" />
+      </div>
+      <Footer />
     </>
   )
 }
