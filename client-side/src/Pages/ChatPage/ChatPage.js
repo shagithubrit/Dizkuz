@@ -22,12 +22,15 @@ export default function ChatPage() {
     const navigate = useNavigate();
 
     const [ HtmlLoaded, setHtmlLoaded] = useState( false);
-    const [ messages, setMessages] = useState( []);
+    // const [ messages, setMessages] = useState( []);
     const [ MessageComponent, setMessageComponent] = useState( <></>);
     const [ alertHead, setAlertHead] = useState("");
     const [ alertBody, setAlertBody] = useState("");
     const [ alertVarient, setAlertVarient] = useState("");
-    const [ show, setShow] = useState(false);
+    const [ Alertshow, setAlertShow] = useState(false);
+    const [ rerenderer, setRerenderer] = useState( false);
+    const [ currentSender, setCurrentSender] = useState( "");
+    const [ currentIssue, setCurrentIssue] = useState( "");
 
     
 
@@ -40,28 +43,71 @@ export default function ChatPage() {
     }
 
     const doWork = async() => {
-        const dizkuzData = JSON.parse(localStorage.getItem('currentUser'));
-        const IssID = dizkuzData.currentIssue;
+        try{
+            const dizkuzData = JSON.parse(localStorage.getItem('dizkuzData'));
+            const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
+            const IssID = dizkuzData.currentIssue;
+            const UsrID = currentUser_._id;
 
+            setCurrentSender( UsrID);
+            setCurrentIssue( IssID);
+
+            const inp = {
+                email: currentUser_.email,
+                password: currentUser_.password,
+                IssueID : IssID,
+                UserID : UsrID
+            };
+            const response = await fetch("http://localhost:8080/members", {
+                method: "POST",
+                body: JSON.stringify(inp),
+                headers: {
+                "Content-Type": "application/json",
+                },
+            });
+            const fetchData = await response.json();
+            if ( fetchData.status === "authFailed") {
+                localStorage.removeItem("currentUser");
+                navigate("/landing");
+            } else if ( fetchData.status == "failed") {
+                setAlertHead( 'Unknown error occured');
+                setAlertBody( 'Due to some unexpected error messages are unable to be loaded. Please try again.');
+                setAlertVarient( 'danger');
+                setAlertShow( true);
+            } else {
+                const LoadedData =  fetchData.data;
         
-        
-
-        const tempMessageComponent = messages.map(( message) =>{
-            return(
-            message.userAuth ?
-            <div>
-                <MessageCardOther author={message.author} text={message.text} dateTime={message.dateTime} />
-            </div>
-            :
-            <div>
-                <MessageCardUser author={message.author} text={message.text} dateTime={message.dateTime} />
-            </div>
-            );
-        });
-
-        setMessageComponent( tempMessageComponent);
-
-        setHtmlLoaded( true);
+                const Messages = LoadedData;
+    
+                let tempVar;
+                if( Messages.length == 0){
+                tempVar = <div style={{paddingTop : '100px', paddingBottom : '50px', color : 'darkred'}}><h4>No conversation exists in this chat. Send a message to start a conversation...</h4></div>;
+                }else {
+                    tempVar = Messages.map(( message) =>{
+                        return(
+                        message.userAuth ?
+                        <div>
+                            <MessageCardOther author={message.author} text={message.text} dateTime={message.dateTime} />
+                        </div>
+                        :
+                        <div>
+                            <MessageCardUser author={message.author} text={message.text} dateTime={message.dateTime} />
+                        </div>
+                        );
+                    });
+                }
+                const tempMessageComponent = tempVar;
+                
+                setRerenderer( ! rerenderer);
+                setMessageComponent( tempMessageComponent);
+                setHtmlLoaded(true);
+            }
+        } catch (error) {
+            setAlertHead( 'Unexpected error occured!');
+            setAlertBody( 'Due to some unexpected error we were not able to get the Messages for you. Please check your connection and try again...');
+            setAlertVarient( 'danger');
+            setAlertShow( true);
+        }
     }
 
     doWork();
@@ -69,11 +115,11 @@ export default function ChatPage() {
 
   return (
     HtmlLoaded ?
-    show?
+    Alertshow?
     <>
         <NavBar />
             <div  style={{paddingTop : '50px'}}>
-                <Alert variant={alertVarient} onClose={() => setShow(false)} dismissible>
+                <Alert variant={alertVarient} onClose={() => setAlertShow(false)} dismissible>
                     <Alert.Heading>{alertHead}</Alert.Heading>
                     <p>
                     {alertBody}
@@ -84,6 +130,7 @@ export default function ChatPage() {
                         {MessageComponent}
                     </div>
                 </div>
+                <MessageInput senderID={currentSender} IssueID={currentIssue} />
             </div>
         <Footer />
     </>
@@ -95,7 +142,7 @@ export default function ChatPage() {
                 {MessageComponent}
             </div>
         </div>
-        <MessageInput />
+        <MessageInput senderID={currentSender} IssueID={currentIssue} />
     </>
     :
     <>

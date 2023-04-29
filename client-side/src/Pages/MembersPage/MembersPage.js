@@ -37,6 +37,7 @@ export default function MembersPage() {
           const OrgID = dizkuzData.currentOrganisation;
           console.log(OrgID);
           setOrganisationName( dizkuzData.currentOrganisationName);
+          console.log( "ordID : ", OrgID);
           const inp = {
             email: currentUser_.email,
             password: currentUser_.password,
@@ -50,6 +51,8 @@ export default function MembersPage() {
             },
           });
           const fetchData = await response.json();
+          console.log( "members fetch DAta : ", fetchData);
+
           if ( fetchData.status === "authFailed") {
             localStorage.removeItem("currentUser");
             navigate("/landing");
@@ -105,7 +108,7 @@ export default function MembersPage() {
         <div style={{padding : '20px', paddingTop : '0px'}}>
             <h3>{OrganisationName}</h3> <hr/>
             <div className='MembersHeading'>
-                <h4>Members33</h4>
+                <h4>Members</h4>
             </div>
             <div className='MembersContainer'>
                 {MembersComponent}

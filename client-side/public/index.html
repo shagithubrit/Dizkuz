@@ -24,17 +24,22 @@
     <script>
     var Alert = ReactBootstrap.Alert;
     
-    console.log( "running js");
-    localStorage.removeItem( 'dizkuzData');
-    const dizkuzData = {
-      currentOrganisation : "none",
-      currentOrganistaionName : "none",
-      currentCategory : "none",
-      currentCategoryName : "none",
-      currentIssue : "none",
-      currentIssueName : "none"
-    };
-    localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData)); 
+    var tempDizkuzData = JSON.parse( localStorage.getItem( 'dizkuzData'));
+    if( tempDizkuzData === null){
+      const dizkuzData = {
+        currentOrganisation : "none",
+        currentOrganisationName : "none",
+        currentCategory : "none",
+        currentCategoryName : "none",
+        currentIssue : "none",
+        currentIssueName : "none"
+      };
+      localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData)); 
+    }
+
+    // console.log( "running js");
+    // localStorage.removeItem( 'dizkuzData');
+    
 
     </script>
 

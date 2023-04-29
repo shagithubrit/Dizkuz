@@ -74,7 +74,9 @@ export default function OrganisationCard(prop) {
   const openOrganisation = () => {
     // console.log( "organisation : ", prop.id);
     const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
+    console.log( "id : ", prop.id);
     dizkuzData.currentOrganisation = prop.id;
+    console.log( "Diz ID : ", dizkuzData.currentOrganisation);
     dizkuzData.currentOrganisationName = prop.title;
     localStorage.removeItem( 'dizkuzData');
     localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData));
