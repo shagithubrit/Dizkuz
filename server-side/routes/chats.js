@@ -51,14 +51,18 @@ router.post("/", async (req, res) => {
        if (List[i].authorID === usrId) {
          const out = {
            userAuth: true,
-           text: List[i],
+           author: List[i].author,
+           text: List[i].text,
+           dateTime: List[i].dateTime,
          };
          OutputList.push(out);
        }
        else{
         const out = {
           userAuth: false,
-          text: List[i],
+          author: List[i].author,
+          text: List[i].text,
+          dateTime: List[i].dateTime,
         };
         OutputList.push(out);
        }
