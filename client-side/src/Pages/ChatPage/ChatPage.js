@@ -109,8 +109,8 @@ export default function ChatPage() {
                 setAlertShow( true);
             }
         }
-
         doWork();
+        
     }, [ chatReloader]);
 
   return (
@@ -118,7 +118,7 @@ export default function ChatPage() {
     Alertshow?
     <>
         <NavBar />
-            <div  style={{paddingTop : '100px'}}>
+            <div  style={{height : '56px'}}></div>
                 <Alert variant={alertVarient} onClose={() => setAlertShow(false)} dismissible>
                     <Alert.Heading>{alertHead}</Alert.Heading>
                     <p>
@@ -131,17 +131,19 @@ export default function ChatPage() {
                     </div>
                 </div>
                 <MessageInput senderID={currentSender} IssueID={currentIssue} chatReloader={chatReloader} setChatReloader={setChatReloader} />
-            </div>
+            <div  style={{height : '64px'}}></div>
         <Footer />
     </>
     :
     <>
         <NavBar />
+        <div  style={{height : '56px'}}></div> 
         <div className='ChatPageContainer'>
             <div className='ChatPageContainer2'>
                 {MessageComponent}
             </div>
         </div>
+        <div  style={{height : '64px'}}></div>
         <MessageInput senderID={currentSender} IssueID={currentIssue} chatReloader={chatReloader} setChatReloader={setChatReloader} />
     </>
     :

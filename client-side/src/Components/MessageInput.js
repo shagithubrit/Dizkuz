@@ -33,6 +33,7 @@ export default function MessageInput(props) {
       const data = await response.json();
       if (data.status === "success") {
         props.setChatReloader( props.chatReloader + 1);
+        setMessage('');
       } else {
         props.setAlertHead( 'Some unknown Error occured!');
         props.setAlertBody( 'There was some unexpected error which prevented the message to be sent. Please try again.');
