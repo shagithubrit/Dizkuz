@@ -35,7 +35,6 @@ router.post("/", (req, res) => {
 
   const getList = async () => {
     const OrgIDs = req.body.organisations;
-    console.log(OrgIDs);
     for (let i = 0; i < OrgIDs.length; i++) {
       const ListElt = await Organisation.findById(OrgIDs[i]);
       List.push(ListElt);
@@ -45,8 +44,6 @@ router.post("/", (req, res) => {
   getList().then(() => {
     output.status = "success";
     output.data = List;
-    console.log("hello");
-    console.log(output.data);
     res.json(output);
   });
 });

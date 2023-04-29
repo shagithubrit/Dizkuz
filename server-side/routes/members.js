@@ -25,7 +25,6 @@ const checkLogin = async (EMAIL, PASSWORD) => {
 
 router.post("/", async (req, res) => {
   const ORGID = req.body.ID;
-  console.log("recieved ORGID : ", ORGID);
   var output = {
     status: "failed",
   };
@@ -35,29 +34,21 @@ router.post("/", async (req, res) => {
   }
   try {
     let currOrg = await Organisation.findById(ORGID).exec();
-    console.log( "Organisation : ");
-    console.log(currOrg.name);
     const MEMS = currOrg.users;
     let arr = [];
-    console.log( "==Members");
-    console.log( MEMS);
      for (let i = 0; i < MEMS.length; i++) {
        const currMem = await User.findById(MEMS[i]);
-       console.log( "curMem : ", currMem);
        let membr = {
             name: currMem.name,
             email: currMem.email,
             _id: currMem._id
          }
-        console.log( "membr : ", membr);
        arr.push(membr);
      }
-     console.log( "arr : ", arr);
     const out = {
       status: "success",
       data: arr,
     };
-    console.log( "output Members : ", out);
     res.json(out);
   } catch (error) {
     output.status = "failed";

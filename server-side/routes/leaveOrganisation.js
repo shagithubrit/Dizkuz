@@ -30,8 +30,6 @@ router.post("/", async (req, res) => {
   };
   const USERID = req.body.userId;
   const ORGID = req.body.organisationId;
-  console.log(USERID);
-  console.log(ORGID);
   if (!checkLogin(req.body.email, req.body.password)) {
     output.status = "authFailed";
     res.json(output);

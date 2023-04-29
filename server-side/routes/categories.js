@@ -25,7 +25,6 @@ const checkLogin = async (EMAIL, PASSWORD) => {
 
 router.post("/", async (req, res) => {
   const ORGID = req.body.ID;
-  console.log(ORGID);
   var output = {
     status : "failed",
   }

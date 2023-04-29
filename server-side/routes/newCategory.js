@@ -47,7 +47,6 @@ router.post("/", async (req, res) => {
       category.name = Name;
       category.OrganisationId = id;
       const doc = await category.save();
-      console.log(doc);
       const OUT = {
         status: "success",
         name: Name,

@@ -18,8 +18,6 @@ router.post("/", async (req, res) => {
   const PASSWORD = req.body.password;
   //   find users with the entered email in database
   let output = await User.findOne({ email: EMAIL }).exec();
-  console.log("user output");
-  console.log(output);
   const userObject = {
     _id: "",
     name: "",

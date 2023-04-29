@@ -17,7 +17,6 @@ router.post("/", async (req, res) => {
     user.password = req.body.password;
     user.email = req.body.email;
     const doc = await user.save();
-    console.log(doc);
     res.json(doc);
   } else {
     res.json(null);

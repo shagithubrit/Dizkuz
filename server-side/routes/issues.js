@@ -23,10 +23,12 @@ const checkLogin = async (EMAIL, PASSWORD) => {
 };
 
 router.get("/", async (req, res) => {
+  console.log( "here issues 0");
   console.log(req.body.ID);
   console.log(req.body.email);
   console.log(req.body.password);
 
+  console.log( "here issue 1");
    var output = {
      status: "failed",
      data: [],
@@ -38,6 +40,7 @@ router.get("/", async (req, res) => {
    
   //  let out = await Issue.find({CategoryId : req.body.ID}).exec();
   //  console.log(out);
+  console.log( "here issue 2");
    res.json(output);
 });
 
