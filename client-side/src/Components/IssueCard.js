@@ -1,8 +1,11 @@
 import React from 'react';
 import './Components.css';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function IssueCard(prop) {
 
+  const navigate = useNavigate();
   const openIssue = () => {
     const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
     dizkuzData.currentIssue = prop.id;
