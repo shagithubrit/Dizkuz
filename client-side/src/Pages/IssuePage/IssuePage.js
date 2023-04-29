@@ -209,7 +209,7 @@ export default function IssuePage() {
                   <IssueCard
                     title={issue.title}
                     body={issue.body}
-                    id={issue.id}
+                    id={issue._id}
                     author={issue.author}
                     date={issue.date}
                     key={issue.id}

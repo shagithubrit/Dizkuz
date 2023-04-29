@@ -46,6 +46,7 @@ export default function ChatPage() {
                 const dizkuzData = JSON.parse(localStorage.getItem('dizkuzData'));
                 const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
                 const IssID = dizkuzData.currentIssue;
+
                 const UsrID = currentUser_._id;
 
                 setCurrentSender( UsrID);

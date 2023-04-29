@@ -6,6 +6,7 @@ export default function IssueCard(prop) {
   const navigate = useNavigate();
   const openIssue = () => {
     const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
+
     dizkuzData.currentIssue = prop.id;
     dizkuzData.currentIssueName = prop.title;
     localStorage.removeItem( 'dizkuzData');
