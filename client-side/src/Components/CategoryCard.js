@@ -4,8 +4,6 @@ import { useNavigate} from 'react-router-dom';
 
 export default function CategoryCard(prop) {
   const navigate = useNavigate();
-
-   const navigate = useNavigate();
   const openCategory = () => {
     const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
     dizkuzData.currentCategory = prop.id;

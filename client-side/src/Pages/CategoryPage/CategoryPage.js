@@ -120,7 +120,15 @@ export default function CategoryPage(props) {
     setModalShow(true);
   };
 
-  const openMembers = () => {};
+  const openMembers = () => {
+    const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
+    dizkuzData.currentCategory = props.id;
+    dizkuzData.currentCategoryName = props.title;
+    console.log( "org ID : ", dizkuzData.currentOrganisation);
+    localStorage.removeItem( 'dizkuzData');
+    localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData));
+    navigate( '/members');
+  };
 
   useEffect(() => {
     
