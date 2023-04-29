@@ -4,7 +4,12 @@ import './Components.css';
 export default function CategoryCard(prop) {
 
   const openCategory = () => {
-    console.log( "Category ID : ", prop.id);
+    const dizkuzData = JSON.parse(localStorage.getItem( 'dizkuzData'));
+    dizkuzData.currentCategory = prop.id;
+    dizkuzData.currentCategoryName = prop.title;
+    localStorage.removeItem( 'dizkuzData');
+    localStorage.setItem( 'dizkuzData', JSON.stringify( dizkuzData));
+    navigate( '/issues');
   }
 
   return (

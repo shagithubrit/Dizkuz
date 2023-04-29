@@ -51,8 +51,6 @@ export default function MembersPage() {
             },
           });
           const fetchData = await response.json();
-          console.log( "fectchData");
-          console.log( fetchData);
           if ( fetchData.status === "authFailed") {
             localStorage.removeItem("currentUser");
             navigate("/landing");

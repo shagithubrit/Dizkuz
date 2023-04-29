@@ -3,7 +3,9 @@ Data stored in localStorage
 
 dizkuzData = {
     currentOrganisation : '',
+    currentOrganisationName : '',
     currentCategory : '',
+    currentCategoryName : '',
     currentIssue : '',
 }
 
