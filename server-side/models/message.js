@@ -6,7 +6,6 @@ const MessageSchema = new Schema({
   text: String,
   dateTime: String,
   authorID: String,
-  userAuth: Boolean,
   IssueID: String,
 });
 

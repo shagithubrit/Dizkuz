@@ -7,7 +7,6 @@ const User = require("../models/user");
 const Organisation = require("../models/organisation");
 const Message = require("../models/message");
 const Issue = require("../models/issue");
-const message = require("../models/message");
 
 
 let router = express.Router();
@@ -43,11 +42,12 @@ router.post("/", async (req, res) => {
   }
 
   try {
-     let List = await Message.find({ issueId: issId }).exec();
+     let List = await Message.find({ IssueID: issId }).exec();
 
+     console.log(List);
      let OutputList = [];
 
-     for (let i = 0; i < List.length(); i++) {
+     for (let i = 0; i < List.length; i++) {
        if (List[i].authorID === usrId) {
          const out = {
            userAuth: true,
@@ -71,5 +71,11 @@ router.post("/", async (req, res) => {
     res.json(output);
   }
 });
+
+router.get("/", async (req, res) => {
+  const docs = await Message.find({});
+  res.json(docs);
+});
+
 
 module.exports = router;
