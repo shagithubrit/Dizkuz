@@ -20,7 +20,7 @@ export default function MembersPage() {
   const [ alertHead, setAlertHead] = useState("");
   const [ alertBody, setAlertBody] = useState("");
   const [ alertVarient, setAlertVarient] = useState("");
-  const [ show, setShow] = useState(false);
+  const [ Alertshow, setAlertShow] = useState(false);
   const [ rerenderer, setRerenderer] = useState( false);
   const [ HtmlLoaded, setHtmlLoaded] = useState( false);  
 
@@ -68,7 +68,7 @@ export default function MembersPage() {
             if( Members.length == 0){
               tempVar = <div style={{paddingTop : '100px', paddingBottom : '50px', color : 'darkred'}}><h4>Sorry, No Member exists.</h4></div>;
             }else {
-                tempvar = members.map( (member) => {
+                tempVar = Members.map( (member) => {
                     return (<MemberCard name={member.name} email={member.email} _id={member._id} />);
                   });
             }
@@ -76,7 +76,7 @@ export default function MembersPage() {
             
             
             console.log( "Prop changed");
-            setreloader( ! reloader);
+            setRerenderer( ! rerenderer);
             setMembersComponent(tempMemberComponent);
             setHtmlLoaded(true);
           }
@@ -97,7 +97,7 @@ export default function MembersPage() {
         <div style={{padding : '20px', marginTop : '50px'}}>
             <h3>{OrganisationName}</h3> <hr/>
             <div className='MembersHeading'>
-                <h4>Members</h4>
+                <h4>Members33</h4>
             </div>
             <div className='MembersContainer'>
                 {MembersComponent}
