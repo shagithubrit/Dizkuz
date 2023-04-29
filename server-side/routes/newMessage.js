@@ -29,8 +29,10 @@ router.post("/", async (req, res) => {
   const AuthId = req.body.User_id;
   const messageBody = req.body.body;
   const issueId = req.body.IssueID;
-   var today = new Date().toLocaleDateString();
-   
+   var todayDate = new Date().toLocaleDateString();
+   var todayTime = new Date().toLocaleTimeString();
+   var DT = todayDate+ " " + todayTime;
+
   let output = {
     status: "Failed",
     data: {},
@@ -41,27 +43,21 @@ router.post("/", async (req, res) => {
     res.json(output);
   }
 
-  let out = await Issue.findOne({ title: issueName });
-
-  if (out == null) {
-    try {
-      let issue = new Issue();
-      issue.author = UserName;
-      issue.title = issueName;
-      issue.body = DESCRIPT;
-      issue.creationDate = today;
-      issue.CategoryId = CATID;
-      const doc = await issue.save();
-      const out = {
-        status: "success",
-        data: doc,
-      };
-      res.json(out);
-    } catch (error) {
-      res.json(error);
-    }
-  } else {
-    res.json(null);
+  try {
+    let message = new Message();
+    message.author = AuthName;
+    message.text = messageBody;
+    message.dateTime = DT;
+    message. authorID = AuthId;
+    message.IssueID = issueId;
+    const doc = await message.save();
+    const out = {
+      status: "success",
+      data: doc,
+    };
+    res.json(out);
+  } catch (error) {
+    res.json(error);
   }
 });
 
