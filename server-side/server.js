@@ -14,6 +14,7 @@ const CHATS = require("./routes/chats");
 const NEWCAT = require("./routes/newCategory");
 const CATEGORY = require("./routes/categories");
 const MEMBERS = require("./routes/members");
+const NEWISSUE = require("./routes/newIssue");
 
 main().catch(err => console.log(err));
 
@@ -51,6 +52,9 @@ server.use("/newCategory", NEWCAT);
 server.use("/categories", CATEGORY);
 // members
 server.use("/members", MEMBERS);
+// new issue
+server.use("/newIssue", NEWISSUE);
+
 
 // starting server
 server.listen(8080, () => {
