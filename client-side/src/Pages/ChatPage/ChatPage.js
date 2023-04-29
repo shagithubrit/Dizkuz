@@ -57,7 +57,7 @@ export default function ChatPage() {
                     IssueID : IssID,
                     UserID : UsrID
                 };
-                const response = await fetch("http://localhost:8080/members", {
+                const response = await fetch("http://localhost:8080/chats", {
                     method: "POST",
                     body: JSON.stringify(inp),
                     headers: {

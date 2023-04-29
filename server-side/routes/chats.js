@@ -7,6 +7,7 @@ const User = require("../models/user");
 const Organisation = require("../models/organisation");
 const Message = require("../models/message");
 const Issue = require("../models/issue");
+const message = require("../models/message");
 
 
 let router = express.Router();
@@ -25,9 +26,13 @@ const checkLogin = async (EMAIL, PASSWORD) => {
   return false;
 };
 
-router.get("/", async (req, res) => {
-  const checkID = req.body.issueID;
-  const userID = req.body.userID;
+router.post("/", async (req, res) => {
+  const issId = req.body.IssueID;
+  const usrId = req.body.UserID;
+
+  console.log(issId);
+  console.log(usrId);
+
   var output = {
     status: "failed",
     data: [],
@@ -36,19 +41,35 @@ router.get("/", async (req, res) => {
     output.status = "authFailed";
     res.json(output);
   }
-  let List = await Issue.find({ issueId: checkID }).catch(() => {
+
+  try {
+     let List = await Message.find({ issueId: issId }).exec();
+
+     let OutputList = [];
+
+     for (let i = 0; i < List.length(); i++) {
+       if (List[i].authorID === usrId) {
+         const out = {
+           userAuth: true,
+           text: List[i],
+         };
+         OutputList.push(out);
+       }
+       else{
+        const out = {
+          userAuth: false,
+          text: List[i],
+        };
+        OutputList.push(out);
+       }
+     }
+
+     output.status = "success";
+     output.data = OutputList;
+     res.json(output);
+  } catch (error) {
     res.json(output);
-  });
-  let OutputList = List.map((elt) => {
-    if (userID == elt.authorID) {
-      return { ...elt, userAuth: true };
-    } else {
-      return { ...elt, userAuth: false };
-    }
-  });
-  output.status = "success";
-  output.data = OutputList;
-  res.json(output);
+  }
 });
 
 module.exports = router;

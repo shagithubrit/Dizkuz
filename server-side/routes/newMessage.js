@@ -50,6 +50,7 @@ router.post("/", async (req, res) => {
     message.dateTime = DT;
     message. authorID = AuthId;
     message.IssueID = issueId;
+    message.userAuth = false;
     const doc = await message.save();
     const out = {
       status: "success",
