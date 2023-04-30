@@ -39,7 +39,7 @@ function NewCategoryModal(props) {
                     ID: OrgID,
                };
                const response = await fetch(
-                    SERVERLINK + "newCategory",
+                    "https://dizkuz-server.onrender.com/newCategory",
                     {
                          method: "POST",
                          body: JSON.stringify(inp),
@@ -167,7 +167,7 @@ export default function CategoryPage(props) {
                          ID: OrgID,
                     };
                     const response = await fetch(
-                         SERVERLINK + "categories",
+                         "https://dizkuz-server.onrender.com/categories",
                          {
                               method: "POST",
                               body: JSON.stringify(inp),
