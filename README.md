@@ -10,7 +10,7 @@ Seemless working is made possible by this app because it provides the following 
 5. Raise issues into a category.
 6. Have discussions on a particular issue.
 
-## **Some additional features-:
+## Some additional features-:
 
 1. You can leave an organisation if you wish to.
 2. Every user is provided a unique user id.
@@ -18,7 +18,7 @@ Seemless working is made possible by this app because it provides the following 
 4. User authentication is required for creating organisation, leaving organisation, creating cattegories and raising issues.
 5. A simple yet captivating UI design makes seemless navigation in the app possible.
 
-## **Steps on how to run the app on your local computer.**
+## Steps on how to run the app on your local computer.
 
 1. Git clone the repository.
   -steps on how to git clone are provided in this link: [Git Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
@@ -31,7 +31,7 @@ Seemless working is made possible by this app because it provides the following 
 8. Open the link [http://localhost:3000/](http://localhost:3000/).
 9. Now our app is ready to use.
 
-## **Made with 💖 by -: **
+## Made with 💖 by -: 
 * [Aditya Raj Rai](https://github.com/adityarai0705)
 * [Aditya Singh Yadav](https://github.com/aditya-mnnit)
 * [Aishwarya Vikarm Singh](https://github.com/Aishwaryavikramsingh)
