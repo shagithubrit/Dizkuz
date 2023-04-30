@@ -28,7 +28,7 @@ export default function MessageInput(props) {
                     IssueID: IssID,
                };
                const response = await fetch(
-                    "http://localhost:8080/sendmessage",
+                    "https://dizkuz-server.onrender.com/sendmessage",
                     {
                          method: "POST",
                          body: JSON.stringify(inp),

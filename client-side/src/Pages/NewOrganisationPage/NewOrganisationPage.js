@@ -49,7 +49,7 @@ export default function NewOrganisationPage() {
                };
                try {
                     const response = await fetch(
-                         "http://localhost:8080/checkuserid",
+                         "https://dizkuz-server.onrender.com/checkuserid",
                          {
                               method: "POST",
                               body: JSON.stringify(checkID),
@@ -104,7 +104,7 @@ export default function NewOrganisationPage() {
                OrgName: OrganisationName,
           };
           try {
-               const response = await fetch("http://localhost:8080/newOrg", {
+               const response = await fetch("https://dizkuz-server.onrender.com/newOrg", {
                     method: "POST",
                     body: JSON.stringify(organisation),
                     headers: {

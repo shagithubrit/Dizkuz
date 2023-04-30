@@ -33,7 +33,7 @@ export default function LoginPage(prop) {
      const handleSubmit = async (e) => {
           e.preventDefault();
           try {
-               const response = await fetch("http://localhost:8080/login", {
+               const response = await fetch("https://dizkuz-server.onrender.com/login", {
                     method: "POST",
                     body: JSON.stringify(userCredentials),
                     headers: {

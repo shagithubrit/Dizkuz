@@ -22,7 +22,7 @@ main().catch((err) => console.log(err));
 // connecting mongodb
 async function main() {
      await mongoose.connect(
-          "mongodb+srv://ishavishwakarma29:ishaDizkuz@cluster0.zwbubwl.mongodb.net/test"
+          MONGO_CONNECTION
      );
      console.log("db connected");
 }

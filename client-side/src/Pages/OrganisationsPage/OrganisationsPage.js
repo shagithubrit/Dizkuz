@@ -36,7 +36,7 @@ export default function OrganisationsPage(prop) {
                };
                try {
                     const response = await fetch(
-                         "http://localhost:8080/organisations",
+                         "https://dizkuz-server.onrender.com/organisations",
                          {
                               method: "POST",
                               body: JSON.stringify(reqData),

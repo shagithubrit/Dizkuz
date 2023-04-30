@@ -12,11 +12,6 @@ router.post("/", async (req, res) => {
      const id = req.body.userID;
 
      let IdExists = false;
-     // User.exists({ _id: id }).then(exists => {
-     //   if (exists) {
-     //     IdExists = true;
-     //   }
-     // });
      let output = await User.findOne({ _id: id }).exec();
 
      if (output != null) {

@@ -30,7 +30,7 @@ export default function OrganisationCard(prop) {
                organisationId: prop.id,
           };
           try {
-               const response = await fetch("http://localhost:8080/leaveOrg", {
+               const response = await fetch("https://dizkuz-server.onrender.com/leaveOrg", {
                     method: "POST",
                     body: JSON.stringify(out),
                     headers: {

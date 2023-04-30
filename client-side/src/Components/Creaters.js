@@ -1,6 +1,5 @@
 import React from "react";
 import UserCard from "./UserCard";
-
 import Isha from "./StaticRES/isha.png";
 import Aditya1 from "./StaticRES/adityarai.png";
 import Aditya2 from "./StaticRES/adityayadav.png";
