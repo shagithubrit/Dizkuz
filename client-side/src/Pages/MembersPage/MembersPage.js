@@ -42,7 +42,7 @@ export default function MembersPage() {
                          ID: OrgID,
                     };
                     const response = await fetch(
-                         "https://dizkuz-server.onrender.com/members",
+                         SERVERLINK + "members",
                          {
                               method: "POST",
                               body: JSON.stringify(inp),

@@ -43,7 +43,7 @@ function NewIssueModal(props) {
                     DESCRIPTION: IssueDescription,
                     ID: CatID,
                };
-               const response = await fetch("https://dizkuz-server.onrender.com/newIssue", {
+               const response = await fetch(SERVERLINK + "newIssue", {
                     method: "POST",
                     body: JSON.stringify(inp),
                     headers: {
@@ -173,7 +173,7 @@ export default function IssuePage() {
                          ID: CatID,
                     };
                     const response = await fetch(
-                         "https://dizkuz-server.onrender.com/issues",
+                         SERVERLINK + "issues",
                          {
                               method: "POST",
                               body: JSON.stringify(inp),

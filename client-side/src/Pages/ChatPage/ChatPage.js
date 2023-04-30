@@ -63,7 +63,7 @@ export default function ChatPage() {
                          UserID: UsrID,
                     };
                     const response = await fetch(
-                         "https://dizkuz-server.onrender.com/chats",
+                         SERVERLINK + "chats",
                          {
                               method: "POST",
                               body: JSON.stringify(inp),

@@ -31,7 +31,7 @@ export default function SignupPage( prop) {
           if (person.password === person.cPassword) {
                try {
                     const response = await fetch(
-                         "https://dizkuz-server.onrender.com/signUp",
+                         SERVERLINK + "signUp",
                          {
                               method: "POST",
                               body: JSON.stringify(person),
