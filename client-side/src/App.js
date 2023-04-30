@@ -20,6 +20,7 @@ import ChatPage from "./Pages/ChatPage/ChatPage";
 import NewOrganisationPage from "./Pages/NewOrganisationPage/NewOrganisationPage";
 import Redirect from './Components/Redirect';
 import MembersPage from "./Pages/MembersPage/MembersPage";
+import AboutUsPage from "./Pages/AboutUsPage/AboutUsPage";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/issues" element={<IssuePage />} />
           <Route path="/neworganisation" element={<NewOrganisationPage />} />
           <Route path="/members" element={<MembersPage />} />
+          <Route path="/aboutus" element={<AboutUsPage />} />
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />

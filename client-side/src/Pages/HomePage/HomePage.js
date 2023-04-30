@@ -18,6 +18,10 @@ export default function HomePage( prop) {
     navigate( '/neworganisation');
   }
 
+  const jumptoAboutus = () => {
+    navigate( '/aboutus');
+  }
+
   const [ currentUser, setCurrentUser] = useState({
     name : '',
     email : '',
@@ -80,14 +84,12 @@ export default function HomePage( prop) {
           </div>
           <hr/>
           <div className='appInfo'>
-            <p><b>Dizkuz</b> is a platform for a complete Organisation to work seamlessly on any project by
-            having discussions
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id nostrum quae rem modi, vitae magni harum quo molestiae error dolorem quia. Tempora nemo nihil sint aperiam exercitationem ipsa eos possimus blanditiis ullam necessitatibus beatae accusamus magni velit molestiae architecto repudiandae, vero aliquid inventore aspernatur optio quos est error quia dolor. Expedita dolor dignissimos voluptatibus commodi ullam nemo, at, fugit perspiciatis nulla labore doloribus sapiente assumenda voluptas deserunt quo adipisci voluptate minima provident. Qui harum quasi cupiditate quas! Consectetur aliquam fugiat repudiandae non enim voluptatum eligendi nulla voluptas. Maxime eos quis expedita accusantium eveniet a repudiandae ipsum nostrum libero recusandae? Consectetur obcaecati beatae dolor sapiente esse nam iste exercitationem velit illo odit, repudiandae vel cupiditate alias quas commodi enim! Mollitia debitis excepturi eaque quo natus provident ipsa deleniti aperiam labore suscipit, impedit fugiat magni expedita similique odit atque voluptatibus quas voluptatum. Vero tempora vitae, accusantium cupiditate accusamus voluptatem alias quisquam iusto, repudiandae, tempore quo dolor! Aut assumenda deserunt, dolores necessitatibus, 
+            <p><b>Dizkuz</b> is a website that allows users in an organisation to collaborate and discuss seamlessly on various categories of topics in real time. This app allows several organisations to have their users discuss their issues classified on the basis of categories. Every user can be a member of various organisations. Every organisation contains several categories and inside those categories are listed issues which individuals face and have posted on the site. Every other user in the same organisation can check the issue and discuss about the possible solutions to it. It works on real time chat system which can help reduce the wasted of time in searching solution to a problem which is already known by other.
             </p>
           </div>
           <hr/>
           <div className='abt'>
-            <div className='HBtn small'>
+            <div className='HBtn small' onClick={jumptoAboutus}>
               Learn more about us
             </div>
           </div>

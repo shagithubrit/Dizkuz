@@ -7,7 +7,7 @@ export default function Footer() {
       <p style={{ textAlign: "centre", fontWeight: "bold" }}>Created in 2023</p>
       <hr />
       <div style={{ textAlign: "start" }}>
-        <p>@Authors : </p>
+        <p>@Creators : </p>
         <a
           href="https://github.com/adityarai0705"
           style={{ textDecoration: "none", color: "azure" }}
