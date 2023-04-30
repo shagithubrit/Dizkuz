@@ -31,7 +31,9 @@ export default function ChatPage() {
     const [ currentIssue, setCurrentIssue] = useState( "");
     const [ chatReloader, setChatReloader] = useState( 1);
 
-    
+    const startReloading = () => {
+        setChatReloader( chatReloader + 1);
+    }
 
     let currentUser_ = {};
 
@@ -110,7 +112,10 @@ export default function ChatPage() {
             }
         }
         doWork();
-        
+        setInterval(() => {
+            startReloading();
+        }, 5000);
+
     }, [ chatReloader]);
 
   return (
@@ -132,7 +137,6 @@ export default function ChatPage() {
                 </div>
                 <MessageInput senderID={currentSender} IssueID={currentIssue} chatReloader={chatReloader} setChatReloader={setChatReloader} />
             <div  style={{height : '64px'}}></div>
-        <Footer />
     </>
     :
     <>
