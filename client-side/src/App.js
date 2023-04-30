@@ -4,10 +4,7 @@ import LandingPage from "./Pages/LandingPage/LandingPage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import SignupPage from "./Pages/SignupPage/SignupPage";
 import HomePage from "./Pages/HomePage/HomePage";
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import NavBar from "./Components/NavBar";
-import Footer from "./Components/Footer";
 import OrganisationsPage from "./Pages/OrganisationsPage/OrganisationsPage";
 import CategoryPage from "./Pages/CategoryPage/CategoryPage";
 import IssuePage from "./Pages/IssuePage/IssuePage";
@@ -18,13 +15,6 @@ import MembersPage from "./Pages/MembersPage/MembersPage";
 import AboutUsPage from "./Pages/AboutUsPage/AboutUsPage";
 
 function App() {
-     const [user, setUser] = useState({
-          username: null,
-          useremail: "demoemail@dizkuz.com",
-          userorgs: 11,
-          usermessages: 193,
-     });
-
      return (
           <Router>
                <div className="App">

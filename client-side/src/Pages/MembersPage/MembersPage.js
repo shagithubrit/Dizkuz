@@ -26,7 +26,6 @@ export default function MembersPage() {
           if (currentUser_ == null) {
                navigate("/landing");
           }
-
           const doWork = async () => {
                try {
                     const dizkuzData = JSON.parse(
@@ -65,7 +64,6 @@ export default function MembersPage() {
                          setAlertShow(true);
                     } else {
                          const LoadedData = fetchData.data;
-
                          const Members = LoadedData;
                          let tempVar;
                          if (Members.length == 0) {
@@ -106,10 +104,8 @@ export default function MembersPage() {
                     setAlertShow(true);
                }
           };
-
           doWork();
      }, []);
-
      return HtmlLoaded ? (
           Alertshow ? (
                <>

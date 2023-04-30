@@ -87,7 +87,6 @@ export default function OrganisationCard(prop) {
                          {" "}
                          <h5>{prop.title}</h5>{" "}
                     </div>
-                    {/* <img className='OrganisationLogo' src={prop.logo} alt='logo' /> */}
                     <div className="OrganisationButtons">
                          <Button
                               className="orgbtn"

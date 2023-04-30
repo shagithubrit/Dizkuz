@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import "./SignupPage.css";
 import Alert from "react-bootstrap/Alert";
 
-export default function SignupPage(prop) {
+export default function SignupPage( prop) {
      const navigate = useNavigate();
      const [alertHead, setAlertHead] = useState("");
      const [alertBody, setAlertBody] = useState("");
@@ -23,7 +23,6 @@ export default function SignupPage(prop) {
      const handleInputs = (e) => {
           const Name = e.target.name;
           const Value = e.target.value;
-
           setPerson({ ...person, [Name]: Value });
      };
 
@@ -42,7 +41,6 @@ export default function SignupPage(prop) {
                          }
                     );
                     const data = await response.json();
-
                     if (data != null) {
                          const curUser = {
                               name: data.name,
@@ -53,12 +51,10 @@ export default function SignupPage(prop) {
                               _id: data._id,
                               __v: data.__v,
                          };
-
                          localStorage.setItem(
                               "currentUser",
                               JSON.stringify(curUser)
-                         ); // saving current user in the browser's local storage.
-
+                         );
                          navigate("/");
                     } else {
                          setAlertHead("Signing up failed!");

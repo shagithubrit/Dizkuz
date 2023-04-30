@@ -58,7 +58,6 @@ export default function MessageInput(props) {
                props.setAlertShow(true);
           }
      };
-
      return (
           <div className="MessageInputBar">
                <div className="MessageBar">

@@ -27,7 +27,6 @@ export default function NavBar() {
                <MDBNavbar expand="lg" dark bgColor="dark">
                     <MDBContainer fluid>
                          <MDBNavbarBrand href="/">Dizkuz</MDBNavbarBrand>
-
                          <MDBNavbarToggler
                               aria-controls="navbarSupportedContent"
                               aria-expanded="false"
@@ -36,7 +35,6 @@ export default function NavBar() {
                          >
                               <MDBIcon icon="bars" fas />
                          </MDBNavbarToggler>
-
                          <MDBCollapse navbar show={showBasic}>
                               <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
                                    <MDBNavbarItem>
@@ -51,7 +49,6 @@ export default function NavBar() {
                                         </MDBNavbarLink>
                                    </MDBNavbarItem>
                               </MDBNavbarNav>
-
                               <form className="d-flex input-group w-auto">
                                    <Button
                                         variant="outline-light"

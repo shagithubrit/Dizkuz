@@ -12,15 +12,15 @@ export default function NewOrganisationPage() {
      const [alertBody, setAlertBody] = useState("");
      const [variant, setVariant] = useState("");
      const [show, setShow] = useState(false);
-
      const navigate = useNavigate();
      const [participants, setParticipants] = useState([]);
      const [dummy, setDummy] = useState(true);
      const [OrganisationName, setOrganisationName] = useState("");
+
      let NewUserID = "";
      let currentUser_ = {};
-
      let participants_ = participants;
+
      let participantComponent = participants_.map((participant) => {
           return (
                <>
@@ -28,15 +28,12 @@ export default function NewOrganisationPage() {
                </>
           );
      });
-
      const handleInputName = (e) => {
           setOrganisationName(e.target.value);
      };
-
      const handleID = (e) => {
           NewUserID = e.target.value;
      };
-
      const AddNewUser = async (e) => {
           e.preventDefault();
           if (NewUserID == "") {
@@ -94,7 +91,6 @@ export default function NewOrganisationPage() {
                }
           }
      };
-
      const handleSubmit = async (e) => {
           e.preventDefault();
           const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
@@ -198,7 +194,6 @@ export default function NewOrganisationPage() {
                                              be changed again.
                                         </Form.Text>
                                    </Form.Group>
-
                                    <div className="participantContainer">
                                         <b>Users</b>
                                         <hr />
@@ -275,7 +270,6 @@ export default function NewOrganisationPage() {
                                              be changed again.
                                         </Form.Text>
                                    </Form.Group>
-
                                    <div className="participantContainer">
                                         <b>Users</b>
                                         <hr />

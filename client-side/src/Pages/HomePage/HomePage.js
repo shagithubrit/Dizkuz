@@ -38,7 +38,6 @@ export default function HomePage(prop) {
                if (currentUser_ == null) {
                     navigate("/landing");
                }
-
                setCurrentUser({
                     name: currentUser_.name,
                     emaill: currentUser_.email,
@@ -46,11 +45,9 @@ export default function HomePage(prop) {
                     messages: currentUser_.messages,
                     _id: currentUser_._id,
                });
-
                profilePic = currentUser_.profilePic;
                setHtmlLoaded(true);
           };
-
           doWork();
      }, []);
 
@@ -90,7 +87,6 @@ export default function HomePage(prop) {
                                         {currentUser.organisations.length}
                                    </h4>
                               </div>
-                              {/* <div><div className='title_he'>Messages :</div> <h4 style={{color : 'darkcyan'}}>{currentUser.messages}</h4></div> */}
                          </div>
                          <ImageContainer image={profilePic} />
                     </div>

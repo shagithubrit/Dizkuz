@@ -17,9 +17,7 @@ export default function OrganisationsPage(prop) {
      const [alertVarient, setAlertVarient] = useState("");
      const [show, setShow] = useState(false);
      const [rerenderer, setRerenderer] = useState(false);
-
      const [HtmlLoaded, setHtmlLoaded] = useState(false);
-
      const [CardsComponent, setCardsComponent] = useState(null);
 
      useEffect(() => {
@@ -27,7 +25,6 @@ export default function OrganisationsPage(prop) {
           if (currentUser_ == null) {
                navigate("/landing");
           }
-
           const doWork = async () => {
                let currentUser_ = JSON.parse(
                     localStorage.getItem("currentUser")
@@ -37,7 +34,6 @@ export default function OrganisationsPage(prop) {
                     password: currentUser_.password,
                     organisations: currentUser_.organisations,
                };
-
                try {
                     const response = await fetch(
                          "http://localhost:8080/organisations",
@@ -50,7 +46,6 @@ export default function OrganisationsPage(prop) {
                          }
                     );
                     const fetchedData = await response.json();
-
                     if (fetchedData.status === "authFailed") {
                          localStorage.removeItem("currentUser");
                          navigate("/landing");
@@ -64,7 +59,6 @@ export default function OrganisationsPage(prop) {
                     } else {
                          const cards = fetchedData.data;
                          let tempCardsComponent;
-
                          if (cards.length === 0) {
                               tempCardsComponent = (
                                    <div
@@ -96,7 +90,6 @@ export default function OrganisationsPage(prop) {
                                    );
                               });
                          }
-
                          setCardsComponent(tempCardsComponent);
                          setHtmlLoaded(true);
                     }
@@ -109,10 +102,8 @@ export default function OrganisationsPage(prop) {
                     setShow(true);
                }
           };
-
           doWork();
      }, [rerenderer]);
-
      return HtmlLoaded ? (
           show ? (
                <>

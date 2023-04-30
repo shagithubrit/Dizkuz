@@ -27,7 +27,6 @@ export default function LoginPage(prop) {
      const handleInputs = (e) => {
           const Name = e.target.name;
           const Value = e.target.value;
-
           setUserCredentials({ ...userCredentials, [Name]: Value });
      };
 
@@ -86,7 +85,6 @@ export default function LoginPage(prop) {
 
      useEffect(() => {
           const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
-
           if (currentUser_ != null) {
                navigate("/");
           }
@@ -122,7 +120,6 @@ export default function LoginPage(prop) {
                                              onChange={handleInputs}
                                         />
                                    </Form.Group>
-
                                    <Form.Group
                                         className="mb-3"
                                         controlId="formBasicPassword"
@@ -136,7 +133,6 @@ export default function LoginPage(prop) {
                                              onChange={handleInputs}
                                         />
                                    </Form.Group>
-
                                    <Button variant="primary" type="submit">
                                         Login
                                    </Button>
@@ -168,7 +164,6 @@ export default function LoginPage(prop) {
                                              onChange={handleInputs}
                                         />
                                    </Form.Group>
-
                                    <Form.Group
                                         className="mb-3"
                                         controlId="formBasicPassword"

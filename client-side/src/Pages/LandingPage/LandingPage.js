@@ -9,6 +9,7 @@ export default function LandingPage() {
      const jumptoLogin = () => {
           navigate("/login");
      };
+
      const jumptoSignup = () => {
           navigate("/signup");
      };
@@ -24,7 +25,6 @@ export default function LandingPage() {
      useEffect(() => {
           const currentUser_ = JSON.parse(localStorage.getItem("currentUser"));
           setCurrentUser(currentUser_);
-
           if (currentUser.name == null) {
                navigate("/landing");
           }
@@ -53,7 +53,7 @@ export default function LandingPage() {
                                    variant="primary"
                                    onClick={jumptoSignup}
                               >
-                                   Sig nup
+                                   Sign up
                               </Button>{" "}
                          </div>
                     </div>

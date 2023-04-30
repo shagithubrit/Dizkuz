@@ -3,7 +3,6 @@ import "./Components.css";
 
 export default function ImageContainer(prop) {
      const outerStyle = {
-          // CSS for the outer circle
           padding: "6px",
           borderWidth: "0px",
           borderRadius: "50%",
@@ -12,10 +11,7 @@ export default function ImageContainer(prop) {
           boxShadow: "0px 0px 10px 3px rgba( 100, 100, 120, .5)",
           backgroundColor: "white",
      };
-
      const innerStyle = {
-          // CSS for the inner circle
-
           backgroundSize: "cover",
           borderRadius: "50%",
           overflow: "hidden",
@@ -26,7 +22,6 @@ export default function ImageContainer(prop) {
           justifyContent: "center",
           alignItems: "center",
      };
-
      return (
           <div className="PfpConainter">
                <div className="OuterCirclePfp" style={outerStyle}>

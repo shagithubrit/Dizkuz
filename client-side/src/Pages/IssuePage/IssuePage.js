@@ -156,7 +156,6 @@ export default function IssuePage() {
           if (currentUser_ == null) {
                navigate("/landing");
           }
-
           const doWork = async () => {
                try {
                     const dizkuzData = JSON.parse(
@@ -165,18 +164,14 @@ export default function IssuePage() {
                     const currentUser_ = JSON.parse(
                          localStorage.getItem("currentUser")
                     );
-
                     setOrganisationName(dizkuzData.currentOrganisationName);
                     setCategoryName(dizkuzData.currentCategoryName);
-
                     const CatID = dizkuzData.currentCategory;
-
                     const inp = {
                          email: currentUser_.email,
                          password: currentUser_.password,
                          ID: CatID,
                     };
-
                     const response = await fetch(
                          "http://localhost:8080/issues",
                          {
@@ -201,7 +196,6 @@ export default function IssuePage() {
                     } else {
                          const LoadedData = fetchData.data;
                          const Issues = LoadedData;
-
                          let tempVar;
                          if (Issues.length == 0) {
                               tempVar = (
@@ -232,8 +226,6 @@ export default function IssuePage() {
                               });
                          }
                          const tempIssueComponent = tempVar;
-
-                         // setreloader(!reloader);
                          setRerenderer(!rerenderer);
                          setIssueComponent(tempIssueComponent);
                          setHtmlLoaded(true);
@@ -247,7 +239,6 @@ export default function IssuePage() {
                     setAlertShow(true);
                }
           };
-
           doWork();
      }, [rerenderer]);
 

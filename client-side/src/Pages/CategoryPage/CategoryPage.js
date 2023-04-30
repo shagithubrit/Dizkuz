@@ -122,7 +122,6 @@ function NewCategoryModal(props) {
 export default function CategoryPage(props) {
      const navigate = useNavigate();
 
-     // modal
      const [alertHead, setAlertHead] = useState("");
      const [alertBody, setAlertBody] = useState("");
      const [alertVarient, setAlertVarient] = useState("");
@@ -152,7 +151,6 @@ export default function CategoryPage(props) {
           if (currentUser_ == null) {
                navigate("/landing");
           }
-
           const doWork = async () => {
                try {
                     const dizkuzData = JSON.parse(
@@ -191,9 +189,7 @@ export default function CategoryPage(props) {
                          setAlertShow(true);
                     } else {
                          const LoadedData = fetchData.data;
-
                          const Categories = LoadedData;
-
                          let tempVar;
                          if (Categories.length == 0) {
                               tempVar = (
@@ -225,7 +221,6 @@ export default function CategoryPage(props) {
                               });
                          }
                          const tempCategoryComponent = tempVar;
-
                          setreloader(!reloader);
                          setCategoryComponent(tempCategoryComponent);
                          setHtmlLoaded(true);
@@ -239,7 +234,6 @@ export default function CategoryPage(props) {
                     setAlertShow(true);
                }
           };
-
           doWork();
      }, [reloader]);
 
@@ -247,7 +241,6 @@ export default function CategoryPage(props) {
           Alertshow ? (
                <>
                     <NavBar />
-                    {/* <div style={{height:'50px'}}></div> */}
                     <Alert
                          variant={alertVarient}
                          onClose={() => setAlertShow(false)}

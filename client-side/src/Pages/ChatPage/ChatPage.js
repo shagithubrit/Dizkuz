@@ -34,7 +34,6 @@ export default function ChatPage() {
      const startReloading = () => {
           setChatReloader(chatReloader + 1);
      };
-
      let currentUser_ = {};
 
      useEffect(() => {
@@ -52,7 +51,6 @@ export default function ChatPage() {
                          localStorage.getItem("currentUser")
                     );
                     const IssID = dizkuzData.currentIssue;
-
                     const UsrID = currentUser_._id;
 
                     setCurrentSender(UsrID);
@@ -87,9 +85,7 @@ export default function ChatPage() {
                          setAlertShow(true);
                     } else {
                          const LoadedData = fetchData.data;
-
                          const Messages = LoadedData;
-
                          let tempVar;
                          if (Messages.length == 0) {
                               tempVar = (
@@ -129,7 +125,6 @@ export default function ChatPage() {
                               });
                          }
                          const tempMessageComponent = tempVar;
-
                          setRerenderer(!rerenderer);
                          setMessageComponent(tempMessageComponent);
                          setHtmlLoaded(true);

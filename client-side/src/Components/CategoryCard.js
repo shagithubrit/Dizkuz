@@ -12,7 +12,6 @@ export default function CategoryCard(prop) {
           localStorage.setItem("dizkuzData", JSON.stringify(dizkuzData));
           navigate("/issues");
      };
-
      return (
           <div className="CategoryCardOuter" onClick={openCategory}>
                <div className="CategoryCardTitle">
