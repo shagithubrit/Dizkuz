@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+     console.log( 'request recieved');
      const EMAIL = req.body.email;
      const PASSWORD = req.body.password;
      //   find users with the entered email in database
