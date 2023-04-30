@@ -1,7 +1,7 @@
 // imports
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 // requiring routes
 const LOGIN = require("./routes/login");
 const SIGNUP = require("./routes/signUp");
@@ -17,16 +17,14 @@ const MEMBERS = require("./routes/members");
 const NEWISSUE = require("./routes/newIssue");
 const SENDCHAT = require("./routes/newMessage");
 
-
-main().catch(err => console.log(err));
+main().catch((err) => console.log(err));
 
 // connecting mongodb
 async function main() {
-    await mongoose.connect(
-      "mongodb+srv://ishavishwakarma29:ishaDizkuz@cluster0.zwbubwl.mongodb.net/test"
-      // "mongodb+srv://adityarai:aditya07@dizkuz.4tvbing.mongodb.net/test"
-    );
-    console.log("db connected");
+     await mongoose.connect(
+          "mongodb+srv://ishavishwakarma29:ishaDizkuz@cluster0.zwbubwl.mongodb.net/test"
+     );
+     console.log("db connected");
 }
 
 const server = express();
@@ -61,5 +59,5 @@ server.use("/sendmessage", SENDCHAT);
 
 // starting server
 server.listen(8080, () => {
-    console.log("server started");
+     console.log("server started");
 });
