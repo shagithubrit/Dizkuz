@@ -161,7 +161,7 @@ export default function SignupPage( prop) {
                                         Sign up
                                    </Button>
                               </Form>
-                              <a href="/login">Login instead?</a>
+                              <a onClick={ () => { navigate("/login")}}>Login instead?</a>
                          </div>
                     </div>
                </div>
@@ -229,7 +229,7 @@ export default function SignupPage( prop) {
                                         Sign up
                                    </Button>
                               </Form>
-                              <a href="/login">Login instead?</a>
+                              <a onClick={ () => { navigate("/login")}}>Login instead?</a>
                          </div>
                     </div>
                </div>
