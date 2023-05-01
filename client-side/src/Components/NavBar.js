@@ -38,13 +38,13 @@ export default function NavBar() {
                          <MDBCollapse navbar show={showBasic}>
                               <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
                                    <MDBNavbarItem>
-                                        <MDBNavbarLink to="/organisations">
+                                        <MDBNavbarLink onClick={ () => { navigate("/organisations")}}>
                                              Organisations
                                         </MDBNavbarLink>
                                    </MDBNavbarItem>
 
                                    <MDBNavbarItem>
-                                        <MDBNavbarLink to="/aboutus">
+                                        <MDBNavbarLink onClick={ () => { navigate("/aboutus")}}>
                                              About us
                                         </MDBNavbarLink>
                                    </MDBNavbarItem>
