@@ -246,6 +246,7 @@ export default function IssuePage() {
           Alertshow ? (
                <>
                     <NavBar />
+                    <div style={{height : '80px'}}></div>
                     <Alert
                          variant={alertVarient}
                          onClose={() => setAlertShow(false)}
@@ -296,6 +297,7 @@ export default function IssuePage() {
           ) : (
                <>
                     <NavBar />
+                    <div style={{height : '80px'}}></div>
                     <div
                          className="IssuePageOuterContainer"
                          style={{ paddingTop: "10px" }}
