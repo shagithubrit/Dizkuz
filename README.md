@@ -36,7 +36,7 @@ Seemless working is made possible by this app because it provides the following 
 * [Aditya Singh Yadav](https://github.com/aditya-mnnit)
 * [Aishwarya Vikarm Singh](https://github.com/Aishwaryavikramsingh)
 * [Isha Vishwakarma](https://github.com/ishavishwakarma29)
-
+* [Shashwat Kapoor](https://github.com/shagithubrit)
 
 
 
